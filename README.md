@@ -830,13 +830,7 @@ Halaman profil project dan anggota kelompok.
 
 ![Dashboard Sumber Aquarium](assets/readme/dasboard.png)
 
-## 👨‍💼 CEO Dashboard Preview
 
-[![CEO Dashboard Preview](assets/readme/ceo-preview.gif)](ceo.mp4)
-
-## 🎬 System Preview
-
-[![System Preview](assets/readme/preview.gif)](previews.mp4)
 
 ------
 
