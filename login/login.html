@@ -1,0 +1,3024 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#02060c">
+  <title>CEO Access — Sumber Aquarium PGK</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#03070d;
+      --surface:#09111a;
+      --surface-2:#0c1621;
+      --surface-3:#111d2a;
+
+      --line:rgba(255,255,255,.075);
+      --line-soft:rgba(255,255,255,.045);
+      --line-cyan:rgba(103,232,249,.22);
+
+      --text:#f4f9ff;
+      --muted:#8190a2;
+      --dim:#526173;
+
+      --cyan:#67e8f9;
+      --blue:#6894ff;
+      --violet:#a477ff;
+      --green:#4adea5;
+      --red:#fb7185;
+      --gold:#facc70;
+
+      --shadow:0 35px 100px rgba(0,0,0,.5);
+      --ease:cubic-bezier(.22,.8,.22,1);
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html,
+    body{
+      width:100%;
+      min-height:100%;
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    body{
+      overflow:hidden;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    button,
+    input{
+      font:inherit;
+    }
+
+    button{
+      border:0;
+    }
+
+    ::selection{
+      color:#fff;
+      background:rgba(103,232,249,.2);
+    }
+
+
+    /* =========================================================
+       BACKGROUND
+       ========================================================= */
+
+    .scene{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      isolation:isolate;
+
+      background:
+        radial-gradient(
+          circle at 50% 42%,
+          rgba(82,114,255,.055),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 15% 15%,
+          rgba(103,232,249,.045),
+          transparent 26%
+        ),
+        linear-gradient(
+          180deg,
+          #02050a 0%,
+          #040914 55%,
+          #020409 100%
+        );
+    }
+
+    .scene::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+
+      background:
+        linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(103,232,249,.022) 30%,
+          transparent 48%
+        ),
+        linear-gradient(
+          315deg,
+          transparent 45%,
+          rgba(164,119,255,.022) 65%,
+          transparent 82%
+        );
+    }
+
+
+    .noise{
+      position:absolute;
+      inset:-40%;
+      pointer-events:none;
+      opacity:.025;
+
+      background-image:url(
+        "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E"
+      );
+    }
+
+
+    .scanlines{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.035;
+
+      background:
+        repeating-linear-gradient(
+          180deg,
+          transparent 0 7px,
+          rgba(255,255,255,.035) 8px
+        );
+    }
+
+
+    /* =========================================================
+       AMBIENT ORBS
+       ========================================================= */
+
+    .orb{
+      position:absolute;
+      border-radius:50%;
+      pointer-events:none;
+      filter:blur(70px);
+    }
+
+    .orb.a{
+      width:360px;
+      height:360px;
+      left:-170px;
+      top:-150px;
+      background:rgba(103,232,249,.08);
+      opacity:.8;
+    }
+
+    .orb.b{
+      width:430px;
+      height:430px;
+      right:-180px;
+      bottom:-190px;
+      background:rgba(164,119,255,.075);
+      opacity:.75;
+    }
+
+    .orb.c{
+      width:190px;
+      height:190px;
+      left:46%;
+      top:30%;
+      background:rgba(104,148,255,.035);
+    }
+
+
+    #particles{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+      opacity:.42;
+    }
+
+
+    /* =========================================================
+       TOP BAR
+       ========================================================= */
+
+    .topbar{
+      position:absolute;
+      z-index:30;
+
+      left:28px;
+      right:28px;
+      top:22px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      pointer-events:none;
+    }
+
+    .micro-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .micro-brand .dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+
+      background:var(--cyan);
+      box-shadow:0 0 12px rgba(103,232,249,.6);
+
+      animation:statusPulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes statusPulse{
+      0%,
+      100%{
+        opacity:1;
+        transform:scale(1);
+      }
+
+      50%{
+        opacity:.42;
+        transform:scale(.72);
+      }
+    }
+
+    .micro-brand span,
+    .system-readout{
+      font:
+        500 9px/1
+        "DM Mono",
+        monospace;
+
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#768596;
+    }
+
+    .system-readout{
+      display:flex;
+      gap:14px;
+    }
+
+    .system-readout strong{
+      color:#aebdce;
+      font-weight:500;
+    }
+
+
+    /* =========================================================
+       MAIN STAGE
+       ========================================================= */
+
+    .stage{
+      position:absolute;
+      inset:0;
+
+      z-index:10;
+
+      display:grid;
+      place-items:center;
+
+      padding:74px 24px 28px;
+    }
+
+
+    /* =========================================================
+       MAIN SHELL
+       ========================================================= */
+
+    .command-shell{
+      position:relative;
+
+      width:min(
+        1100px,
+        calc(100vw - 48px)
+      );
+
+      min-height:640px;
+
+      display:grid;
+      grid-template-columns:
+        minmax(0, 1fr)
+        430px;
+
+      overflow:hidden;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      border-radius:30px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(11,19,29,.94),
+          rgba(4,8,14,.97)
+        );
+
+      box-shadow:
+        var(--shadow),
+        inset 0 1px rgba(255,255,255,.045);
+
+      backdrop-filter:
+        blur(18px)
+        saturate(110%);
+
+      animation:
+        shellEnter .65s var(--ease) both;
+
+      transition:
+        box-shadow .3s ease;
+    }
+
+    @keyframes shellEnter{
+      from{
+        opacity:0;
+        transform:
+          translateY(16px)
+          scale(.985);
+      }
+
+      to{
+        opacity:1;
+        transform:
+          translateY(0)
+          scale(1);
+      }
+    }
+
+    .command-shell::after{
+      content:"";
+
+      position:absolute;
+      inset:0;
+
+      pointer-events:none;
+
+      background:
+        linear-gradient(
+          110deg,
+          transparent 0 35%,
+          rgba(255,255,255,.025) 50%,
+          transparent 65%
+        );
+
+      transform:translateX(-55%);
+      animation:
+        shellSweep 9s ease-in-out infinite;
+    }
+
+    @keyframes shellSweep{
+      0%,
+      72%{
+        transform:translateX(-60%);
+      }
+
+      100%{
+        transform:translateX(60%);
+      }
+    }
+
+
+    /* =========================================================
+       LEFT PANEL
+       ========================================================= */
+
+    .left-panel{
+      position:relative;
+      overflow:hidden;
+
+      padding:34px 36px;
+
+      border-right:
+        1px solid
+        var(--line);
+
+      background:
+        radial-gradient(
+          circle at 50% 42%,
+          rgba(103,232,249,.065),
+          transparent 28%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(9,18,29,.58),
+          rgba(2,6,11,.92)
+        );
+    }
+
+    .brand-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-logo{
+      width:45px;
+      height:45px;
+
+      object-fit:cover;
+
+      border-radius:13px;
+
+      border:
+        1px solid
+        rgba(103,232,249,.18);
+
+      box-shadow:
+        0 0 0 4px rgba(103,232,249,.018),
+        0 12px 24px rgba(0,0,0,.3);
+    }
+
+    .brand strong{
+      display:block;
+
+      font-size:12px;
+      letter-spacing:.13em;
+    }
+
+    .brand span{
+      display:block;
+
+      margin-top:4px;
+
+      font:
+        500 8px/1
+        "DM Mono",
+        monospace;
+
+      letter-spacing:.13em;
+
+      color:var(--dim);
+    }
+
+    .status-pill{
+      display:flex;
+      align-items:center;
+      gap:7px;
+
+      padding:8px 10px;
+
+      border:
+        1px solid
+        rgba(74,222,165,.13);
+
+      border-radius:999px;
+
+      background:
+        rgba(74,222,165,.035);
+
+      font-size:8px;
+      font-weight:800;
+
+      letter-spacing:.12em;
+
+      color:#a5f1d1;
+    }
+
+    .status-pill i{
+      font-size:5px;
+
+      color:var(--green);
+
+      animation:
+        statusPulse
+        2.2s
+        ease-in-out
+        infinite;
+    }
+
+
+    /* =========================================================
+       AQUARIUM HERO
+       ========================================================= */
+
+    .hero{
+      position:relative;
+
+      height:360px;
+
+      margin-top:27px;
+
+      overflow:hidden;
+
+      border:
+        1px solid
+        rgba(255,255,255,.06);
+
+      border-radius:24px;
+
+      background:
+        radial-gradient(
+          circle at 50% 48%,
+          rgba(103,232,249,.10),
+          transparent 18%
+        ),
+        radial-gradient(
+          circle at 50% 52%,
+          rgba(164,119,255,.045),
+          transparent 44%
+        ),
+        linear-gradient(
+          180deg,
+          #07121d,
+          #03080e 92%
+        );
+    }
+
+    .hero::before{
+      content:"";
+
+      position:absolute;
+      inset:0;
+
+      pointer-events:none;
+
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0 39px,
+          rgba(103,232,249,.018) 40px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent 0 39px,
+          rgba(103,232,249,.014) 40px
+        );
+    }
+
+    .hero::after{
+      content:"";
+
+      position:absolute;
+
+      top:-30%;
+      left:-30%;
+
+      width:160%;
+      height:160%;
+
+      pointer-events:none;
+
+      background:
+        linear-gradient(
+          115deg,
+          transparent 43%,
+          rgba(255,255,255,.022) 50%,
+          transparent 57%
+        );
+
+      animation:
+        waterDrift
+        10s
+        ease-in-out
+        infinite alternate;
+    }
+
+    @keyframes waterDrift{
+      from{
+        transform:translateX(-5%);
+      }
+
+      to{
+        transform:translateX(5%);
+      }
+    }
+
+
+    /* HUD corners */
+
+    .hud-corner{
+      position:absolute;
+
+      width:28px;
+      height:28px;
+
+      z-index:4;
+
+      border-color:
+        rgba(103,232,249,.28);
+
+      border-style:solid;
+    }
+
+    .hud-corner.tl{
+      left:12px;
+      top:12px;
+      border-width:1px 0 0 1px;
+    }
+
+    .hud-corner.tr{
+      right:12px;
+      top:12px;
+      border-width:1px 1px 0 0;
+    }
+
+    .hud-corner.bl{
+      left:12px;
+      bottom:12px;
+      border-width:0 0 1px 1px;
+    }
+
+    .hud-corner.br{
+      right:12px;
+      bottom:12px;
+      border-width:0 1px 1px 0;
+    }
+
+
+    /* DATA CHIPS */
+
+    .data-chip{
+      position:absolute;
+      z-index:8;
+
+      padding:7px 8px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.055);
+
+      border-radius:9px;
+
+      background:
+        rgba(2,7,13,.6);
+
+      backdrop-filter:
+        blur(8px);
+
+      font:
+        500 7px/1.35
+        "DM Mono",
+        monospace;
+
+      letter-spacing:.06em;
+
+      color:#69788a;
+    }
+
+    .data-chip b{
+      display:block;
+
+      margin-top:2px;
+
+      color:#b4c2d1;
+
+      font-size:8px;
+    }
+
+    .chip-a{
+      left:20px;
+      top:22px;
+    }
+
+    .chip-b{
+      right:20px;
+      top:22px;
+      text-align:right;
+    }
+
+    .chip-c{
+      left:20px;
+      bottom:20px;
+    }
+
+    .chip-d{
+      right:20px;
+      bottom:20px;
+      text-align:right;
+    }
+
+
+    /* ORBITS */
+
+    .orbit{
+      position:absolute;
+
+      left:50%;
+      top:49%;
+
+      border-radius:50%;
+
+      transform:
+        translate(-50%,-50%)
+        rotateX(68deg);
+
+      border:
+        1px solid
+        rgba(103,232,249,.085);
+
+      animation:
+        orbitSpin
+        22s
+        linear
+        infinite;
+    }
+
+    .o1{
+      width:210px;
+      height:210px;
+    }
+
+    .o2{
+      width:310px;
+      height:170px;
+
+      border-color:
+        rgba(164,119,255,.075);
+
+      animation-duration:
+        30s;
+
+      animation-direction:
+        reverse;
+    }
+
+    .o3{
+      width:390px;
+      height:275px;
+
+      border-color:
+        rgba(250,204,112,.045);
+
+      animation-duration:
+        38s;
+    }
+
+    @keyframes orbitSpin{
+      to{
+        transform:
+          translate(-50%,-50%)
+          rotateX(68deg)
+          rotateZ(360deg);
+      }
+    }
+
+
+    /* CORE */
+
+    .core{
+      position:absolute;
+
+      left:50%;
+      top:49%;
+
+      width:155px;
+      height:155px;
+
+      transform:
+        translate(-50%,-50%);
+
+      border-radius:50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.82) 0 2%,
+          rgba(103,232,249,.42) 5%,
+          rgba(103,232,249,.10) 23%,
+          rgba(104,148,255,.045) 48%,
+          transparent 72%
+        );
+
+      filter:
+        drop-shadow(
+          0 0 25px
+          rgba(103,232,249,.28)
+        );
+
+      animation:
+        corePulse
+        4s
+        ease-in-out
+        infinite;
+    }
+
+    .core::before,
+    .core::after{
+      content:"";
+
+      position:absolute;
+
+      inset:28px;
+
+      border:
+        1px solid
+        rgba(103,232,249,.19);
+
+      border-radius:50%;
+
+      animation:
+        coreRotate
+        10s
+        linear
+        infinite;
+    }
+
+    .core::after{
+      inset:48px;
+
+      border-color:
+        rgba(164,119,255,.22);
+
+      animation-duration:
+        7s;
+
+      animation-direction:
+        reverse;
+    }
+
+    @keyframes corePulse{
+      0%,
+      100%{
+        transform:
+          translate(-50%,-50%)
+          scale(.97);
+
+        opacity:.84;
+      }
+
+      50%{
+        transform:
+          translate(-50%,-50%)
+          scale(1.035);
+
+        opacity:1;
+      }
+    }
+
+    @keyframes coreRotate{
+      to{
+        transform:
+          rotate(360deg);
+      }
+    }
+
+
+    /* FISH */
+
+    .fish{
+      position:absolute;
+
+      z-index:10;
+
+      left:50%;
+      top:49%;
+
+      width:180px;
+
+      transform:
+        translate(-50%,-50%);
+
+      filter:
+        drop-shadow(
+          0 20px 24px
+          rgba(0,0,0,.55)
+        );
+
+      animation:
+        fishFloat
+        5.5s
+        ease-in-out
+        infinite;
+    }
+
+    @keyframes fishFloat{
+      0%,
+      100%{
+        transform:
+          translate(-50%,-50%)
+          rotate(-1.5deg);
+      }
+
+      50%{
+        transform:
+          translate(
+            calc(-50% + 10px),
+            calc(-50% - 7px)
+          )
+          rotate(1.5deg);
+      }
+    }
+
+
+    /* BUBBLES */
+
+    .bubble{
+      position:absolute;
+
+      z-index:11;
+
+      bottom:15px;
+
+      width:5px;
+      height:5px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.18);
+
+      border-radius:50%;
+
+      background:
+        rgba(255,255,255,.025);
+
+      animation:
+        bubbleUp
+        8s
+        linear
+        infinite;
+    }
+
+    .bubble:nth-child(1){
+      left:25%;
+    }
+
+    .bubble:nth-child(2){
+      left:38%;
+      width:4px;
+      height:4px;
+      animation-delay:-2s;
+    }
+
+    .bubble:nth-child(3){
+      left:62%;
+      width:6px;
+      height:6px;
+      animation-delay:-4.2s;
+    }
+
+    .bubble:nth-child(4){
+      left:76%;
+      width:4px;
+      height:4px;
+      animation-delay:-1.5s;
+    }
+
+    @keyframes bubbleUp{
+      to{
+        transform:
+          translate(18px,-340px)
+          scale(.55);
+
+        opacity:0;
+      }
+    }
+
+
+    /* SCAN */
+
+    .scan{
+      position:absolute;
+
+      z-index:12;
+
+      left:12%;
+      right:12%;
+      top:50%;
+
+      height:1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(103,232,249,.42),
+          transparent
+        );
+
+      box-shadow:
+        0 0 14px
+        rgba(103,232,249,.12);
+
+      animation:
+        scanMove
+        5.8s
+        ease-in-out
+        infinite;
+    }
+
+    @keyframes scanMove{
+      0%,
+      100%{
+        transform:translateY(-105px);
+        opacity:.06;
+      }
+
+      50%{
+        transform:translateY(105px);
+        opacity:.52;
+      }
+    }
+
+
+    .hero-label{
+      position:absolute;
+
+      z-index:14;
+
+      left:17px;
+      bottom:14px;
+
+      display:flex;
+      align-items:center;
+      gap:7px;
+
+      font:
+        500 8px/1
+        "DM Mono",
+        monospace;
+
+      letter-spacing:.11em;
+
+      color:#6d7c8e;
+    }
+
+    .hero-label i{
+      color:var(--cyan);
+    }
+
+
+    /* LEFT COPY */
+
+    .copy{
+      margin-top:21px;
+    }
+
+    .copy .kicker{
+      font:
+        500 9px/1
+        "DM Mono",
+        monospace;
+
+      color:var(--gold);
+
+      letter-spacing:.16em;
+    }
+
+    .copy h1{
+      margin:9px 0 0;
+
+      font-size:
+        clamp(28px,3.4vw,44px);
+
+      line-height:.98;
+
+      letter-spacing:-.05em;
+    }
+
+    .copy h1 span{
+      display:block;
+
+      color:var(--cyan);
+
+      text-shadow:
+        0 0 24px
+        rgba(103,232,249,.09);
+    }
+
+    .copy p{
+      max-width:530px;
+
+      margin:11px 0 0;
+
+      color:var(--muted);
+
+      font-size:11px;
+
+      line-height:1.7;
+    }
+
+
+    /* =========================================================
+       RIGHT PANEL
+       ========================================================= */
+
+    .right-panel{
+      position:relative;
+
+      display:flex;
+      align-items:center;
+
+      padding:38px 34px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(5,10,17,.55),
+          rgba(2,5,10,.93)
+        );
+    }
+
+    .auth-wrap{
+      width:100%;
+      max-width:380px;
+      margin:auto;
+    }
+
+
+    /* AUTH HEADER */
+
+    .auth-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:14px;
+
+      margin-bottom:21px;
+    }
+
+    .auth-head .eyebrow{
+      font:
+        500 9px/1
+        "DM Mono",
+        monospace;
+
+      color:var(--cyan);
+
+      letter-spacing:.17em;
+    }
+
+    .auth-head h2{
+      margin:8px 0 5px;
+
+      font-size:30px;
+
+      line-height:1;
+
+      letter-spacing:-.05em;
+    }
+
+    .auth-head p{
+      margin:0;
+
+      color:var(--muted);
+
+      font-size:10px;
+    }
+
+    .clock{
+      font:
+        500 10px/1
+        "DM Mono",
+        monospace;
+
+      color:var(--dim);
+
+      font-variant-numeric:
+        tabular-nums;
+    }
+
+
+    /* PROTOCOL */
+
+    .protocol{
+      display:block;
+
+      margin-bottom:18px;
+
+      padding:4px;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius:12px;
+
+      background:
+        rgba(255,255,255,.018);
+    }
+
+    .protocol span{
+      display:block;
+
+      padding:10px;
+
+      border-radius:8px;
+
+      text-align:center;
+
+      font:
+        700 8px/1
+        "DM Mono",
+        monospace;
+
+      letter-spacing:.08em;
+
+      color:#d9faff;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(103,232,249,.075),
+          rgba(164,119,255,.06)
+        );
+
+      box-shadow:
+        inset 0 0 0 1px
+        rgba(103,232,249,.065);
+    }
+
+    .protocol span.active{
+      color:#dffcff;
+    }
+
+
+    /* STEP */
+
+    .step{
+      animation:
+        stepIn
+        .3s
+        var(--ease);
+    }
+
+    @keyframes stepIn{
+      from{
+        opacity:0;
+        transform:translateY(7px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .hidden{
+      display:none!important;
+    }
+
+
+    /* FIELDS */
+
+    .field{
+      margin-bottom:14px;
+    }
+
+    .label-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      margin-bottom:7px;
+    }
+
+    .label-row label{
+      font-size:9px;
+      font-weight:800;
+
+      letter-spacing:.08em;
+
+      color:#cbd7e4;
+    }
+
+    .hint{
+      font:
+        500 8px/1
+        "DM Mono",
+        monospace;
+
+      color:var(--dim);
+    }
+
+
+    /* INPUT */
+
+    .input-wrap{
+      position:relative;
+    }
+
+    .input-wrap > i{
+      position:absolute;
+
+      left:13px;
+      top:50%;
+
+      transform:
+        translateY(-50%);
+
+      pointer-events:none;
+
+      font-size:10px;
+
+      color:#546376;
+
+      transition:
+        color .18s ease;
+    }
+
+    input{
+      width:100%;
+      height:50px;
+
+      padding:
+        0
+        40px
+        0
+        36px;
+
+      outline:0;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius:13px;
+
+      background:
+        rgba(3,8,14,.88);
+
+      color:#fff;
+
+      font-size:11px;
+
+      transition:
+        border-color .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+    }
+
+    input::placeholder{
+      color:#3e4c5c;
+    }
+
+    input:hover{
+      border-color:
+        rgba(255,255,255,.11);
+    }
+
+    input:focus{
+      border-color:
+        rgba(103,232,249,.34);
+
+      background:
+        rgba(6,13,21,.96);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(103,232,249,.04),
+        0 8px 24px
+        rgba(0,0,0,.18);
+    }
+
+    .input-wrap:focus-within > i{
+      color:var(--cyan);
+    }
+
+
+    /* PASSWORD EYE */
+
+    .eye{
+      position:absolute;
+
+      right:8px;
+      top:50%;
+
+      width:32px;
+      height:32px;
+
+      display:grid;
+      place-items:center;
+
+      transform:
+        translateY(-50%);
+
+      border-radius:9px;
+
+      background:transparent;
+
+      color:#526173;
+
+      cursor:pointer;
+
+      transition:
+        background .18s ease,
+        color .18s ease;
+    }
+
+    .eye:hover{
+      background:
+        rgba(103,232,249,.055);
+
+      color:var(--cyan);
+    }
+
+
+    /* STRENGTH */
+
+    .strength{
+      display:grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:5px;
+
+      margin:
+        10px 0 5px;
+    }
+
+    .strength span{
+      height:3px;
+
+      border-radius:999px;
+
+      background:#17222e;
+
+      transition:
+        background .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .strength span.on{
+      background:
+        linear-gradient(
+          90deg,
+          var(--cyan),
+          var(--violet)
+        );
+
+      box-shadow:
+        0 0 7px
+        rgba(103,232,249,.14);
+    }
+
+    .strength-text{
+      font:
+        500 8px/1
+        "DM Mono",
+        monospace;
+
+      color:#627184;
+    }
+
+
+    /* =========================================================
+       PRIMARY BUTTON
+       ========================================================= */
+
+    .primary{
+      position:relative;
+      isolation:isolate;
+
+      width:100%;
+      height:50px;
+
+      margin-top:14px;
+
+      overflow:hidden;
+
+      border-radius:13px;
+
+      background:
+        linear-gradient(
+          110deg,
+          #70eaff,
+          #7897ff 55%,
+          #a87cff
+        );
+
+      color:#02090e;
+
+      font-size:10px;
+      font-weight:900;
+
+      letter-spacing:.06em;
+
+      cursor:pointer;
+
+      box-shadow:
+        0 15px 30px
+        rgba(72,117,255,.11);
+
+      transition:
+        transform .18s ease,
+        filter .18s ease,
+        box-shadow .18s ease;
+    }
+
+    .primary::before{
+      content:"";
+
+      position:absolute;
+      z-index:-1;
+
+      top:-80%;
+      left:-100%;
+
+      width:55%;
+      height:260%;
+
+      transform:
+        rotate(12deg);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.38),
+          transparent
+        );
+
+      animation:
+        buttonShine
+        5.5s
+        ease-in-out
+        infinite;
+    }
+
+    @keyframes buttonShine{
+      0%,
+      64%{
+        left:-100%;
+      }
+
+      86%,
+      100%{
+        left:150%;
+      }
+    }
+
+    .primary:hover{
+      transform:
+        translateY(-2px);
+
+      filter:
+        brightness(1.045);
+
+      box-shadow:
+        0 19px 34px
+        rgba(72,117,255,.17);
+    }
+
+    .primary:active{
+      transform:
+        translateY(0);
+    }
+
+    .primary:disabled{
+      opacity:.62;
+
+      cursor:not-allowed;
+
+      transform:none;
+    }
+
+
+    /* ERROR */
+
+    .error{
+      min-height:19px;
+
+      margin-top:10px;
+
+      color:var(--red);
+
+      font-size:9px;
+
+      font-weight:700;
+    }
+
+    .shake{
+      animation:
+        shake
+        .32s
+        ease;
+    }
+
+    @keyframes shake{
+      20%{
+        transform:translateX(-5px);
+      }
+
+      40%{
+        transform:translateX(5px);
+      }
+
+      60%{
+        transform:translateX(-3px);
+      }
+
+      80%{
+        transform:translateX(2px);
+      }
+    }
+
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    .foot{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+
+      margin-top:19px;
+      padding-top:14px;
+
+      border-top:
+        1px solid
+        var(--line);
+
+      font:
+        500 8px/1
+        "DM Mono",
+        monospace;
+
+      color:#536173;
+    }
+
+    .foot span:first-child{
+      color:#6fd6b1;
+    }
+
+
+    /* =========================================================
+       BOTTOM META
+       ========================================================= */
+
+    .corner-meta{
+      position:absolute;
+      z-index:30;
+
+      left:28px;
+      right:28px;
+      bottom:20px;
+
+      display:flex;
+      justify-content:space-between;
+
+      color:#455365;
+
+      font:
+        500 8px/1
+        "DM Mono",
+        monospace;
+
+      letter-spacing:.08em;
+
+      pointer-events:none;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media(max-width:980px){
+
+      body{
+        overflow:auto;
+      }
+
+      .stage{
+        position:absolute;
+        inset:auto 0 0;
+
+        padding:
+          70px
+          14px
+          18px;
+      }
+
+      .command-shell{
+        width:
+          min(
+            620px,
+            calc(100vw - 28px)
+          );
+
+        min-height:0;
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .left-panel{
+        display:none;
+      }
+
+      .right-panel{
+        padding:
+          29px
+          21px;
+      }
+
+      .topbar{
+        left:16px;
+        right:16px;
+      }
+
+      .corner-meta{
+        left:16px;
+        right:16px;
+      }
+    }
+
+
+    @media(max-width:520px){
+
+      .system-readout{
+        display:none;
+      }
+
+      .auth-head{
+        align-items:flex-start;
+      }
+
+      .clock{
+        display:none;
+      }
+
+      .right-panel{
+        padding:
+          23px
+          16px;
+      }
+
+      .auth-head h2{
+        font-size:27px;
+      }
+
+      .corner-meta{
+        font-size:7px;
+      }
+
+      .stage{
+        padding-top:64px;
+      }
+    }
+
+
+    /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
+
+    @media(prefers-reduced-motion:reduce){
+
+      *,
+      *::before,
+      *::after{
+        animation:
+          none!important;
+
+        transition:
+          none!important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="scene" id="scene">
+
+    <div class="orb a"></div>
+    <div class="orb b"></div>
+    <div class="orb c"></div>
+
+    <canvas id="particles"></canvas>
+
+    <div class="noise"></div>
+    <div class="scanlines"></div>
+
+
+    <header class="topbar">
+
+      <div class="micro-brand">
+        <span class="dot"></span>
+        <span>SUMBER AQUARIUM // PGK</span>
+      </div>
+
+      <div class="system-readout">
+        <strong id="systemState">
+          SECURE CHANNEL
+        </strong>
+
+        <span>
+          NODE-01
+        </span>
+
+        <span id="clock">
+          --:--:--
+        </span>
+      </div>
+
+    </header>
+
+
+    <main class="stage">
+
+      <section class="command-shell" id="shell">
+
+
+        <!-- =====================================================
+             LEFT PANEL
+             ===================================================== -->
+
+        <section class="left-panel">
+
+          <div class="brand-row">
+
+            <div class="brand">
+
+              <img
+                class="brand-logo"
+                src="./assets/images/logo.png"
+                alt="Sumber Aquarium"
+              >
+
+              <div>
+
+                <strong>
+                  SUMBER AQUARIUM
+                </strong>
+
+                <span>
+                  PGK / CEO CONTROL NETWORK
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="status-pill">
+
+              <i class="fa-solid fa-circle"></i>
+
+              ONLINE
+
+            </div>
+
+          </div>
+
+
+          <div class="hero">
+
+            <div class="hud-corner tl"></div>
+            <div class="hud-corner tr"></div>
+            <div class="hud-corner bl"></div>
+            <div class="hud-corner br"></div>
+
+
+            <div class="data-chip chip-a">
+
+              CORE STATUS
+
+              <b>
+                STABLE
+              </b>
+
+            </div>
+
+
+            <div class="data-chip chip-b">
+
+              AUTH NODE
+
+              <b>
+                01 / PGK
+              </b>
+
+            </div>
+
+
+            <div class="data-chip chip-c">
+
+              ENCRYPTION
+
+              <b>
+                ACTIVE
+              </b>
+
+            </div>
+
+
+            <div class="data-chip chip-d">
+
+              SESSION
+
+              <b>
+                LOCKED
+              </b>
+
+            </div>
+
+
+            <div class="orbit o1"></div>
+            <div class="orbit o2"></div>
+            <div class="orbit o3"></div>
+
+            <div class="core"></div>
+
+            <div class="scan"></div>
+
+
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+
+
+            <svg
+              class="fish"
+              viewBox="0 0 280 170"
+              aria-label="Animated aquarium fish"
+            >
+
+              <defs>
+
+                <linearGradient
+                  id="fishBody"
+                  x1="0"
+                  x2="1"
+                >
+
+                  <stop
+                    offset="0"
+                    stop-color="#6ce9ff"
+                  />
+
+                  <stop
+                    offset=".56"
+                    stop-color="#6d9bff"
+                  />
+
+                  <stop
+                    offset="1"
+                    stop-color="#aa78ff"
+                  />
+
+                </linearGradient>
+
+
+                <linearGradient
+                  id="fin"
+                  x1="0"
+                  x2="1"
+                >
+
+                  <stop
+                    offset="0"
+                    stop-color="#8cf2ff"
+                    stop-opacity=".9"
+                  />
+
+                  <stop
+                    offset="1"
+                    stop-color="#9e75ff"
+                    stop-opacity=".65"
+                  />
+
+                </linearGradient>
+
+              </defs>
+
+
+              <path
+                d="M52 88 C74 52 130 38 188 53 C209 59 225 72 235 84 C222 96 208 105 188 112 C130 131 73 119 52 88Z"
+                fill="url(#fishBody)"
+              />
+
+
+              <path
+                d="M53 88 L18 53 Q5 88 18 123Z"
+                fill="#65e5ff"
+                opacity=".78"
+              />
+
+
+              <path
+                d="M128 49 Q149 16 171 49 Q151 61 128 49Z"
+                fill="url(#fin)"
+                opacity=".84"
+              />
+
+
+              <path
+                d="M128 120 Q151 150 174 113 Q150 103 128 120Z"
+                fill="url(#fin)"
+                opacity=".56"
+              />
+
+
+              <path
+                d="M235 84 Q258 72 273 62 Q264 83 273 106 Q258 97 235 84Z"
+                fill="#ffd873"
+                opacity=".6"
+              />
+
+
+              <path
+                d="M92 78 Q124 58 160 80 Q127 100 92 86Z"
+                fill="rgba(255,255,255,.13)"
+              />
+
+
+              <circle
+                cx="200"
+                cy="74"
+                r="7"
+                fill="#071018"
+              />
+
+              <circle
+                cx="202"
+                cy="72"
+                r="2.4"
+                fill="#fff"
+              />
+
+            </svg>
+
+
+            <div class="hero-label">
+
+              <i class="fa-solid fa-wave-square"></i>
+
+              AQUATIC CORE / LIVE TELEMETRY
+
+            </div>
+
+          </div>
+
+
+          <div class="copy">
+
+            <div class="kicker">
+              EXECUTIVE CONTROL LAYER
+            </div>
+
+            <h1>
+              Masuk ke pusat
+              <br>
+              <span>
+                kendali aquarium.
+              </span>
+            </h1>
+
+            <p>
+              One clean access flow untuk dashboard CEO.
+              Credential diverifikasi langsung di server
+              sebelum sesi CEO dibuat.
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             RIGHT PANEL
+             ===================================================== -->
+
+        <section class="right-panel">
+
+          <div class="auth-wrap">
+
+
+            <div class="auth-head">
+
+              <div>
+
+                <div class="eyebrow">
+                  CEO AUTHENTICATION
+                </div>
+
+                <h2>
+                  Welcome back.
+                </h2>
+
+                <p>
+                  Authorised access only.
+                </p>
+
+              </div>
+
+              <div
+                class="clock"
+                id="clockMobile"
+              >
+                --:--:--
+              </div>
+
+            </div>
+
+
+            <div
+              class="protocol"
+              aria-label="Authentication flow"
+            >
+
+              <span class="active">
+                01 CREDENTIALS
+              </span>
+
+            </div>
+
+
+            <div
+              class="step"
+              id="credentialStep"
+            >
+
+
+              <div class="field">
+
+                <div class="label-row">
+
+                  <label for="username">
+                    CEO USERNAME
+                  </label>
+
+                  <span class="hint">
+                    MAX 64
+                  </span>
+
+                </div>
+
+
+                <div class="input-wrap">
+
+                  <i
+                    class="fa-solid fa-user-shield"
+                  ></i>
+
+                  <input
+                    id="username"
+                    maxlength="64"
+                    autocomplete="username"
+                    placeholder="Masukkan username"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div class="field">
+
+                <div class="label-row">
+
+                  <label for="password">
+                    PASSWORD
+                  </label>
+
+                  <span class="hint">
+                    SERVER VERIFIED
+                  </span>
+
+                </div>
+
+
+                <div class="input-wrap">
+
+                  <i
+                    class="fa-solid fa-lock"
+                  ></i>
+
+
+                  <input
+                    id="password"
+                    type="password"
+                    maxlength="128"
+                    autocomplete="current-password"
+                    placeholder="Masukkan password"
+                  >
+
+
+                  <button
+                    class="eye"
+                    type="button"
+                    id="togglePassword"
+                    aria-label="Tampilkan password"
+                  >
+
+                    <i
+                      class="fa-solid fa-eye"
+                    ></i>
+
+                  </button>
+
+                </div>
+
+
+                <div
+                  class="strength"
+                  aria-hidden="true"
+                >
+
+                  <span id="s1"></span>
+                  <span id="s2"></span>
+                  <span id="s3"></span>
+                  <span id="s4"></span>
+
+                </div>
+
+
+                <div
+                  class="strength-text"
+                  id="strengthText"
+                >
+                  Credentials stay on the secure channel.
+                </div>
+
+              </div>
+
+
+              <button
+                class="primary"
+                id="continueBtn"
+              >
+
+                <i
+                  class="fa-solid fa-arrow-right-to-bracket"
+                ></i>
+
+                &nbsp;
+
+                VERIFY CREDENTIALS
+
+              </button>
+
+            </div>
+
+
+            <div
+              class="error"
+              id="error"
+              aria-live="polite"
+            ></div>
+
+
+            <div class="foot">
+
+              <span>
+                <i class="fa-solid fa-lock"></i>
+                SERVER-SIDE AUTHENTICATION
+              </span>
+
+              <span>
+                PGK · CEO GATE
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </section>
+
+    </main>
+
+
+    <div class="corner-meta">
+
+      <span>
+        ENCRYPTED ACCESS CHANNEL
+      </span>
+
+      <span>
+        LOCAL NODE // 01
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const shell =
+      document.getElementById("shell");
+
+    const errorBox =
+      document.getElementById("error");
+
+    const clock =
+      document.getElementById("clock");
+
+    const clockMobile =
+      document.getElementById("clockMobile");
+
+    const username =
+      document.getElementById("username");
+
+    const password =
+      document.getElementById("password");
+
+    const credentialStep =
+      document.getElementById("credentialStep");
+
+    const systemState =
+      document.getElementById("systemState");
+
+
+    // Smooth 3D depth on desktop. Disabled for touch devices.
+    if (
+      window.matchMedia(
+        "(pointer:fine)"
+      ).matches
+    ) {
+
+      let rx = 0,
+          ry = 0,
+          raf = 0;
+
+
+      window.addEventListener(
+        "pointermove",
+        (event) => {
+
+          const x =
+            event.clientX /
+            innerWidth -
+            .5;
+
+          const y =
+            event.clientY /
+            innerHeight -
+            .5;
+
+
+          rx = y * -2.4;
+          ry = x * 3.2;
+
+
+          if (!raf) {
+
+            raf =
+              requestAnimationFrame(
+                () => {
+
+                  shell.style.transform =
+                    `perspective(1400px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+
+                  raf = 0;
+
+                }
+              );
+
+          }
+
+        },
+        {
+          passive:true
+        }
+      );
+
+
+      window.addEventListener(
+        "pointerleave",
+        () =>
+          shell.style.transform =
+            "perspective(1400px) rotateX(0deg) rotateY(0deg)"
+      );
+
+    }
+
+
+    function updateClock(){
+
+      const time =
+        new Date().toLocaleTimeString(
+          "id-ID",
+          {
+            hour12:false
+          }
+        );
+
+
+      clock.textContent =
+        time;
+
+      clockMobile.textContent =
+        time;
+
+    }
+
+
+    updateClock();
+
+    setInterval(
+      updateClock,
+      1000
+    );
+
+
+    // Animated particle field.
+    const canvas =
+      document.getElementById(
+        "particles"
+      );
+
+    const ctx =
+      canvas.getContext("2d");
+
+    let particles = [];
+
+
+    function resizeCanvas(){
+
+      const ratio =
+        Math.min(
+          window.devicePixelRatio || 1,
+          2
+        );
+
+
+      canvas.width =
+        Math.floor(
+          innerWidth * ratio
+        );
+
+      canvas.height =
+        Math.floor(
+          innerHeight * ratio
+        );
+
+
+      canvas.style.width =
+        innerWidth + "px";
+
+      canvas.style.height =
+        innerHeight + "px";
+
+
+      ctx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+      );
+
+
+      const count =
+        Math.min(
+          110,
+          Math.max(
+            35,
+            Math.floor(
+              innerWidth / 14
+            )
+          )
+        );
+
+
+      particles =
+        Array.from(
+          {
+            length:count
+          },
+          () => ({
+            x:
+              Math.random() *
+              innerWidth,
+
+            y:
+              Math.random() *
+              innerHeight,
+
+            vx:
+              (Math.random() - .5) *
+              .18,
+
+            vy:
+              (Math.random() - .5) *
+              .13,
+
+            r:
+              Math.random() *
+              1.15 +
+              .25,
+
+            a:
+              Math.random() *
+              .55 +
+              .15
+
+          })
+        );
+
+    }
+
+
+    function drawParticles(){
+
+      ctx.clearRect(
+        0,
+        0,
+        innerWidth,
+        innerHeight
+      );
+
+
+      for (
+        const p of particles
+      ){
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+
+        if(
+          p.x < -10
+        )
+          p.x =
+            innerWidth + 10;
+
+
+        if(
+          p.x >
+          innerWidth + 10
+        )
+          p.x = -10;
+
+
+        if(
+          p.y < -10
+        )
+          p.y =
+            innerHeight + 10;
+
+
+        if(
+          p.y >
+          innerHeight + 10
+        )
+          p.y = -10;
+
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+          p.x,
+          p.y,
+          p.r,
+          0,
+          Math.PI * 2
+        );
+
+
+        ctx.fillStyle =
+          `rgba(108,233,255,${p.a})`;
+
+
+        ctx.fill();
+
+      }
+
+
+      requestAnimationFrame(
+        drawParticles
+      );
+
+    }
+
+
+    resizeCanvas();
+
+
+    window.addEventListener(
+      "resize",
+      resizeCanvas,
+      {
+        passive:true
+      }
+    );
+
+
+    drawParticles();
+
+
+    function setError(
+      message=""
+    ){
+
+      errorBox.textContent =
+        message;
+
+
+      if(message){
+
+        errorBox.classList.remove(
+          "shake"
+        );
+
+
+        void errorBox.offsetWidth;
+
+
+        errorBox.classList.add(
+          "shake"
+        );
+
+
+        systemState.textContent =
+          "AUTH EVENT / REVIEW";
+
+
+        setTimeout(
+          () =>
+            systemState.textContent =
+              "SECURE CHANNEL",
+          2400
+        );
+
+      }
+
+    }
+
+
+    function setLoading(
+      button,
+      loading,
+      label
+    ){
+
+      button.disabled =
+        loading;
+
+
+      button.dataset.original =
+        button.dataset.original ||
+        button.innerHTML;
+
+
+      button.innerHTML =
+        loading
+          ? `
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            &nbsp;
+            ${label}
+          `
+          : button.dataset.original;
+
+    }
+
+
+    // Password quality indicator is visual only; server remains authoritative.
+    const bars = [
+
+      document.getElementById(
+        "s1"
+      ),
+
+      document.getElementById(
+        "s2"
+      ),
+
+      document.getElementById(
+        "s3"
+      ),
+
+      document.getElementById(
+        "s4"
+      )
+
+    ];
+
+
+    const strengthText =
+      document.getElementById(
+        "strengthText"
+      );
+
+
+    password.addEventListener(
+      "input",
+      () => {
+
+        const value =
+          password.value;
+
+
+        let score = 0;
+
+
+        if(
+          value.length >= 8
+        )
+          score++;
+
+
+        if(
+          value.length >= 12
+        )
+          score++;
+
+
+        if(
+          /[A-Z]/.test(value) &&
+          /[a-z]/.test(value)
+        )
+          score++;
+
+
+        if(
+          /\d/.test(value) &&
+          /[^A-Za-z0-9]/.test(value)
+        )
+          score++;
+
+
+        bars.forEach(
+          (bar,i) =>
+            bar.classList.toggle(
+              "on",
+              i < score
+            )
+        );
+
+
+        strengthText.textContent =
+          !value
+            ? "Credentials stay on the secure channel."
+            : score < 2
+              ? "Password signal: LOW"
+              : score < 4
+                ? "Password signal: ACCEPTABLE"
+                : "Password signal: STRONG";
+
+      }
+    );
+
+
+    document
+      .getElementById(
+        "togglePassword"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          const show =
+            password.type ===
+            "password";
+
+
+          password.type =
+            show
+              ? "text"
+              : "password";
+
+
+          document
+            .querySelector(
+              "#togglePassword i"
+            )
+            .className =
+              show
+                ? "fa-solid fa-eye-slash"
+                : "fa-solid fa-eye";
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "continueBtn"
+      )
+      .addEventListener(
+        "click",
+        async () => {
+
+          setError("");
+
+
+          const u =
+            username.value.trim();
+
+          const p =
+            password.value;
+
+
+          if(
+            !u ||
+            !p
+          ){
+
+            setError(
+              "Username dan password wajib diisi."
+            );
+
+            return;
+
+          }
+
+
+          const btn =
+            document.getElementById(
+              "continueBtn"
+            );
+
+
+          setLoading(
+            btn,
+            true,
+            "VERIFYING"
+          );
+
+
+          try {
+
+            const response =
+              await fetch(
+                "/api/auth/login",
+                {
+                  method:"POST",
+
+                  headers:{
+                    "Content-Type":
+                      "application/json"
+                  },
+
+                  credentials:
+                    "same-origin",
+
+                  body:
+                    JSON.stringify({
+                      username:u,
+                      password:p
+                    })
+                }
+              );
+
+
+            const data =
+              await response
+                .json()
+                .catch(
+                  () => ({})
+                );
+
+
+            if(
+              response.ok &&
+              data.redirect
+            ){
+
+              systemState.textContent =
+                "ACCESS GRANTED";
+
+
+              window.location.replace(
+                data.redirect
+              );
+
+
+              return;
+
+            }
+
+
+            throw new Error(
+              data.message ||
+              "Authentication failed."
+            );
+
+
+          } catch(error){
+
+            setError(
+              error.message
+            );
+
+
+            btn.disabled =
+              false;
+
+
+            btn.innerHTML =
+              btn.dataset.original;
+
+          }
+
+        }
+      );
+
+
+    username.addEventListener(
+      "keydown",
+      event => {
+
+        if(
+          event.key ===
+          "Enter"
+        )
+          password.focus();
+
+      }
+    );
+
+
+    password.addEventListener(
+      "keydown",
+      event => {
+
+        if(
+          event.key ===
+          "Enter"
+        )
+          document
+            .getElementById(
+              "continueBtn"
+            )
+            .click();
+
+      }
+    );
+
+
+    // If the CEO is already authenticated, do not show the login screen again.
+    window.addEventListener(
+      "load",
+      async () => {
+
+        try {
+
+          const response =
+            await fetch(
+              "/api/auth/me",
+              {
+                method:"GET",
+
+                credentials:
+                  "same-origin",
+
+                cache:"no-store"
+              }
+            );
+
+
+          if(
+            response.ok
+          ){
+
+            const data =
+              await response.json();
+
+
+            if(
+              data.authenticated
+            ){
+
+              window.location.replace(
+                "/dashboard.html"
+              );
+
+
+              return;
+
+            }
+
+          }
+
+        }catch(error){
+
+          console.debug(
+            "Existing session check skipped:",
+            error
+          );
+
+        }
+
+
+        setTimeout(
+          () =>
+            username.focus(),
+          700
+        );
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
