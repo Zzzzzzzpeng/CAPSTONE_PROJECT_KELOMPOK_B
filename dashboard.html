@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Dashboard Sistem Informasi Pengelolaan Sumber Aquarium — Proyek Capstone Universitas Terbuka."
+  >
+
+  <title>
+    Sumber Aquarium — Sistem Informasi Pengelolaan
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="/css/style.css"
+  >
+</head>
+
+<body>
+
+<div
+  class="layout"
+  id="layout"
+>
+
+  <aside>
+
+    <div class="brand">
+
+      <img
+        src="/assets/images/logo.png"
+        alt="Logo Sumber Aquarium"
+      >
+
+      <div>
+
+        <h2>
+          SUMBER AQUARIUM
+        </h2>
+
+        <p>
+          SISTEM INFORMASI PENGELOLAAN
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <nav aria-label="Navigasi utama">
+
+      <a
+        class="active"
+        href="/dashboard.html"
+      >
+        📊
+        <span>
+          Ringkasan Sistem
+        </span>
+      </a>
+
+      <a
+        href="/modules/stok-ikan/stokikan.html"
+      >
+        🐟
+        <span>
+          Data Stok Ikan
+        </span>
+      </a>
+
+      <a
+        href="/modules/tambah-ikan/tambahikan.html"
+      >
+        ＋
+        <span>
+          Tambah Data Ikan
+        </span>
+      </a>
+
+      <a
+        href="/modules/catat-penjualan/catatanpenjualan.html"
+      >
+        🛒
+        <span>
+          Pencatatan Penjualan
+        </span>
+      </a>
+
+      <a
+        href="/modules/riwayat-penjualan/riwayatpenjualan.html"
+      >
+        ↗
+        <span>
+          Riwayat Penjualan
+        </span>
+      </a>
+
+      <a
+        href="/modules/catat-kematian/catatankematian.html"
+      >
+        ⚠
+        <span>
+          Pencatatan Kematian
+        </span>
+      </a>
+
+      <a
+        href="/modules/riwayat-kematian/riwayatkematian.html"
+      >
+        ☷
+        <span>
+          Riwayat Kematian
+        </span>
+      </a>
+
+    </nav>
+
+
+    <div class="side-bottom">
+
+      <div class="system-pill">
+
+        <span class="dot"></span>
+
+        <strong>
+          Sistem aktif
+        </strong>
+
+        <br>
+
+        <small id="lastSync">
+          Menyiapkan sinkronisasi...
+        </small>
+
+      </div>
+
+
+      <button
+        class="logout-btn"
+        onclick="logout()"
+      >
+        ↪
+
+        <span>
+          Keluar dari sistem
+        </span>
+
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <main>
+
+    <div class="topbar">
+
+      <button
+        class="logout-btn"
+        style="display:none"
+        id="menuBtn"
+      >
+        ☰ Menu
+      </button>
+
+
+      <div>
+
+        <div class="eyebrow">
+          Proyek Capstone • Universitas Terbuka
+        </div>
+
+        <h1>
+          Ruang Kendali Aquarium
+        </h1>
+
+        <p class="subtitle">
+          Dashboard Sistem Informasi untuk mengelola
+          persediaan ikan, transaksi penjualan,
+          dan pencatatan kematian dalam satu
+          alur data yang terintegrasi.
+        </p>
+
+      </div>
+
+
+      <a
+        class="profile"
+        href="/CEO.html"
+        aria-label="Buka profil pengguna"
+      >
+
+        <div class="avatar">
+          SI
+        </div>
+
+        <div>
+
+          <strong>
+            Pengelola Sistem
+          </strong>
+
+          <small>
+            Profil pengguna ↗
+          </small>
+
+        </div>
+
+      </a>
+
+    </div>
+
+
+    <section class="hero">
+
+      <div class="hero-row">
+
+        <div>
+
+          <span class="live">
+
+            <span class="dot"></span>
+
+            OPERASIONAL AKTIF
+
+          </span>
+
+
+          <h2>
+            Selamat datang di pusat informasi
+            Sumber Aquarium.
+          </h2>
+
+
+          <p class="muted">
+            Data di bawah dirangkum dari modul utama
+            sistem untuk membantu pemantauan operasional
+            dan mendukung proses pengambilan keputusan
+            berbasis data.
+          </p>
+
+        </div>
+
+
+        <div
+          class="clock"
+          id="clock"
+          aria-live="polite"
+        >
+          --:--:--
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section
+      class="metrics"
+      aria-label="Ringkasan data"
+    >
+
+      <article class="metric">
+
+        <div class="metric-label">
+
+          Total persediaan
+
+          <span class="metric-icon">
+            🐟
+          </span>
+
+        </div>
+
+        <div
+          class="number"
+          id="totalStock"
+        >
+          —
+        </div>
+
+        <div class="trend">
+          ● jumlah ikan tercatat
+        </div>
+
+      </article>
+
+
+      <article class="metric">
+
+        <div class="metric-label">
+
+          Jenis ikan
+
+          <span class="metric-icon">
+            ◉
+          </span>
+
+        </div>
+
+        <div
+          class="number"
+          id="fishTypes"
+        >
+          —
+        </div>
+
+        <div class="trend">
+          ● data spesies
+        </div>
+
+      </article>
+
+
+      <article class="metric">
+
+        <div class="metric-label">
+
+          Transaksi
+
+          <span class="metric-icon">
+            ↗
+          </span>
+
+        </div>
+
+        <div
+          class="number"
+          id="salesCount"
+        >
+          —
+        </div>
+
+        <div class="trend">
+          ● penjualan tercatat
+        </div>
+
+      </article>
+
+
+      <article class="metric">
+
+        <div class="metric-label">
+
+          Kematian
+
+          <span class="metric-icon">
+            ⚠
+          </span>
+
+        </div>
+
+        <div
+          class="number"
+          id="deathCount"
+        >
+          —
+        </div>
+
+        <div class="trend">
+          ● kejadian tercatat
+        </div>
+
+      </article>
+
+
+      <article class="metric">
+
+        <div class="metric-label">
+
+          Stok perlu perhatian
+
+          <span class="metric-icon">
+            !
+          </span>
+
+        </div>
+
+        <div
+          class="number"
+          id="lowStock"
+        >
+          —
+        </div>
+
+        <div
+          class="trend"
+          style="color:var(--amber)"
+        >
+          ● batas persediaan
+        </div>
+
+      </article>
+
+
+      <article class="metric">
+
+        <div class="metric-label">
+
+          Nilai penjualan
+
+          <span class="metric-icon">
+            Rp
+          </span>
+
+        </div>
+
+        <div
+          class="number"
+          id="revenue"
+        >
+          —
+        </div>
+
+        <div class="trend">
+          ● akumulasi transaksi
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <div class="content-grid">
+
+
+      <!-- QUICK OPERATIONS -->
+
+      <section class="panel">
+
+        <div class="panel-head">
+
+          <div>
+
+            <h2>
+              ⚡ Akses Operasional
+            </h2>
+
+            <span class="muted">
+              Jalur cepat menuju proses utama sistem
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <a
+            class="action"
+            href="/modules/tambah-ikan/tambahikan.html"
+          >
+
+            <span class="arrow">
+              ↗
+            </span>
+
+            <div class="action-icon">
+              ＋
+            </div>
+
+            <h3>
+              Tambah Data Ikan
+            </h3>
+
+            <p>
+              Masukkan spesies, harga,
+              dan jumlah persediaan ke basis data.
+            </p>
+
+          </a>
+
+
+          <a
+            class="action"
+            href="/modules/stok-ikan/stokikan.html"
+          >
+
+            <span class="arrow">
+              ↗
+            </span>
+
+            <div class="action-icon">
+              🐟
+            </div>
+
+            <h3>
+              Monitoring Persediaan
+            </h3>
+
+            <p>
+              Periksa jumlah stok dan identifikasi
+              data yang perlu diperhatikan.
+            </p>
+
+          </a>
+
+
+          <a
+            class="action"
+            href="/modules/catat-penjualan/catatanpenjualan.html"
+          >
+
+            <span class="arrow">
+              ↗
+            </span>
+
+            <div class="action-icon">
+              🛒
+            </div>
+
+            <h3>
+              Pencatatan Penjualan
+            </h3>
+
+            <p>
+              Catat transaksi agar histori penjualan
+              dan persediaan tetap terhubung.
+            </p>
+
+          </a>
+
+
+          <a
+            class="action"
+            href="/modules/catat-kematian/catatankematian.html"
+          >
+
+            <span class="arrow">
+              ↗
+            </span>
+
+            <div class="action-icon">
+              ⚠
+            </div>
+
+            <h3>
+              Pencatatan Kematian
+            </h3>
+
+            <p>
+              Dokumentasikan jumlah kematian
+              dan keterangan untuk evaluasi operasional.
+            </p>
+
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- SYSTEM ACTIVITY -->
+
+      <section class="panel">
+
+        <div class="panel-head">
+
+          <div>
+
+            <h2>
+              ◌ Status Sistem
+            </h2>
+
+            <span class="muted">
+              Indikator proses pada sesi berjalan
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="feed">
+
+          <div class="feed-item">
+
+            <div class="feed-icon">
+              ●
+            </div>
+
+            <div>
+
+              <b>
+                Koneksi basis data
+              </b>
+
+              <span>
+                Endpoint sistem berhasil merespons.
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="feed-item">
+
+            <div class="feed-icon">
+              🐟
+            </div>
+
+            <div>
+
+              <b>
+                Persediaan terpantau
+              </b>
+
+              <span id="inventorySignal">
+                Menunggu data persediaan.
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="feed-item">
+
+            <div class="feed-icon">
+              Rp
+            </div>
+
+            <div>
+
+              <b>
+                Rekapitulasi penjualan
+              </b>
+
+              <span>
+                Nilai dihitung dari transaksi
+                yang tersimpan.
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="feed-item">
+
+            <div class="feed-icon">
+              ✓
+            </div>
+
+            <div>
+
+              <b>
+                Sesi pengguna
+              </b>
+
+              <span>
+                Lapisan autentikasi sistem
+                sedang aktif.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- SALES -->
+
+      <section class="panel">
+
+        <div class="panel-head">
+
+          <div>
+
+            <h2>
+              🛒 Transaksi Terbaru
+            </h2>
+
+            <span class="muted">
+              Lima transaksi penjualan terakhir
+            </span>
+
+          </div>
+
+          <a
+            href="/modules/riwayat-penjualan/riwayatpenjualan.html"
+          >
+            Buka riwayat ↗
+          </a>
+
+        </div>
+
+
+        <div style="overflow:auto">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Tanggal
+                </th>
+
+                <th>
+                  Jenis ikan
+                </th>
+
+                <th>
+                  Jumlah
+                </th>
+
+                <th>
+                  Nilai
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="recentSales">
+
+              <tr>
+
+                <td
+                  colspan="4"
+                  class="empty"
+                >
+                  Memuat data transaksi...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- MORTALITY -->
+
+      <section class="panel">
+
+        <div class="panel-head">
+
+          <div>
+
+            <h2>
+              ⚠ Catatan Kematian
+            </h2>
+
+            <span class="muted">
+              Lima kejadian terakhir yang tercatat
+            </span>
+
+          </div>
+
+          <a
+            href="/modules/riwayat-kematian/riwayatkematian.html"
+          >
+            Buka riwayat ↗
+          </a>
+
+        </div>
+
+
+        <div style="overflow:auto">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Jenis ikan
+                </th>
+
+                <th>
+                  Jumlah
+                </th>
+
+                <th>
+                  Keterangan
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="recentDeaths">
+
+              <tr>
+
+                <td
+                  colspan="3"
+                  class="empty"
+                >
+                  Memuat catatan kematian...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<script>
+
+const $ = id =>
+  document.getElementById(id);
+
+
+function formatRupiah(v) {
+
+  return new Intl.NumberFormat(
+    "id-ID",
+    {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0
+    }
+  ).format(v);
+
+}
+
+
+function formatTanggal(v) {
+
+  const d = new Date(v);
+
+  return Number.isNaN(d.getTime())
+    ? "-"
+    : d.toLocaleDateString(
+        "id-ID",
+        {
+          day: "numeric",
+          month: "short",
+          year: "numeric"
+        }
+      );
+
+}
+
+
+function esc(v) {
+
+  return String(v ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+function animateNumber(
+  el,
+  value,
+  duration = 650
+) {
+
+  const end =
+    Number(value) || 0;
+
+  const start =
+    Number(el.dataset.value) || 0;
+
+  const t0 =
+    performance.now();
+
+
+  function tick(t) {
+
+    const p =
+      Math.min(
+        (t - t0) / duration,
+        1
+      );
+
+    const e =
+      1 - Math.pow(1 - p, 3);
+
+
+    el.textContent =
+      Math.round(
+        start +
+        (end - start) * e
+      ).toLocaleString("id-ID");
+
+
+    if (p < 1) {
+      requestAnimationFrame(tick);
+    }
+
+  }
+
+
+  el.dataset.value =
+    end;
+
+  requestAnimationFrame(tick);
+
+}
+
+
+let toastTimer;
+
+
+function showToast(
+  msg,
+  type = "success"
+) {
+
+  const t =
+    $("toast");
+
+  t.textContent =
+    msg;
+
+  t.className =
+    `toast show ${type}`;
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      () => {
+        t.className =
+          "toast";
+      },
+      2600
+    );
+
+}
+
+
+function clock() {
+
+  $("clock").textContent =
+    new Date().toLocaleTimeString(
+      "id-ID",
+      {
+        hour12: false
+      }
+    );
+
+}
+
+
+setInterval(
+  clock,
+  1000
+);
+
+clock();
+
+
+async function requireAuth() {
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/auth/me",
+        {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "no-store"
+        }
+      );
+
+
+    if (!response.ok) {
+
+      window.location.replace("/");
+
+      return null;
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if (!data.authenticated) {
+
+      window.location.replace("/");
+
+      return null;
+
+    }
+
+
+    return data;
+
+  } catch (error) {
+
+    console.error(
+      "Authentication check failed:",
+      error
+    );
+
+    window.location.replace("/");
+
+    return null;
+
+  }
+
+}
+
+
+async function logout() {
+
+  try {
+
+    await fetch(
+      "/api/auth/logout",
+      {
+        method: "POST",
+        credentials: "same-origin"
+      }
+    );
+
+  } finally {
+
+    window.location.replace("/");
+
+  }
+
+}
+
+
+async function loadDashboard() {
+
+  try {
+
+    const [
+      fishResponse,
+      salesResponse,
+      deathsResponse
+    ] =
+      await Promise.all([
+        fetch("/api/ikan"),
+        fetch("/api/penjualan"),
+        fetch("/api/kematian")
+      ]);
+
+
+    if (
+      !fishResponse.ok ||
+      !salesResponse.ok ||
+      !deathsResponse.ok
+    ) {
+
+      throw new Error(
+        "API dashboard gagal."
+      );
+
+    }
+
+
+    const [
+      fish,
+      sales,
+      deaths
+    ] =
+      await Promise.all([
+        fishResponse.json(),
+        salesResponse.json(),
+        deathsResponse.json()
+      ]);
+
+
+    const totalStock =
+      fish.reduce(
+        (s, x) =>
+          s + Number(x.jumlah || 0),
+        0
+      );
+
+
+    const lowStock =
+      fish.filter(
+        x =>
+          Number(x.jumlah || 0) <= 10
+      ).length;
+
+
+    const revenue =
+      sales.reduce(
+        (s, x) =>
+          s + Number(x.totalHarga || 0),
+        0
+      );
+
+
+    animateNumber(
+      $("totalStock"),
+      totalStock
+    );
+
+    animateNumber(
+      $("fishTypes"),
+      fish.length
+    );
+
+    animateNumber(
+      $("salesCount"),
+      sales.length
+    );
+
+    animateNumber(
+      $("deathCount"),
+      deaths.length
+    );
+
+    animateNumber(
+      $("lowStock"),
+      lowStock
+    );
+
+
+    $("revenue").textContent =
+      formatRupiah(revenue);
+
+
+    $("inventorySignal").textContent =
+      `${totalStock.toLocaleString("id-ID")} ekor dari ${fish.length} jenis ikan tercatat.`;
+
+
+    $("lastSync").textContent =
+      `Sinkronisasi terakhir ${new Date().toLocaleTimeString(
+        "id-ID",
+        {
+          hour12: false
+        }
+      )}`;
+
+
+    $("recentSales").innerHTML =
+      sales.length
+
+        ? sales
+            .slice(0, 5)
+            .map(
+              x => `
+                <tr>
+
+                  <td>
+                    ${esc(
+                      formatTanggal(
+                        x.tanggal
+                      )
+                    )}
+                  </td>
+
+                  <td>
+                    <strong>
+                      ${esc(x.namaIkan)}
+                    </strong>
+                  </td>
+
+                  <td>
+                    ${esc(x.jumlah)}
+                    ekor
+                  </td>
+
+                  <td>
+                    <span class="badge">
+                      ${esc(
+                        formatRupiah(
+                          x.totalHarga
+                        )
+                      )}
+                    </span>
+                  </td>
+
+                </tr>
+              `
+            )
+            .join("")
+
+        : `
+          <tr>
+            <td
+              colspan="4"
+              class="empty"
+            >
+              Belum ada transaksi penjualan.
+            </td>
+          </tr>
+        `;
+
+
+    $("recentDeaths").innerHTML =
+      deaths.length
+
+        ? deaths
+            .slice(0, 5)
+            .map(
+              x => `
+                <tr>
+
+                  <td>
+                    <strong>
+                      ${esc(x.namaIkan)}
+                    </strong>
+                  </td>
+
+                  <td>
+                    <span class="badge badge-danger">
+                      ${esc(x.jumlah)}
+                      ekor
+                    </span>
+                  </td>
+
+                  <td>
+                    ${esc(x.keterangan)}
+                  </td>
+
+                </tr>
+              `
+            )
+            .join("")
+
+        : `
+          <tr>
+            <td
+              colspan="3"
+              class="empty"
+            >
+              Belum ada catatan kematian.
+            </td>
+          </tr>
+        `;
+
+  } catch (e) {
+
+    console.error(e);
+
+
+    [
+      "totalStock",
+      "fishTypes",
+      "salesCount",
+      "deathCount",
+      "lowStock",
+      "revenue"
+    ].forEach(
+      id =>
+        $(id).textContent =
+          "ERR"
+    );
+
+
+    showToast(
+      "⚠ Gagal mengambil data dashboard.",
+      "error"
+    );
+
+  }
+
+}
+
+
+(async function bootDashboard() {
+
+  const auth =
+    await requireAuth();
+
+
+  if (!auth) {
+    return;
+  }
+
+
+  const profileName =
+    document.querySelector(
+      ".profile strong"
+    );
+
+
+  if (profileName) {
+
+    profileName.textContent =
+      auth.username ||
+      "Pengelola Sistem";
+
+  }
+
+
+  await loadDashboard();
+
+
+  setInterval(
+    loadDashboard,
+    30000
+  );
+
+})();
+
+
+const menuBtn =
+  $("menuBtn");
+
+
+if (innerWidth <= 900) {
+
+  menuBtn.style.display =
+    "block";
+
+
+  menuBtn.onclick =
+    () => {
+
+      document
+        .getElementById("layout")
+        .classList
+        .toggle("menu-open");
+
+    };
+
+}
+
+</script>
+
+</body>
+</html>
