@@ -1,0 +1,64 @@
+#================================
+# Python
+# ================================
+.venv/
+venv/
+env/
+ENV/
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ================================
+# Environment / Secrets
+# ================================
+.env
+.env.*
+!.env.example
+
+# PostgreSQL local configuration
+postgres-language-server.jsonc
+
+# ================================
+# IDE / Editors
+# ================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ================================
+# OS
+# ================================
+.DS_Store
+Thumbs.db
+
+# ================================
+# Logs
+# ================================
+*.log
+
+# ================================
+# Python tooling
+# ================================
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ================================
+# Build / temporary files
+# ================================
+build/
+dist/
+*.egg-info/
+
+# ================================
+# Local database dumps
+# ================================
+*.dump
+*.backup
+*.bak
