@@ -832,11 +832,11 @@ Halaman profil project dan anggota kelompok.
 
 ## 👨‍💼 CEO Dashboard Preview
 
-[▶️ Tonton CEO Dashboard Preview](ceo.mp4)
+[![CEO Dashboard Preview](assets/readme/ceo-preview.gif)](ceo.mp4)
 
 ## 🎬 System Preview
 
-[▶️ Tonton System Preview](preview.mp4)
+[![System Preview](assets/readme/preview.gif)](previews.mp4)
 
 ------
 
