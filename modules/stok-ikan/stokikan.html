@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stok Ikan - Sumber Aquarium</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="../../assets/images/logo.png" alt="Logo">
+        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
+        <li><a href="stokikan.html" class="active">🐟 Stok Ikan</a></li>
+        <li><a href="../tambah-ikan/tambahikan.html">➕ Tambah Ikan</a></li>
+        <li><a href="../catat-penjualan/catatanpenjualan.html">🛒 Catat Penjualan</a></li>
+        <li><a href="../riwayat-penjualan/riwayatpenjualan.html">📜 Riwayat Penjualan</a></li>
+        <li><a href="../catat-kematian/catatankematian.html">⚠️ Catat Kematian</a></li>
+        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
+      </ul>
+      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <div class="header">
+        <h1>Manajemen Stok Ikan</h1>
+        <p>Pantau daftar seluruh pasokan ikan yang tersedia di fasilitas Anda secara real-time.</p>
+      </div>
+
+      <div class="panel">
+        <div class="table-toolbar">
+          <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari nama atau kategori ikan...">
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Ikan</th>
+                <th>Kategori</th>
+                <th>Stok</th>
+                <th>Harga</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="fishTableBody">
+              <tr><td colspan="6" style="text-align:center; color:var(--muted); padding: 30px;">Memuat sinkronisasi data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <div id="toast" class="toast"></div>
+
+  <script src="../../js/auth.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    let fishData = [];
+
+    function showToast(msg, type="success") {
+      const t = $("toast");
+      t.textContent = msg;
+      t.className = `toast show ${type}`;
+      setTimeout(() => t.classList.remove("show"), 3000);
+    }
+
+    function formatRupiah(num) {
+      return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(num);
+    }
+    function esc(val) {
+      return String(val||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    }
+
+    async function loadFish() {
+      try {
+        const res = await fetch("/api/ikan");
+        if (!res.ok) throw new Error("Gagal mengambil data dari server.");
+        fishData = await res.json();
+        renderTable();
+      } catch (err) {
+        $("fishTableBody").innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--bad); padding: 30px;">⚠️ ${err.message}</td></tr>`;
+      }
+    }
+
+    function renderTable() {
+      const keyword = $("searchInput").value.trim().toLowerCase();
+      const filtered = fishData.filter(i => String(i.nama).toLowerCase().includes(keyword) || String(i.kategori).toLowerCase().includes(keyword));
+      
+      const tbody = $("fishTableBody");
+      if (!filtered.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--muted); padding: 30px;">Data tidak ditemukan.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(ikan => `
+        <tr>
+          <td><span class="badge badge-warn">#${esc(ikan.id)}</span></td>
+          <td><strong>${esc(ikan.nama)}</strong></td>
+          <td><span class="badge" style="background:rgba(255,255,255,0.05); border: 1px solid var(--line);">${esc(ikan.kategori)}</span></td>
+          <td><strong style="${ikan.jumlah <= 10 ? 'color:var(--bad)' : 'color:var(--good)'}">${esc(ikan.jumlah)} ekor</strong></td>
+          <td>${formatRupiah(ikan.harga)}</td>
+          <td><button class="btn-delete" onclick="deleteFish(${ikan.id}, '${esc(ikan.nama)}')">Hapus</button></td>
+        </tr>
+      `).join("");
+    }
+
+const res = await fetch(
+    `/api/ikan/${id}`,
+    {
+        method: "DELETE",
+        credentials: "same-origin"
+    }
+);
+
+const data =
+    await res.json()
+        .catch(() => ({}));
+
+if (!res.ok) {
+    throw new Error(
+        data.error ||
+        data.message ||
+        `HTTP ${res.status}`
+    );
+}
+
+    $("searchInput").addEventListener("input", renderTable);
+    loadFish();
+  </script>
+</body>
+</html>

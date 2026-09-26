@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catat Penjualan - Sumber Aquarium</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="../../assets/images/logo.png" alt="Logo">
+        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
+        <li><a href="../stok-ikan/stokikan.html">🐟 Stok Ikan</a></li>
+        <li><a href="../tambah-ikan/tambahikan.html">➕ Tambah Ikan</a></li>
+        <li><a href="catatanpenjualan.html" class="active">🛒 Catat Penjualan</a></li>
+        <li><a href="../riwayat-penjualan/riwayatpenjualan.html">📜 Riwayat Penjualan</a></li>
+        <li><a href="../catat-kematian/catatankematian.html">⚠️ Catat Kematian</a></li>
+        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
+      </ul>
+      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <div class="header">
+        <h1>Catat Transaksi</h1>
+        <p>Proses penjualan secara real-time. Sistem akan otomatis memotong stok dan mengkalkulasi revenue.</p>
+      </div>
+
+      <div class="panel" style="max-width: 600px;">
+        <form id="sellForm">
+          <div class="form-group">
+            <label for="fishSelect">Pilih Unit Ikan</label>
+            <select id="fishSelect" required>
+              <option value="">Memuat database ikan...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="jumlahJual">Jumlah Terjual (Ekor)</label>
+            <input type="number" id="jumlahJual" min="1" placeholder="Masukkan jumlah transaksi" required>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">Proses Transaksi</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="../../js/auth.js"></script>
+  <script>
+$("sellForm").addEventListener(
+    "submit",
+    async (e) => {
+        e.preventDefault();
+
+        const id = Number(
+            $("fishSelect").value
+        );
+
+        const jumlah = Number(
+            $("jumlahJual").value
+        );
+
+        const fish = stokIkan.find(
+            i => i.id === id
+        );
+
+        if (!fish) {
+            showToast(
+                "Pilih ikan terlebih dahulu.",
+                "error"
+            );
+            return;
+        }
+
+        if (
+            !Number.isInteger(jumlah) ||
+            jumlah <= 0
+        ) {
+            showToast(
+                "Jumlah penjualan harus lebih dari 0.",
+                "error"
+            );
+            return;
+        }
+
+        if (jumlah > fish.jumlah) {
+            showToast(
+                `Stok ${fish.nama} tidak mencukupi (Sisa ${fish.jumlah}).`,
+                "error"
+            );
+            return;
+        }
+
+        const btn = $("submitBtn");
+
+        btn.disabled = true;
+        btn.textContent = "Memproses...";
+
+        try {
+            const res = await fetch(
+                "/api/penjualan",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        ikan_id: id,
+                        jumlah
+                    })
+                }
+            );
+
+            const data =
+                await res.json()
+                    .catch(() => ({}));
+
+            if (!res.ok) {
+                throw new Error(
+                    data.error ||
+                    data.message ||
+                    `HTTP ${res.status}`
+                );
+            }
+
+            showToast(
+                "Transaksi berhasil dicatat!",
+                "success"
+            );
+
+            setTimeout(
+                () => {
+                    window.location.href =
+                        "../riwayat-penjualan/riwayatpenjualan.html";
+                },
+                1000
+            );
+
+        } catch (err) {
+            showToast(
+                err.message,
+                "error"
+            );
+
+            btn.disabled = false;
+            btn.textContent =
+                "Proses Transaksi";
+        }
+    }
+);
+
+    loadFish();
+  </script>
+</body>
+</html>

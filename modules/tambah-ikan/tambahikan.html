@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Ikan - Sumber Aquarium</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="../../assets/images/logo.png" alt="Logo">
+        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
+        <li><a href="../stok-ikan/stokikan.html">🐟 Stok Ikan</a></li>
+        <li><a href="tambahikan.html" class="active">➕ Tambah Ikan</a></li>
+        <li><a href="../catat-penjualan/catatanpenjualan.html">🛒 Catat Penjualan</a></li>
+        <li><a href="../riwayat-penjualan/riwayatpenjualan.html">📜 Riwayat Penjualan</a></li>
+        <li><a href="../catat-kematian/catatankematian.html">⚠️ Catat Kematian</a></li>
+        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
+      </ul>
+      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <div class="header">
+        <h1>Tambah Spesies Baru</h1>
+        <p>Integrasikan data stok ikan baru ke dalam ekosistem database Sumber Aquarium.</p>
+      </div>
+
+      <div class="panel" style="max-width: 600px;">
+        <form id="addFishForm">
+          <div class="form-group">
+            <label for="nama">Nama Ikan</label>
+            <input type="text" id="nama" placeholder="Contoh: Louhan Cencu Sizing" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="kategori">Kategori</label>
+            <select id="kategori" required>
+              <option value="">-- Pilih Kategori Identifikasi --</option>
+              <option value="Predator">Predator</option>
+              <option value="Channa">Channa</option>
+              <option value="Koki">Mas Koki</option>
+              <option value="Hias">Hias Kecil / Aquascape</option>
+              <option value="Cichlid">Cichlid</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label for="jumlah">Stok Awal (Ekor)</label>
+              <input type="number" id="jumlah" min="1" placeholder="0" required>
+            </div>
+            <div class="form-group">
+              <label for="harga">Harga Satuan (Rp)</label>
+              <input type="number" id="harga" min="0" placeholder="0" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">Simpan ke Database</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="../../js/auth.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    
+    function showToast(msg, type="success") {
+      const t = $("toast");
+      t.textContent = msg;
+      t.className = `toast show ${type}`;
+      setTimeout(() => t.classList.remove("show"), 3000);
+    }
+
+    $("addFishForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = $("submitBtn");
+      
+const payload = {
+    nama: $("nama").value.trim(),
+    foto: "/assets/images/logo.png",
+    kategori: $("kategori").value,
+    jumlah: Number($("jumlah").value),
+    harga: Number($("harga").value)
+};
+
+      btn.disabled = true;
+      btn.textContent = "Sinkronisasi...";
+
+      try {
+        const res = await fetch("/api/ikan", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        
+const data = await res.json().catch(() => ({}));
+
+if (!res.ok) {
+    throw new Error(
+        data.error ||
+        data.message ||
+        `HTTP ${res.status}`
+    );
+}
+        
+        showToast(`Berhasil! ${payload.nama} telah masuk sistem.`, "success");
+        setTimeout(() => window.location.href = "../stok-ikan/stokikan.html", 1500);
+      } catch (err) {
+        showToast(err.message, "error");
+        btn.disabled = false;
+        btn.textContent = "Simpan ke Database";
+      }
+    });
+  </script>
+</body>
+</html>

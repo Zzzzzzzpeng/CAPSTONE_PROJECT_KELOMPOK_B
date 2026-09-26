@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Riwayat Kematian - Sumber Aquarium
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../../css/style.css"
+    >
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <img
+                src="../../assets/images/logo.png"
+                alt="Logo"
+            >
+
+            <div>
+                <h2>SUMBER AQUARIUM</h2>
+                <p>PGK MONITORING</p>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="../../dashboard.html">
+                    📊 Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="../stok-ikan/stokikan.html">
+                    🐟 Stok Ikan
+                </a>
+            </li>
+
+            <li>
+                <a href="../tambah-ikan/tambahikan.html">
+                    ➕ Tambah Ikan
+                </a>
+            </li>
+
+            <li>
+                <a href="../catat-penjualan/catatanpenjualan.html">
+                    🛒 Catat Penjualan
+                </a>
+            </li>
+
+            <li>
+                <a href="../riwayat-penjualan/riwayatpenjualan.html">
+                    📜 Riwayat Penjualan
+                </a>
+            </li>
+
+            <li>
+                <a href="../catat-kematian/catatankematian.html">
+                    ⚠️ Catat Kematian
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="riwayatkematian.html"
+                    class="active"
+                >
+                    📋 Riwayat Kematian
+                </a>
+            </li>
+
+        </ul>
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <div class="header">
+
+            <h1>
+                Riwayat Kematian
+            </h1>
+
+            <p>
+                Riwayat mortalitas ikan yang
+                tercatat di sistem.
+            </p>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>
+                                Tanggal
+                            </th>
+
+                            <th>
+                                Nama Ikan
+                            </th>
+
+                            <th>
+                                Jumlah
+                            </th>
+
+                            <th>
+                                Keterangan
+                            </th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="deathTable">
+
+                        <tr>
+                            <td
+                                colspan="4"
+                                style="text-align:center"
+                            >
+                                Memuat data...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script src="../../js/auth.js"></script>
+
+<script>
+
+const tbody =
+    document.getElementById(
+        "deathTable"
+    );
+
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+}
+
+
+function formatTanggal(value) {
+
+    const date =
+        new Date(value);
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "-";
+    }
+
+    return date.toLocaleString(
+        "id-ID",
+        {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+}
+
+
+async function loadDeathHistory() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/kematian",
+                {
+                    credentials:
+                        "same-origin",
+                    cache: "no-store"
+                }
+            );
+
+        const data =
+            await response
+                .json()
+                .catch(() => []);
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                `HTTP ${response.status}`
+            );
+        }
+
+
+        if (!data.length) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td
+                        colspan="4"
+                        style="text-align:center"
+                    >
+                        Belum ada riwayat kematian.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+
+        tbody.innerHTML =
+            data.map(item => `
+
+                <tr>
+
+                    <td>
+                        ${escapeHTML(
+                            formatTanggal(
+                                item.tanggal
+                            )
+                        )}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${escapeHTML(
+                                item.namaIkan
+                            )}
+                        </strong>
+                    </td>
+
+                    <td>
+                        <span
+                            class="badge badge-danger"
+                        >
+                            ${escapeHTML(
+                                item.jumlah
+                            )}
+                            ekor
+                        </span>
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            item.keterangan
+                        )}
+                    </td>
+
+                </tr>
+
+            `).join("");
+
+    } catch (error) {
+
+        console.error(
+            "Gagal mengambil riwayat kematian:",
+            error
+        );
+
+        tbody.innerHTML = `
+            <tr>
+                <td
+                    colspan="4"
+                    style="
+                        text-align:center;
+                        color:var(--bad);
+                        padding:30px;
+                    "
+                >
+                    ⚠️ ${escapeHTML(
+                        error.message
+                    )}
+                </td>
+            </tr>
+        `;
+    }
+}
+
+
+loadDeathHistory();
+
+</script>
+
+</body>
+</html>

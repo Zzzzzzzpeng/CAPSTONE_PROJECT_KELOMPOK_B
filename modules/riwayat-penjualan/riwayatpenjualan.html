@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riwayat Penjualan - Sumber Aquarium</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="../../assets/images/logo.png" alt="Logo">
+        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
+        <li><a href="../stok-ikan/stokikan.html">🐟 Stok Ikan</a></li>
+        <li><a href="../tambah-ikan/tambahikan.html">➕ Tambah Ikan</a></li>
+        <li><a href="../catat-penjualan/catatanpenjualan.html">🛒 Catat Penjualan</a></li>
+        <li><a href="riwayatpenjualan.html" class="active">📜 Riwayat Penjualan</a></li>
+        <li><a href="../catat-kematian/catatankematian.html">⚠️ Catat Kematian</a></li>
+        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
+      </ul>
+      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <div class="header">
+        <h1>Log Transaksi Penjualan</h1>
+        <p>Laporan transaksi keluar dan akumulasi pendapatan historis untuk keperluan audit.</p>
+      </div>
+
+      <div class="panel">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Tanggal (Waktu)</th>
+                <th>Spesies Terjual</th>
+                <th>Volume (Ekor)</th>
+                <th>Total Revenue</th>
+              </tr>
+            </thead>
+            <tbody id="salesTable">
+              <tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 30px;">Menarik data historis...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="../../js/auth.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    function esc(val) { return String(val).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
+    function formatRupiah(num) { return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(num); }
+    function formatTanggal(val) {
+      const d = new Date(val);
+      return isNaN(d.getTime()) ? "-" : d.toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+    }
+
+    async function loadSales() {
+      const tbody = $("salesTable");
+      try {
+        const res = await fetch("/api/penjualan");
+        if (!res.ok) throw new Error("Gagal mengambil log transaksi.");
+        const data = await res.json();
+        
+        if (!data.length) {
+          tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--muted); padding:30px;">Sistem belum mencatat riwayat penjualan.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = data.map(i => `
+          <tr>
+            <td style="color:var(--muted); font-size: 12px;">${esc(formatTanggal(i.tanggal))}</td>
+            <td><strong>${esc(i.namaIkan)}</strong></td>
+            <td>${esc(i.jumlah)} ekor</td>
+            <td><span class="badge badge-success">${esc(formatRupiah(i.totalHarga))}</span></td>
+          </tr>
+        `).join("");
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--bad); padding:30px;">⚠️ ${err.message}</td></tr>`;
+      }
+    }
+    loadSales();
+  </script>
+</body>
+</html>

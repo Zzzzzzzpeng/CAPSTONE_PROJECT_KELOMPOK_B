@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catat Kematian - Sumber Aquarium</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="../../assets/images/logo.png" alt="Logo">
+        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
+        <li><a href="../stok-ikan/stokikan.html">🐟 Stok Ikan</a></li>
+        <li><a href="../tambah-ikan/tambahikan.html">➕ Tambah Ikan</a></li>
+        <li><a href="../catat-penjualan/catatanpenjualan.html">🛒 Catat Penjualan</a></li>
+        <li><a href="../riwayat-penjualan/riwayatpenjualan.html">📜 Riwayat Penjualan</a></li>
+        <li><a href="catatankematian.html" class="active">⚠️ Catat Kematian</a></li>
+        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
+      </ul>
+      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <div class="header">
+        <h1>Catat Mortalitas (Kematian)</h1>
+        <p>Rekam insiden ikan mati beserta alasan untuk menjaga akurasi inventaris dan evaluasi parameter air.</p>
+      </div>
+
+      <div class="panel" style="max-width: 600px;">
+        <form id="deathForm">
+          <div class="form-group">
+            <label for="fishSelect">Pilih Unit Ikan</label>
+            <select id="fishSelect" required>
+              <option value="">Memuat database ikan...</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="jumlahMati">Jumlah Mati (Ekor)</label>
+            <input type="number" id="jumlahMati" min="1" placeholder="Masukkan angka insiden" required>
+          </div>
+
+          <div class="form-group">
+            <label for="keterangan">Diagnosis / Keterangan Penyebab</label>
+            <textarea id="keterangan" rows="3" placeholder="Misal: Indikasi White Spot, Kualitas air drop, dll" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit btn-danger" id="submitBtn">Catat Mortalitas</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="../../js/auth.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    let stokIkan = [];
+
+    function showToast(msg, type="success") {
+      const t = $("toast");
+      t.textContent = msg;
+      t.className = `toast show ${type}`;
+      setTimeout(() => t.classList.remove("show"), 3000);
+    }
+
+    async function loadFish() {
+      try {
+        const res = await fetch("/api/ikan");
+        if (!res.ok) throw new Error("Gagal mengambil data.");
+        stokIkan = await res.json();
+        
+        const sel = $("fishSelect");
+        if (!stokIkan.length) {
+          sel.innerHTML = `<option value="">Tidak ada ikan tersedia</option>`;
+          return;
+        }
+        
+        sel.innerHTML = `<option value="">-- Pilih Ikan --</option>` + 
+          stokIkan.map(i => `<option value="${i.id}">${i.nama} (Stok: ${i.jumlah} ekor)</option>`).join("");
+      } catch (err) {
+        $("fishSelect").innerHTML = `<option value="">⚠️ Error koneksi database</option>`;
+      }
+    }
+    $("deathForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const id = Number($("fishSelect").value);
+      const jumlah = Number($("jumlahMati").value);
+      const ket = $("keterangan").value.trim();
+      const fish = stokIkan.find(i => i.id === id);
+
+      if (jumlah > fish.jumlah) {
+        showToast(`Stok ${fish.nama} hanya ${fish.jumlah}, tidak logis!`, "error");
+        return;
+      }
+
+      const btn = $("submitBtn");
+      btn.disabled = true;
+      btn.textContent = "Merekam Insiden...";
+
+      try {
+        const res = await fetch("/api/kematian", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ikan_id: id, jumlah: jumlah, keterangan: ket })
+        });
+        
+        if (!res.ok) throw new Error("Gagal menyimpan data kematian.");
+        
+        showToast("Insiden berhasil direkam. Stok telah disesuaikan.", "success");
+        setTimeout(() => window.location.href = "../riwayat-kematian/riwayatkematian.html", 1500);
+      } catch (err) {
+        showToast(err.message, "error");
+        btn.disabled = false;
+        btn.textContent = "Catat Mortalitas";
+      }
+    });
+
+
+    loadFish();
+  </script>
+</body>
+</html>
