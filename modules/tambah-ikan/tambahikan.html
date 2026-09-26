@@ -1,125 +1,432 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tambah Ikan - Sumber Aquarium</title>
-  <link rel="stylesheet" href="../../css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tambah Ikan — Sumber Aquarium</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
+
 <body>
-  <div class="app-container">
+
+<div class="app-container">
+
     <aside class="sidebar">
-      <div class="brand">
-        <img src="../../assets/images/logo.png" alt="Logo">
-        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
-      </div>
-      <ul class="nav-links">
-        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
-        <li><a href="../stok-ikan/stokikan.html">🐟 Stok Ikan</a></li>
-        <li><a href="tambahikan.html" class="active">➕ Tambah Ikan</a></li>
-        <li><a href="../catat-penjualan/catatanpenjualan.html">🛒 Catat Penjualan</a></li>
-        <li><a href="../riwayat-penjualan/riwayatpenjualan.html">📜 Riwayat Penjualan</a></li>
-        <li><a href="../catat-kematian/catatankematian.html">⚠️ Catat Kematian</a></li>
-        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
-      </ul>
-      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+
+        <div class="brand">
+            <img
+                src="../../assets/images/logo.png"
+                alt="Sumber Aquarium"
+            >
+
+            <div>
+                <h2>SUMBER AQUARIUM</h2>
+                <p>PGK MONITORING</p>
+            </div>
+        </div>
+
+
+        <nav class="nav-links">
+
+            <a href="../../dashboard.html">
+                📊 Dashboard
+            </a>
+
+            <a href="../stok-ikan/stokikan.html">
+                🐟 Stok Ikan
+            </a>
+
+            <a
+                href="tambahikan.html"
+                class="active"
+            >
+                ＋ Tambah Ikan
+            </a>
+
+            <a href="../catat-penjualan/catatanpenjualan.html">
+                🛒 Catat Penjualan
+            </a>
+
+            <a href="../riwayat-penjualan/riwayatpenjualan.html">
+                📜 Riwayat Penjualan
+            </a>
+
+            <a href="../catat-kematian/catatankematian.html">
+                ⚠️ Catat Kematian
+            </a>
+
+            <a href="../riwayat-kematian/riwayatkematian.html">
+                📋 Riwayat Kematian
+            </a>
+
+        </nav>
+
+        <div class="side-bottom">
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                ↪ Logout
+            </button>
+
+        </div>
+
     </aside>
 
+
     <main class="main-content">
-      <div class="header">
-        <h1>Tambah Spesies Baru</h1>
-        <p>Integrasikan data stok ikan baru ke dalam ekosistem database Sumber Aquarium.</p>
-      </div>
 
-      <div class="panel" style="max-width: 600px;">
-        <form id="addFishForm">
-          <div class="form-group">
-            <label for="nama">Nama Ikan</label>
-            <input type="text" id="nama" placeholder="Contoh: Louhan Cencu Sizing" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="kategori">Kategori</label>
-            <select id="kategori" required>
-              <option value="">-- Pilih Kategori Identifikasi --</option>
-              <option value="Predator">Predator</option>
-              <option value="Channa">Channa</option>
-              <option value="Koki">Mas Koki</option>
-              <option value="Hias">Hias Kecil / Aquascape</option>
-              <option value="Cichlid">Cichlid</option>
-            </select>
-          </div>
+        <header class="header">
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-            <div class="form-group">
-              <label for="jumlah">Stok Awal (Ekor)</label>
-              <input type="number" id="jumlah" min="1" placeholder="0" required>
+            <div>
+
+                <div class="eyebrow">
+                    Inventory Management
+                </div>
+
+                <h1>
+                    Tambah Ikan
+                </h1>
+
+                <p>
+                    Tambahkan jenis ikan baru ke persediaan
+                    Sumber Aquarium.
+                </p>
+
             </div>
-            <div class="form-group">
-              <label for="harga">Harga Satuan (Rp)</label>
-              <input type="number" id="harga" min="0" placeholder="0" required>
-            </div>
-          </div>
 
-          <button type="submit" class="btn-submit" id="submitBtn">Simpan ke Database</button>
-        </form>
-      </div>
+        </header>
+
+
+        <div class="form-layout">
+
+            <section class="form-card">
+
+                <form id="addFishForm">
+
+                    <div class="form-group">
+
+                        <label for="nama">
+                            Nama Ikan
+                        </label>
+
+                        <input
+                            id="nama"
+                            type="text"
+                            maxlength="100"
+                            placeholder="Contoh: Koi Kohaku"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="kategori">
+                            Kategori
+                        </label>
+
+                        <select
+                            id="kategori"
+                            required
+                        >
+
+                            <option value="">
+                                Pilih kategori
+                            </option>
+
+                            <option value="Predator">
+                                Predator
+                            </option>
+
+                            <option value="Hias Kecil">
+                                Hias Kecil
+                            </option>
+
+                            <option value="Cupang">
+                                Cupang
+                            </option>
+
+                            <option value="Pembersih">
+                                Pembersih
+                            </option>
+
+                            <option value="Molly">
+                                Molly
+                            </option>
+
+                            <option value="Koki">
+                                Koki
+                            </option>
+
+                            <option value="Koi">
+                                Koi
+                            </option>
+
+                            <option value="Channa">
+                                Channa
+                            </option>
+
+                            <option value="Crustacea">
+                                Crustacea
+                            </option>
+
+                            <option value="Hias">
+                                Hias
+                            </option>
+
+                            <option value="Hias Besar">
+                                Hias Besar
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="jumlah">
+                                Stok Awal
+                            </label>
+
+                            <input
+                                id="jumlah"
+                                type="number"
+                                min="0"
+                                step="1"
+                                placeholder="0"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="harga">
+                                Harga Satuan
+                            </label>
+
+                            <input
+                                id="harga"
+                                type="number"
+                                min="0"
+                                step="1"
+                                placeholder="0"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-submit"
+                        id="submitBtn"
+                        type="submit"
+                    >
+                        Simpan ke Database
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <aside class="form-card">
+
+                <div class="eyebrow">
+                    Data validation
+                </div>
+
+                <h2>
+                    Sebelum menyimpan
+                </h2>
+
+                <p class="muted">
+                    Data akan divalidasi kembali oleh Flask
+                    sebelum masuk PostgreSQL.
+                </p>
+
+                <div class="feed">
+
+                    <div class="feed-item">
+                        <div class="feed-icon">✓</div>
+
+                        <div>
+                            <b>Nama</b>
+                            <span>
+                                Maksimal 100 karakter.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-icon">✓</div>
+
+                        <div>
+                            <b>Stok</b>
+                            <span>
+                                Tidak boleh negatif.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-icon">✓</div>
+
+                        <div>
+                            <b>Harga</b>
+                            <span>
+                                Maksimal dua angka desimal.
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
     </main>
-  </div>
 
-  <div id="toast" class="toast"></div>
+</div>
 
-  <script src="../../js/auth.js"></script>
-  <script>
-    const $ = id => document.getElementById(id);
-    
-    function showToast(msg, type="success") {
-      const t = $("toast");
-      t.textContent = msg;
-      t.className = `toast show ${type}`;
-      setTimeout(() => t.classList.remove("show"), 3000);
-    }
 
-    $("addFishForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const btn = $("submitBtn");
-      
-const payload = {
-    nama: $("nama").value.trim(),
-    foto: "/assets/images/logo.png",
-    kategori: $("kategori").value,
-    jumlah: Number($("jumlah").value),
-    harga: Number($("harga").value)
-};
+<div id="toast" class="toast"></div>
 
-      btn.disabled = true;
-      btn.textContent = "Sinkronisasi...";
 
-      try {
-        const res = await fetch("/api/ikan", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-        
-const data = await res.json().catch(() => ({}));
+<script src="../../js/auth.js"></script>
 
-if (!res.ok) {
-    throw new Error(
-        data.error ||
-        data.message ||
-        `HTTP ${res.status}`
+<script>
+
+document
+    .getElementById("addFishForm")
+    .addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+            const button =
+                document.getElementById(
+                    "submitBtn"
+                );
+
+
+            const payload = {
+
+                nama:
+                    document
+                        .getElementById("nama")
+                        .value
+                        .trim(),
+
+                foto:
+                    "/assets/images/logo.png",
+
+                kategori:
+                    document
+                        .getElementById("kategori")
+                        .value,
+
+                jumlah:
+                    Number(
+                        document
+                            .getElementById("jumlah")
+                            .value
+                    ),
+
+                harga:
+                    Number(
+                        document
+                            .getElementById("harga")
+                            .value
+                    )
+            };
+
+
+            if (
+                !payload.nama ||
+                !payload.kategori ||
+                !Number.isInteger(payload.jumlah) ||
+                payload.jumlah < 0 ||
+                !Number.isFinite(payload.harga) ||
+                payload.harga < 0
+            ) {
+
+                showToast(
+                    "Periksa kembali data input.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            button.disabled = true;
+            button.textContent =
+                "Menyimpan...";
+
+
+            try {
+
+                await apiJson(
+                    "/api/ikan",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(payload)
+                    }
+                );
+
+
+                showToast(
+                    `${payload.nama} berhasil ditambahkan.`,
+                    "success"
+                );
+
+
+                setTimeout(
+                    () => {
+                        window.location.href =
+                            "../stok-ikan/stokikan.html";
+                    },
+                    900
+                );
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    "error"
+                );
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Simpan ke Database";
+            }
+
+        }
     );
-}
-        
-        showToast(`Berhasil! ${payload.nama} telah masuk sistem.`, "success");
-        setTimeout(() => window.location.href = "../stok-ikan/stokikan.html", 1500);
-      } catch (err) {
-        showToast(err.message, "error");
-        btn.disabled = false;
-        btn.textContent = "Simpan ke Database";
-      }
-    });
-  </script>
+
+</script>
+
 </body>
 </html>

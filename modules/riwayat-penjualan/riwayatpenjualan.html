@@ -1,93 +1,372 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Riwayat Penjualan - Sumber Aquarium</title>
-  <link rel="stylesheet" href="../../css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Riwayat Penjualan — Sumber Aquarium</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
+
 <body>
-  <div class="app-container">
+
+<div class="app-container">
+
     <aside class="sidebar">
-      <div class="brand">
-        <img src="../../assets/images/logo.png" alt="Logo">
-        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
-      </div>
-      <ul class="nav-links">
-        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
-        <li><a href="../stok-ikan/stokikan.html">🐟 Stok Ikan</a></li>
-        <li><a href="../tambah-ikan/tambahikan.html">➕ Tambah Ikan</a></li>
-        <li><a href="../catat-penjualan/catatanpenjualan.html">🛒 Catat Penjualan</a></li>
-        <li><a href="riwayatpenjualan.html" class="active">📜 Riwayat Penjualan</a></li>
-        <li><a href="../catat-kematian/catatankematian.html">⚠️ Catat Kematian</a></li>
-        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
-      </ul>
-      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+
+        <div class="brand">
+            <img
+                src="../../assets/images/logo.png"
+                alt="Sumber Aquarium"
+            >
+
+            <div>
+                <h2>SUMBER AQUARIUM</h2>
+                <p>PGK MONITORING</p>
+            </div>
+        </div>
+
+
+        <nav class="nav-links">
+
+            <a href="../../dashboard.html">
+                📊 Dashboard
+            </a>
+
+            <a href="../stok-ikan/stokikan.html">
+                🐟 Stok Ikan
+            </a>
+
+            <a href="../tambah-ikan/tambahikan.html">
+                ＋ Tambah Ikan
+            </a>
+
+            <a href="../catat-penjualan/catatanpenjualan.html">
+                🛒 Catat Penjualan
+            </a>
+
+            <a
+                href="riwayatpenjualan.html"
+                class="active"
+            >
+                📜 Riwayat Penjualan
+            </a>
+
+            <a href="../catat-kematian/catatankematian.html">
+                ⚠️ Catat Kematian
+            </a>
+
+            <a href="../riwayat-kematian/riwayatkematian.html">
+                📋 Riwayat Kematian
+            </a>
+
+        </nav>
+
+
+        <div class="side-bottom">
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                ↪ Logout
+            </button>
+
+        </div>
+
     </aside>
 
+
     <main class="main-content">
-      <div class="header">
-        <h1>Log Transaksi Penjualan</h1>
-        <p>Laporan transaksi keluar dan akumulasi pendapatan historis untuk keperluan audit.</p>
-      </div>
 
-      <div class="panel">
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Tanggal (Waktu)</th>
-                <th>Spesies Terjual</th>
-                <th>Volume (Ekor)</th>
-                <th>Total Revenue</th>
-              </tr>
-            </thead>
-            <tbody id="salesTable">
-              <tr><td colspan="4" style="text-align: center; color: var(--muted); padding: 30px;">Menarik data historis...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+        <header class="header">
+
+            <div>
+
+                <div class="eyebrow">
+                    Sales History
+                </div>
+
+                <h1>
+                    Riwayat Penjualan
+                </h1>
+
+                <p>
+                    Histori transaksi penjualan yang
+                    tersimpan pada PostgreSQL.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <section class="mini-grid">
+
+            <div class="mini-card">
+                <span>Transaksi</span>
+                <strong id="totalTransactions">—</strong>
+            </div>
+
+            <div class="mini-card">
+                <span>Ekornya terjual</span>
+                <strong id="totalSold">—</strong>
+            </div>
+
+            <div class="mini-card">
+                <span>Total revenue</span>
+                <strong id="totalRevenue">—</strong>
+            </div>
+
+        </section>
+
+
+        <section class="panel">
+
+            <div class="table-toolbar">
+
+                <div>
+                    <strong>
+                        Log transaksi
+                    </strong>
+
+                    <div class="muted">
+                        Cari berdasarkan nama ikan.
+                    </div>
+                </div>
+
+                <input
+                    id="searchInput"
+                    class="search-input"
+                    type="search"
+                    placeholder="🔎 Cari transaksi..."
+                >
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Waktu</th>
+                            <th>Ikan</th>
+                            <th>Jumlah</th>
+                            <th>Harga Satuan</th>
+                            <th>Total</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="salesTable">
+
+                        <tr>
+                            <td
+                                colspan="5"
+                                class="empty"
+                            >
+                                Memuat data...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
     </main>
-  </div>
 
-  <div id="toast" class="toast"></div>
+</div>
 
-  <script src="../../js/auth.js"></script>
-  <script>
-    const $ = id => document.getElementById(id);
-    function esc(val) { return String(val).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
-    function formatRupiah(num) { return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(num); }
-    function formatTanggal(val) {
-      const d = new Date(val);
-      return isNaN(d.getTime()) ? "-" : d.toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+
+<div id="toast" class="toast"></div>
+
+
+<script src="../../js/auth.js"></script>
+
+<script>
+
+let sales = [];
+
+
+function renderSummary() {
+
+    const quantity =
+        sales.reduce(
+            (sum, item) =>
+                sum + Number(item.jumlah || 0),
+            0
+        );
+
+    const revenue =
+        sales.reduce(
+            (sum, item) =>
+                sum + Number(item.totalHarga || 0),
+            0
+        );
+
+
+    document.getElementById(
+        "totalTransactions"
+    ).textContent =
+        sales.length.toLocaleString("id-ID");
+
+
+    document.getElementById(
+        "totalSold"
+    ).textContent =
+        quantity.toLocaleString("id-ID");
+
+
+    document.getElementById(
+        "totalRevenue"
+    ).textContent =
+        formatRupiah(revenue);
+}
+
+
+function renderSales() {
+
+    const keyword =
+        document.getElementById(
+            "searchInput"
+        ).value
+            .trim()
+            .toLowerCase();
+
+
+    const filtered =
+        sales.filter(
+            item =>
+                String(item.namaIkan)
+                    .toLowerCase()
+                    .includes(keyword)
+        );
+
+
+    const tbody =
+        document.getElementById(
+            "salesTable"
+        );
+
+
+    if (!filtered.length) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty">
+                    Tidak ada transaksi.
+                </td>
+            </tr>
+        `;
+
+        return;
     }
 
-    async function loadSales() {
-      const tbody = $("salesTable");
-      try {
-        const res = await fetch("/api/penjualan");
-        if (!res.ok) throw new Error("Gagal mengambil log transaksi.");
-        const data = await res.json();
-        
-        if (!data.length) {
-          tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--muted); padding:30px;">Sistem belum mencatat riwayat penjualan.</td></tr>`;
-          return;
-        }
 
-        tbody.innerHTML = data.map(i => `
-          <tr>
-            <td style="color:var(--muted); font-size: 12px;">${esc(formatTanggal(i.tanggal))}</td>
-            <td><strong>${esc(i.namaIkan)}</strong></td>
-            <td>${esc(i.jumlah)} ekor</td>
-            <td><span class="badge badge-success">${esc(formatRupiah(i.totalHarga))}</span></td>
-          </tr>
-        `).join("");
-      } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--bad); padding:30px;">⚠️ ${err.message}</td></tr>`;
-      }
+    tbody.innerHTML =
+        filtered
+            .map(
+                item => `
+                    <tr>
+
+                        <td>
+                            ${escapeHTML(
+                                formatTanggal(item.tanggal)
+                            )}
+                        </td>
+
+                        <td>
+                            <strong>
+                                ${escapeHTML(item.namaIkan)}
+                            </strong>
+                        </td>
+
+                        <td>
+                            ${Number(item.jumlah)
+                                .toLocaleString("id-ID")}
+                            ekor
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                formatRupiah(
+                                    item.hargaSatuan
+                                )
+                            )}
+                        </td>
+
+                        <td>
+                            <span class="badge badge-success">
+                                ${escapeHTML(
+                                    formatRupiah(
+                                        item.totalHarga
+                                    )
+                                )}
+                            </span>
+                        </td>
+
+                    </tr>
+                `
+            )
+            .join("");
+}
+
+
+async function loadSales() {
+
+    try {
+
+        sales =
+            await apiJson(
+                "/api/penjualan"
+            );
+
+        renderSummary();
+        renderSales();
+
+    } catch (error) {
+
+        document.getElementById(
+            "salesTable"
+        ).innerHTML = `
+            <tr>
+                <td colspan="5" class="empty">
+                    ⚠️ ${escapeHTML(error.message)}
+                </td>
+            </tr>
+        `;
     }
-    loadSales();
-  </script>
+}
+
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "input",
+        renderSales
+    );
+
+
+(async () => {
+
+    const auth =
+        await window.authReady;
+
+    if (!auth) return;
+
+    await loadSales();
+
+})();
+
+</script>
+
 </body>
 </html>

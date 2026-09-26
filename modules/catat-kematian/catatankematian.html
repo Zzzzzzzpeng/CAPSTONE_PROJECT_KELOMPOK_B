@@ -1,129 +1,449 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catat Kematian - Sumber Aquarium</title>
-  <link rel="stylesheet" href="../../css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catat Kematian — Sumber Aquarium</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
+
 <body>
-  <div class="app-container">
+
+<div class="app-container">
+
     <aside class="sidebar">
-      <div class="brand">
-        <img src="../../assets/images/logo.png" alt="Logo">
-        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
-      </div>
-      <ul class="nav-links">
-        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
-        <li><a href="../stok-ikan/stokikan.html">🐟 Stok Ikan</a></li>
-        <li><a href="../tambah-ikan/tambahikan.html">➕ Tambah Ikan</a></li>
-        <li><a href="../catat-penjualan/catatanpenjualan.html">🛒 Catat Penjualan</a></li>
-        <li><a href="../riwayat-penjualan/riwayatpenjualan.html">📜 Riwayat Penjualan</a></li>
-        <li><a href="catatankematian.html" class="active">⚠️ Catat Kematian</a></li>
-        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
-      </ul>
-      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+
+        <div class="brand">
+            <img
+                src="../../assets/images/logo.png"
+                alt="Sumber Aquarium"
+            >
+
+            <div>
+                <h2>SUMBER AQUARIUM</h2>
+                <p>PGK MONITORING</p>
+            </div>
+        </div>
+
+
+        <nav class="nav-links">
+
+            <a href="../../dashboard.html">
+                📊 Dashboard
+            </a>
+
+            <a href="../stok-ikan/stokikan.html">
+                🐟 Stok Ikan
+            </a>
+
+            <a href="../tambah-ikan/tambahikan.html">
+                ＋ Tambah Ikan
+            </a>
+
+            <a href="../catat-penjualan/catatanpenjualan.html">
+                🛒 Catat Penjualan
+            </a>
+
+            <a href="../riwayat-penjualan/riwayatpenjualan.html">
+                📜 Riwayat Penjualan
+            </a>
+
+            <a
+                href="catatankematian.html"
+                class="active"
+            >
+                ⚠️ Catat Kematian
+            </a>
+
+            <a href="../riwayat-kematian/riwayatkematian.html">
+                📋 Riwayat Kematian
+            </a>
+
+        </nav>
+
+
+        <div class="side-bottom">
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                ↪ Logout
+            </button>
+
+        </div>
+
     </aside>
 
+
     <main class="main-content">
-      <div class="header">
-        <h1>Catat Mortalitas (Kematian)</h1>
-        <p>Rekam insiden ikan mati beserta alasan untuk menjaga akurasi inventaris dan evaluasi parameter air.</p>
-      </div>
 
-      <div class="panel" style="max-width: 600px;">
-        <form id="deathForm">
-          <div class="form-group">
-            <label for="fishSelect">Pilih Unit Ikan</label>
-            <select id="fishSelect" required>
-              <option value="">Memuat database ikan...</option>
-            </select>
-          </div>
+        <header class="header">
 
-          <div class="form-group">
-            <label for="jumlahMati">Jumlah Mati (Ekor)</label>
-            <input type="number" id="jumlahMati" min="1" placeholder="Masukkan angka insiden" required>
-          </div>
+            <div>
 
-          <div class="form-group">
-            <label for="keterangan">Diagnosis / Keterangan Penyebab</label>
-            <textarea id="keterangan" rows="3" placeholder="Misal: Indikasi White Spot, Kualitas air drop, dll" required></textarea>
-          </div>
+                <div class="eyebrow">
+                    Mortality Record
+                </div>
 
-          <button type="submit" class="btn-submit btn-danger" id="submitBtn">Catat Mortalitas</button>
-        </form>
-      </div>
+                <h1>
+                    Catat Kematian
+                </h1>
+
+                <p>
+                    Catat mortalitas ikan dan keterangan
+                    kondisi untuk menjaga konsistensi stok.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <div class="form-layout">
+
+            <section class="form-card">
+
+                <form id="deathForm">
+
+                    <div class="form-group">
+
+                        <label for="fishSelect">
+                            Ikan
+                        </label>
+
+                        <select
+                            id="fishSelect"
+                            required
+                        >
+                            <option value="">
+                                Memuat stok...
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="jumlahMati">
+                            Jumlah Mati
+                        </label>
+
+                        <input
+                            id="jumlahMati"
+                            type="number"
+                            min="1"
+                            step="1"
+                            placeholder="Contoh: 2"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="keterangan">
+                            Keterangan
+                        </label>
+
+                        <textarea
+                            id="keterangan"
+                            maxlength="1000"
+                            placeholder="Contoh: kondisi air, gejala, atau penyebab yang diketahui."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        id="submitBtn"
+                        class="btn btn-danger"
+                        type="submit"
+                    >
+                        Catat Mortalitas
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <aside class="form-card">
+
+                <div class="eyebrow">
+                    Inventory impact
+                </div>
+
+                <h2>
+                    Dampak pencatatan
+                </h2>
+
+                <p class="muted">
+                    Setelah berhasil, jumlah stok ikan
+                    akan dikurangi dan histori mortalitas
+                    akan dibuat.
+                </p>
+
+                <div class="mini-card">
+
+                    <span>
+                        Stok tersedia
+                    </span>
+
+                    <strong id="stockPreview">
+                        —
+                    </strong>
+
+                </div>
+
+            </aside>
+
+        </div>
+
     </main>
-  </div>
 
-  <div id="toast" class="toast"></div>
+</div>
 
-  <script src="../../js/auth.js"></script>
-  <script>
-    const $ = id => document.getElementById(id);
-    let stokIkan = [];
 
-    function showToast(msg, type="success") {
-      const t = $("toast");
-      t.textContent = msg;
-      t.className = `toast show ${type}`;
-      setTimeout(() => t.classList.remove("show"), 3000);
-    }
+<div id="toast" class="toast"></div>
 
-    async function loadFish() {
-      try {
-        const res = await fetch("/api/ikan");
-        if (!res.ok) throw new Error("Gagal mengambil data.");
-        stokIkan = await res.json();
-        
-        const sel = $("fishSelect");
-        if (!stokIkan.length) {
-          sel.innerHTML = `<option value="">Tidak ada ikan tersedia</option>`;
-          return;
+
+<script src="../../js/auth.js"></script>
+
+<script>
+
+let fish = [];
+
+
+const select =
+    document.getElementById(
+        "fishSelect"
+    );
+
+
+function updateStockPreview() {
+
+    const id =
+        Number(select.value);
+
+    const item =
+        fish.find(
+            fish =>
+                Number(fish.id) === id
+        );
+
+    document.getElementById(
+        "stockPreview"
+    ).textContent =
+        item
+            ? `${Number(item.jumlah).toLocaleString("id-ID")} ekor`
+            : "—";
+}
+
+
+async function loadFish() {
+
+    fish =
+        await apiJson(
+            "/api/ikan"
+        );
+
+
+    select.innerHTML =
+        `<option value="">
+            Pilih ikan
+        </option>`
+        +
+        fish
+            .map(
+                item => `
+                    <option value="${Number(item.id)}">
+                        ${escapeHTML(item.nama)}
+                        · stok ${Number(item.jumlah)}
+                    </option>
+                `
+            )
+            .join("");
+}
+
+
+select.addEventListener(
+    "change",
+    updateStockPreview
+);
+
+
+document
+    .getElementById("deathForm")
+    .addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            const ikan_id =
+                Number(select.value);
+
+            const jumlah =
+                Number(
+                    document.getElementById(
+                        "jumlahMati"
+                    ).value
+                );
+
+            const keterangan =
+                document.getElementById(
+                    "keterangan"
+                ).value.trim();
+
+
+            const item =
+                fish.find(
+                    fish =>
+                        Number(fish.id) === ikan_id
+                );
+
+
+            if (!item) {
+
+                showToast(
+                    "Pilih ikan terlebih dahulu.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (
+                !Number.isInteger(jumlah) ||
+                jumlah <= 0
+            ) {
+
+                showToast(
+                    "Jumlah harus lebih dari 0.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (
+                jumlah >
+                Number(item.jumlah)
+            ) {
+
+                showToast(
+                    `Stok ${item.nama} hanya ${item.jumlah} ekor.`,
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (!keterangan) {
+
+                showToast(
+                    "Keterangan wajib diisi.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            const button =
+                document.getElementById(
+                    "submitBtn"
+                );
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Mencatat...";
+
+
+            try {
+
+                await apiJson(
+                    "/api/kematian",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                ikan_id,
+                                jumlah,
+                                keterangan
+                            })
+                    }
+                );
+
+
+                showToast(
+                    "Mortalitas berhasil dicatat.",
+                    "success"
+                );
+
+
+                setTimeout(
+                    () => {
+                        window.location.href =
+                            "../riwayat-kematian/riwayatkematian.html";
+                    },
+                    900
+                );
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    "error"
+                );
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Catat Mortalitas";
+            }
+
         }
-        
-        sel.innerHTML = `<option value="">-- Pilih Ikan --</option>` + 
-          stokIkan.map(i => `<option value="${i.id}">${i.nama} (Stok: ${i.jumlah} ekor)</option>`).join("");
-      } catch (err) {
-        $("fishSelect").innerHTML = `<option value="">⚠️ Error koneksi database</option>`;
-      }
+    );
+
+
+(async () => {
+
+    const auth =
+        await window.authReady;
+
+    if (!auth) return;
+
+    try {
+        await loadFish();
+    } catch (error) {
+        showToast(
+            error.message,
+            "error"
+        );
     }
-    $("deathForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const id = Number($("fishSelect").value);
-      const jumlah = Number($("jumlahMati").value);
-      const ket = $("keterangan").value.trim();
-      const fish = stokIkan.find(i => i.id === id);
 
-      if (jumlah > fish.jumlah) {
-        showToast(`Stok ${fish.nama} hanya ${fish.jumlah}, tidak logis!`, "error");
-        return;
-      }
+})();
 
-      const btn = $("submitBtn");
-      btn.disabled = true;
-      btn.textContent = "Merekam Insiden...";
+</script>
 
-      try {
-        const res = await fetch("/api/kematian", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ikan_id: id, jumlah: jumlah, keterangan: ket })
-        });
-        
-        if (!res.ok) throw new Error("Gagal menyimpan data kematian.");
-        
-        showToast("Insiden berhasil direkam. Stok telah disesuaikan.", "success");
-        setTimeout(() => window.location.href = "../riwayat-kematian/riwayatkematian.html", 1500);
-      } catch (err) {
-        showToast(err.message, "error");
-        btn.disabled = false;
-        btn.textContent = "Catat Mortalitas";
-      }
-    });
-
-
-    loadFish();
-  </script>
 </body>
 </html>

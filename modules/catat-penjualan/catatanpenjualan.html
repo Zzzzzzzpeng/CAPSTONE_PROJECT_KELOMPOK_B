@@ -1,165 +1,565 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catat Penjualan - Sumber Aquarium</title>
-  <link rel="stylesheet" href="../../css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catat Penjualan — Sumber Aquarium</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
+
 <body>
-  <div class="app-container">
+
+<div class="app-container">
+
     <aside class="sidebar">
-      <div class="brand">
-        <img src="../../assets/images/logo.png" alt="Logo">
-        <div><h2>SUMBER AQUARIUM</h2><p>PGK MONITORING</p></div>
-      </div>
-      <ul class="nav-links">
-        <li><a href="../../dashboard.html">📊 Dashboard</a></li>
-        <li><a href="../stok-ikan/stokikan.html">🐟 Stok Ikan</a></li>
-        <li><a href="../tambah-ikan/tambahikan.html">➕ Tambah Ikan</a></li>
-        <li><a href="catatanpenjualan.html" class="active">🛒 Catat Penjualan</a></li>
-        <li><a href="../riwayat-penjualan/riwayatpenjualan.html">📜 Riwayat Penjualan</a></li>
-        <li><a href="../catat-kematian/catatankematian.html">⚠️ Catat Kematian</a></li>
-        <li><a href="../riwayat-kematian/riwayatkematian.html">📋 Riwayat Kematian</a></li>
-      </ul>
-      <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+
+        <div class="brand">
+            <img
+                src="../../assets/images/logo.png"
+                alt="Sumber Aquarium"
+            >
+
+            <div>
+                <h2>SUMBER AQUARIUM</h2>
+                <p>PGK MONITORING</p>
+            </div>
+        </div>
+
+
+        <nav class="nav-links">
+
+            <a href="../../dashboard.html">
+                📊 Dashboard
+            </a>
+
+            <a href="../stok-ikan/stokikan.html">
+                🐟 Stok Ikan
+            </a>
+
+            <a href="../tambah-ikan/tambahikan.html">
+                ＋ Tambah Ikan
+            </a>
+
+            <a
+                href="catatanpenjualan.html"
+                class="active"
+            >
+                🛒 Catat Penjualan
+            </a>
+
+            <a href="../riwayat-penjualan/riwayatpenjualan.html">
+                📜 Riwayat Penjualan
+            </a>
+
+            <a href="../catat-kematian/catatankematian.html">
+                ⚠️ Catat Kematian
+            </a>
+
+            <a href="../riwayat-kematian/riwayatkematian.html">
+                📋 Riwayat Kematian
+            </a>
+
+        </nav>
+
+
+        <div class="side-bottom">
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                ↪ Logout
+            </button>
+
+        </div>
+
     </aside>
 
+
     <main class="main-content">
-      <div class="header">
-        <h1>Catat Transaksi</h1>
-        <p>Proses penjualan secara real-time. Sistem akan otomatis memotong stok dan mengkalkulasi revenue.</p>
-      </div>
 
-      <div class="panel" style="max-width: 600px;">
-        <form id="sellForm">
-          <div class="form-group">
-            <label for="fishSelect">Pilih Unit Ikan</label>
-            <select id="fishSelect" required>
-              <option value="">Memuat database ikan...</option>
-            </select>
-          </div>
+        <header class="header">
 
-          <div class="form-group">
-            <label for="jumlahJual">Jumlah Terjual (Ekor)</label>
-            <input type="number" id="jumlahJual" min="1" placeholder="Masukkan jumlah transaksi" required>
-          </div>
+            <div>
 
-          <button type="submit" class="btn-submit" id="submitBtn">Proses Transaksi</button>
-        </form>
-      </div>
+                <div class="eyebrow">
+                    Sales Transaction
+                </div>
+
+                <h1>
+                    Catat Penjualan
+                </h1>
+
+                <p>
+                    Pilih ikan dan jumlah transaksi.
+                    Server akan menghitung revenue dan
+                    mengurangi stok dalam satu transaksi database.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <div class="form-layout">
+
+            <section class="form-card">
+
+                <form id="sellForm">
+
+                    <div class="form-group">
+
+                        <label for="fishSelect">
+                            Ikan
+                        </label>
+
+                        <select
+                            id="fishSelect"
+                            required
+                        >
+                            <option value="">
+                                Memuat stok...
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div
+                        class="mini-card"
+                        id="fishPreview"
+                    >
+                        <span>
+                            Pilih ikan untuk melihat harga.
+                        </span>
+
+                        <strong>
+                            —
+                        </strong>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="jumlahJual">
+                            Jumlah Terjual
+                        </label>
+
+                        <input
+                            id="jumlahJual"
+                            type="number"
+                            min="1"
+                            step="1"
+                            placeholder="Contoh: 5"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div
+                        class="mini-card"
+                        id="salePreview"
+                    >
+                        <span>
+                            Estimasi transaksi
+                        </span>
+
+                        <strong>
+                            Rp0
+                        </strong>
+                    </div>
+
+
+                    <br>
+
+
+                    <button
+                        id="submitBtn"
+                        class="btn btn-submit"
+                        type="submit"
+                    >
+                        Proses Transaksi
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <aside class="form-card">
+
+                <div class="eyebrow">
+                    Transaction flow
+                </div>
+
+                <h2>
+                    Apa yang terjadi?
+                </h2>
+
+                <div class="feed">
+
+                    <div class="feed-item">
+                        <div class="feed-icon">01</div>
+
+                        <div>
+                            <b>Validasi</b>
+                            <span>
+                                Server memeriksa ikan dan jumlah.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-icon">02</div>
+
+                        <div>
+                            <b>Lock row</b>
+                            <span>
+                                Data ikan dikunci selama transaksi.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-icon">03</div>
+
+                        <div>
+                            <b>Update stok</b>
+                            <span>
+                                Stok dikurangi secara atomik.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-icon">04</div>
+
+                        <div>
+                            <b>History</b>
+                            <span>
+                                Transaksi disimpan ke histori.
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
     </main>
-  </div>
 
-  <div id="toast" class="toast"></div>
+</div>
 
-  <script src="../../js/auth.js"></script>
-  <script>
-$("sellForm").addEventListener(
-    "submit",
-    async (e) => {
-        e.preventDefault();
 
-        const id = Number(
-            $("fishSelect").value
+<div id="toast" class="toast"></div>
+
+
+<script src="../../js/auth.js"></script>
+
+<script>
+
+let stokIkan = [];
+
+
+const fishSelect =
+    document.getElementById(
+        "fishSelect"
+    );
+
+const jumlahInput =
+    document.getElementById(
+        "jumlahJual"
+    );
+
+
+function updatePreview() {
+
+    const id =
+        Number(
+            fishSelect.value
         );
 
-        const jumlah = Number(
-            $("jumlahJual").value
+    const jumlah =
+        Number(
+            jumlahInput.value
+        ) || 0;
+
+    const fish =
+        stokIkan.find(
+            item =>
+                Number(item.id) === id
         );
 
-        const fish = stokIkan.find(
-            i => i.id === id
+
+    const info =
+        document.getElementById(
+            "fishPreview"
         );
 
-        if (!fish) {
-            showToast(
-                "Pilih ikan terlebih dahulu.",
-                "error"
-            );
-            return;
-        }
+    const total =
+        document.getElementById(
+            "salePreview"
+        );
 
-        if (
-            !Number.isInteger(jumlah) ||
-            jumlah <= 0
-        ) {
-            showToast(
-                "Jumlah penjualan harus lebih dari 0.",
-                "error"
-            );
-            return;
-        }
 
-        if (jumlah > fish.jumlah) {
-            showToast(
-                `Stok ${fish.nama} tidak mencukupi (Sisa ${fish.jumlah}).`,
-                "error"
-            );
-            return;
-        }
+    if (!fish) {
 
-        const btn = $("submitBtn");
+        info.innerHTML = `
+            <span>
+                Pilih ikan untuk melihat harga.
+            </span>
 
-        btn.disabled = true;
-        btn.textContent = "Memproses...";
+            <strong>—</strong>
+        `;
 
-        try {
-            const res = await fetch(
-                "/api/penjualan",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-                    credentials: "same-origin",
-                    body: JSON.stringify({
-                        ikan_id: id,
-                        jumlah
-                    })
-                }
-            );
+        total.innerHTML = `
+            <span>
+                Estimasi transaksi
+            </span>
 
-            const data =
-                await res.json()
-                    .catch(() => ({}));
+            <strong>Rp0</strong>
+        `;
 
-            if (!res.ok) {
-                throw new Error(
-                    data.error ||
-                    data.message ||
-                    `HTTP ${res.status}`
-                );
-            }
-
-            showToast(
-                "Transaksi berhasil dicatat!",
-                "success"
-            );
-
-            setTimeout(
-                () => {
-                    window.location.href =
-                        "../riwayat-penjualan/riwayatpenjualan.html";
-                },
-                1000
-            );
-
-        } catch (err) {
-            showToast(
-                err.message,
-                "error"
-            );
-
-            btn.disabled = false;
-            btn.textContent =
-                "Proses Transaksi";
-        }
+        return;
     }
+
+
+    info.innerHTML = `
+        <span>
+            ${escapeHTML(fish.nama)}
+            · stok ${Number(fish.jumlah).toLocaleString("id-ID")}
+        </span>
+
+        <strong>
+            ${escapeHTML(formatRupiah(fish.harga))}
+        </strong>
+    `;
+
+
+    const value =
+        Number(fish.harga) *
+        jumlah;
+
+
+    total.innerHTML = `
+        <span>
+            Estimasi total
+        </span>
+
+        <strong>
+            ${escapeHTML(formatRupiah(value))}
+        </strong>
+    `;
+}
+
+
+async function loadFish() {
+
+    stokIkan =
+        await apiJson("/api/ikan");
+
+
+    if (!stokIkan.length) {
+
+        fishSelect.innerHTML = `
+            <option value="">
+                Belum ada ikan
+            </option>
+        `;
+
+        return;
+    }
+
+
+    fishSelect.innerHTML =
+        `<option value="">
+            Pilih ikan
+        </option>`
+        +
+        stokIkan
+            .map(
+                fish => `
+                    <option value="${Number(fish.id)}">
+                        ${escapeHTML(fish.nama)}
+                        · stok ${Number(fish.jumlah)}
+                        · ${escapeHTML(
+                            formatRupiah(fish.harga)
+                        )}
+                    </option>
+                `
+            )
+            .join("");
+
+
+    updatePreview();
+}
+
+
+fishSelect.addEventListener(
+    "change",
+    updatePreview
 );
 
-    loadFish();
-  </script>
+jumlahInput.addEventListener(
+    "input",
+    updatePreview
+);
+
+
+document
+    .getElementById("sellForm")
+    .addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            const id =
+                Number(
+                    fishSelect.value
+                );
+
+            const jumlah =
+                Number(
+                    jumlahInput.value
+                );
+
+
+            const fish =
+                stokIkan.find(
+                    item =>
+                        Number(item.id) === id
+                );
+
+
+            if (!fish) {
+
+                showToast(
+                    "Pilih ikan terlebih dahulu.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (
+                !Number.isInteger(jumlah) ||
+                jumlah <= 0
+            ) {
+
+                showToast(
+                    "Jumlah harus lebih dari 0.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (
+                jumlah >
+                Number(fish.jumlah)
+            ) {
+
+                showToast(
+                    `Stok ${fish.nama} hanya ${fish.jumlah} ekor.`,
+                    "error"
+                );
+
+                return;
+            }
+
+
+            const button =
+                document.getElementById(
+                    "submitBtn"
+                );
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Memproses...";
+
+
+            try {
+
+                await apiJson(
+                    "/api/penjualan",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                ikan_id: id,
+                                jumlah
+                            })
+                    }
+                );
+
+
+                showToast(
+                    "Penjualan berhasil dicatat.",
+                    "success"
+                );
+
+
+                setTimeout(
+                    () => {
+                        window.location.href =
+                            "../riwayat-penjualan/riwayatpenjualan.html";
+                    },
+                    900
+                );
+
+            } catch (error) {
+
+                showToast(
+                    error.message,
+                    "error"
+                );
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Proses Transaksi";
+            }
+
+        }
+    );
+
+
+(async () => {
+
+    const auth =
+        await window.authReady;
+
+    if (!auth) return;
+
+    try {
+        await loadFish();
+    } catch (error) {
+        showToast(
+            error.message,
+            "error"
+        );
+    }
+
+})();
+
+</script>
+
 </body>
 </html>

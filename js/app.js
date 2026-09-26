@@ -1,31 +1,11 @@
 let stokIkanCache = [];
 
-async function apiJson(url, options = {}) {
-    const response = await fetch(url, {
-        credentials: "same-origin",
-        cache: "no-store",
-        ...options
-    });
-
-    const data = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-        throw new Error(
-            data.error ||
-            data.message ||
-            `HTTP ${response.status}`
-        );
-    }
-
-    return data;
-}
-
 async function initStorage() {
     try {
         stokIkanCache = await apiJson("/api/ikan");
         return stokIkanCache;
     } catch (error) {
-        console.error("Gagal mengambil data ikan:", error);
+        console.error(error);
         return [];
     }
 }
@@ -59,19 +39,14 @@ async function saveData(key, data) {
     return stokIkanCache;
 }
 
-function formatRupiah(number) {
-    return new Intl.NumberFormat(
-        "id-ID",
-        {
-            style: "currency",
-            currency: "IDR",
-            maximumFractionDigits: 0
-        }
-    ).format(Number(number) || 0);
-}
-
 async function deleteFish(id) {
-    if (!confirm("Yakin ingin menghapus data ikan ini?")) {
+    const fish = stokIkanCache.find(
+        item => Number(item.id) === Number(id)
+    );
+
+    const name = fish?.nama || "ikan ini";
+
+    if (!confirm(`Hapus ${name}? Data yang sudah memiliki histori tidak dapat dihapus.`)) {
         return false;
     }
 
@@ -85,28 +60,25 @@ async function deleteFish(id) {
 
         stokIkanCache =
             stokIkanCache.filter(
-                item => item.id !== id
+                item => Number(item.id) !== Number(id)
             );
 
         if (typeof renderTable === "function") {
             renderTable();
         }
 
+        showToast(
+            `${name} berhasil dihapus.`,
+            "success"
+        );
+
         return true;
     } catch (error) {
-        console.error("Gagal menghapus ikan:", error);
-        alert(error.message);
+        showToast(
+            error.message,
+            "error"
+        );
+
         return false;
     }
 }
-
-document.addEventListener(
-    "DOMContentLoaded",
-    async () => {
-        await initStorage();
-
-        if (typeof renderTable === "function") {
-            renderTable();
-        }
-    }
-);
