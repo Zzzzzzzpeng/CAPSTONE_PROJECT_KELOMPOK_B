@@ -2,20 +2,222 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Catat Penjualan — Sumber Aquarium</title>
 
-    <link rel="stylesheet" href="../../css/style.css">
+    <link
+        rel="stylesheet"
+        href="../../css/style.css"
+    >
+
+    <style>
+        .sales-page {
+            min-width: 0;
+        }
+
+        .sales-header {
+            margin-bottom: 22px;
+        }
+
+        .sales-header h1 {
+            margin: 5px 0 7px;
+            color: #fff;
+            font-size: clamp(28px, 4vw, 42px);
+            line-height: 1;
+            letter-spacing: -.055em;
+        }
+
+        .sales-header p {
+            max-width: 720px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .sales-layout {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1.05fr)
+                minmax(280px, .75fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .sales-card {
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #0b0b0b,
+                    #050505
+                );
+            box-shadow:
+                0 18px 50px rgb(0 0 0 / 38%);
+        }
+
+        .sales-card h2 {
+            margin: 5px 0 20px;
+            color: #fff;
+            font-size: 21px;
+            letter-spacing: -.035em;
+        }
+
+        .sales-form {
+            display: grid;
+            gap: 17px;
+        }
+
+        .sales-form .form-group {
+            margin: 0;
+        }
+
+        .sales-form label {
+            display: block;
+            margin-bottom: 7px;
+            color: #e7ebea;
+            font-size: 9px;
+            font-weight: 850;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .sales-form input,
+        .sales-form select {
+            width: 100%;
+        }
+
+        .sales-action {
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .sales-preview-stack {
+            display: grid;
+            gap: 11px;
+        }
+
+        .sales-preview {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            min-height: 76px;
+            padding: 15px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #090909;
+        }
+
+        .sales-preview span {
+            display: block;
+            color: var(--muted);
+            font-size: 9px;
+            line-height: 1.5;
+        }
+
+        .sales-preview strong {
+            display: block;
+            margin-top: 4px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        #salePreview {
+            border-color:
+                rgb(32 217 192 / 16%);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgb(32 217 192 / 7%),
+                    #080808
+                );
+        }
+
+        #salePreview strong {
+            color: var(--teal);
+            font-family:
+                "Space Grotesk",
+                system-ui,
+                sans-serif;
+            font-size: 21px;
+            letter-spacing: -.03em;
+        }
+
+        .sales-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 11px;
+        }
+
+        .sales-info {
+            padding: 14px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: #080808;
+        }
+
+        .sales-info span {
+            display: block;
+            color: var(--muted);
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+
+        .sales-info strong {
+            display: block;
+            margin-top: 6px;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        .sales-info strong:first-letter {
+            color: var(--teal);
+        }
+
+        @media (max-width: 850px) {
+            .sales-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .sales-card {
+                padding: 18px;
+            }
+
+            .sales-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sales-card,
+            .sales-preview {
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="app-container">
+<div class="app-container sales-page">
 
     <aside class="sidebar">
 
         <div class="brand">
+
             <img
                 src="../../assets/images/logo.png"
                 alt="Sumber Aquarium"
@@ -25,10 +227,13 @@
                 <h2>SUMBER AQUARIUM</h2>
                 <p>PGK MONITORING</p>
             </div>
+
         </div>
 
-
-        <nav class="nav-links">
+        <nav
+            class="nav-links"
+            aria-label="Navigasi utama"
+        >
 
             <a href="../../dashboard.html">
                 📊 Dashboard
@@ -45,6 +250,7 @@
             <a
                 href="catatanpenjualan.html"
                 class="active"
+                aria-current="page"
             >
                 🛒 Catat Penjualan
             </a>
@@ -63,11 +269,11 @@
 
         </nav>
 
-
         <div class="side-bottom">
 
             <button
                 class="logout-btn"
+                type="button"
                 onclick="logout()"
             >
                 ↪ Logout
@@ -80,34 +286,40 @@
 
     <main class="main-content">
 
-        <header class="header">
+        <header class="sales-header">
 
-            <div>
-
-                <div class="eyebrow">
-                    Sales Transaction
-                </div>
-
-                <h1>
-                    Catat Penjualan
-                </h1>
-
-                <p>
-                    Pilih ikan dan jumlah transaksi.
-                    Server akan menghitung revenue dan
-                    mengurangi stok dalam satu transaksi database.
-                </p>
-
+            <div class="eyebrow">
+                SALES
             </div>
+
+            <h1>
+                Catat Penjualan
+            </h1>
+
+            <p>
+                Pilih ikan, tentukan jumlah terjual,
+                lalu simpan transaksi.
+            </p>
 
         </header>
 
 
-        <div class="form-layout">
+        <div class="sales-layout">
 
-            <section class="form-card">
+            <section class="sales-card">
 
-                <form id="sellForm">
+                <div class="eyebrow">
+                    TRANSAKSI BARU
+                </div>
+
+                <h2>
+                    Detail Penjualan
+                </h2>
+
+                <form
+                    id="sellForm"
+                    class="sales-form"
+                >
 
                     <div class="form-group">
 
@@ -128,11 +340,11 @@
 
 
                     <div
-                        class="mini-card"
+                        class="sales-preview"
                         id="fishPreview"
                     >
                         <span>
-                            Pilih ikan untuk melihat harga.
+                            Pilih ikan
                         </span>
 
                         <strong>
@@ -152,33 +364,17 @@
                             type="number"
                             min="1"
                             step="1"
-                            placeholder="Contoh: 5"
+                            placeholder="Masukkan jumlah"
+                            inputmode="numeric"
                             required
                         >
 
                     </div>
 
 
-                    <div
-                        class="mini-card"
-                        id="salePreview"
-                    >
-                        <span>
-                            Estimasi transaksi
-                        </span>
-
-                        <strong>
-                            Rp0
-                        </strong>
-                    </div>
-
-
-                    <br>
-
-
                     <button
                         id="submitBtn"
-                        class="btn btn-submit"
+                        class="btn btn-submit sales-action"
                         type="submit"
                     >
                         Proses Transaksi
@@ -189,60 +385,54 @@
             </section>
 
 
-            <aside class="form-card">
+            <aside class="sales-card">
 
                 <div class="eyebrow">
-                    Transaction flow
+                    RINGKASAN
                 </div>
 
                 <h2>
-                    Apa yang terjadi?
+                    Transaksi
                 </h2>
 
-                <div class="feed">
+                <div class="sales-preview-stack">
 
-                    <div class="feed-item">
-                        <div class="feed-icon">01</div>
+                    <div
+                        class="sales-preview"
+                        id="salePreview"
+                    >
+                        <span>
+                            Estimasi total
+                        </span>
 
-                        <div>
-                            <b>Validasi</b>
-                            <span>
-                                Server memeriksa ikan dan jumlah.
-                            </span>
-                        </div>
+                        <strong>
+                            Rp0
+                        </strong>
                     </div>
 
-                    <div class="feed-item">
-                        <div class="feed-icon">02</div>
+                </div>
 
-                        <div>
-                            <b>Lock row</b>
-                            <span>
-                                Data ikan dikunci selama transaksi.
-                            </span>
-                        </div>
+
+                <div class="sales-info-grid">
+
+                    <div class="sales-info">
+                        <span>
+                            Sistem
+                        </span>
+
+                        <strong>
+                            PostgreSQL
+                        </strong>
                     </div>
 
-                    <div class="feed-item">
-                        <div class="feed-icon">03</div>
+                    <div class="sales-info">
+                        <span>
+                            Transaksi
+                        </span>
 
-                        <div>
-                            <b>Update stok</b>
-                            <span>
-                                Stok dikurangi secara atomik.
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="feed-item">
-                        <div class="feed-icon">04</div>
-
-                        <div>
-                            <b>History</b>
-                            <span>
-                                Transaksi disimpan ke histori.
-                            </span>
-                        </div>
+                        <strong>
+                            Online
+                        </strong>
                     </div>
 
                 </div>
@@ -256,7 +446,10 @@
 </div>
 
 
-<div id="toast" class="toast"></div>
+<div
+    id="toast"
+    class="toast"
+></div>
 
 
 <script src="../../js/auth.js"></script>
@@ -264,7 +457,6 @@
 <script>
 
 let stokIkan = [];
-
 
 const fishSelect =
     document.getElementById(
@@ -275,7 +467,6 @@ const jumlahInput =
     document.getElementById(
         "jumlahJual"
     );
-
 
 function updatePreview() {
 
@@ -295,7 +486,6 @@ function updatePreview() {
                 Number(item.id) === id
         );
 
-
     const info =
         document.getElementById(
             "fishPreview"
@@ -306,12 +496,11 @@ function updatePreview() {
             "salePreview"
         );
 
-
     if (!fish) {
 
         info.innerHTML = `
             <span>
-                Pilih ikan untuk melihat harga.
+                Pilih ikan
             </span>
 
             <strong>—</strong>
@@ -319,7 +508,7 @@ function updatePreview() {
 
         total.innerHTML = `
             <span>
-                Estimasi transaksi
+                Estimasi total
             </span>
 
             <strong>Rp0</strong>
@@ -327,7 +516,6 @@ function updatePreview() {
 
         return;
     }
-
 
     info.innerHTML = `
         <span>
@@ -340,11 +528,9 @@ function updatePreview() {
         </strong>
     `;
 
-
     const value =
         Number(fish.harga) *
         jumlah;
-
 
     total.innerHTML = `
         <span>
@@ -357,12 +543,10 @@ function updatePreview() {
     `;
 }
 
-
 async function loadFish() {
 
     stokIkan =
         await apiJson("/api/ikan");
-
 
     if (!stokIkan.length) {
 
@@ -374,7 +558,6 @@ async function loadFish() {
 
         return;
     }
-
 
     fishSelect.innerHTML =
         `<option value="">
@@ -395,10 +578,8 @@ async function loadFish() {
             )
             .join("");
 
-
     updatePreview();
 }
-
 
 fishSelect.addEventListener(
     "change",
@@ -410,7 +591,6 @@ jumlahInput.addEventListener(
     updatePreview
 );
 
-
 document
     .getElementById("sellForm")
     .addEventListener(
@@ -418,7 +598,6 @@ document
         async event => {
 
             event.preventDefault();
-
 
             const id =
                 Number(
@@ -430,13 +609,11 @@ document
                     jumlahInput.value
                 );
 
-
             const fish =
                 stokIkan.find(
                     item =>
                         Number(item.id) === id
                 );
-
 
             if (!fish) {
 
@@ -447,7 +624,6 @@ document
 
                 return;
             }
-
 
             if (
                 !Number.isInteger(jumlah) ||
@@ -462,7 +638,6 @@ document
                 return;
             }
 
-
             if (
                 jumlah >
                 Number(fish.jumlah)
@@ -476,18 +651,15 @@ document
                 return;
             }
 
-
             const button =
                 document.getElementById(
                     "submitBtn"
                 );
 
-
             button.disabled = true;
 
             button.textContent =
                 "Memproses...";
-
 
             try {
 
@@ -509,12 +681,10 @@ document
                     }
                 );
 
-
                 showToast(
                     "Penjualan berhasil dicatat.",
                     "success"
                 );
-
 
                 setTimeout(
                     () => {
@@ -539,7 +709,6 @@ document
 
         }
     );
-
 
 (async () => {
 

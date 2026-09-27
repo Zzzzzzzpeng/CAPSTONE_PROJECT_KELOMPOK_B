@@ -3,964 +3,3021 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Profil Kelompok B — Capstone Project Sumber Aquarium PGK.">
-    <title>Kelompok B — Sumber Aquarium PGK</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <meta
+        name="description"
+        content="Sumber Aquarium PGK — Capstone Project Kelompok B."
+    >
+
+    <title>Sumber Aquarium PGK — Kelompok B</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    >
+
     <style>
 
-/* =========================================================
-   CEO PROFILE — PURE BLACK THEME
-========================================================= */
-
-:root {
-    --ceo-bg: #000;
-    --ceo-surface: #080808;
-    --ceo-surface-2: #0d0d0d;
-    --ceo-line: rgb(255 255 255 / 8%);
-    --ceo-text: #f5f7f7;
-    --ceo-muted: #929b98;
-    --ceo-faint: #697471;
-    --ceo-teal: #20d9c0;
-    --ceo-teal-soft: rgb(32 217 192 / 9%);
-    --ceo-radius: 20px;
-    --ceo-ease: cubic-bezier(.2,.8,.2,1);
-}
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    min-height: 100%;
-    background: #000;
-    color-scheme: dark;
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: var(--ceo-text);
-    background:
-        radial-gradient(circle at 82% 0%, rgb(32 217 192 / 5%), transparent 30rem),
-        #000;
-    font-family: "Inter", system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
-body::selection {
-    color: #001311;
-    background: var(--ceo-teal);
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-img {
-    display: block;
-    max-width: 100%;
-}
-
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
-
-:focus-visible {
-    outline: 2px solid var(--ceo-teal);
-    outline-offset: 3px;
-}
-
-.container {
-    width: min(calc(100% - 36px), 1180px);
-    margin-inline: auto;
-}
-
-/* =========================================================
-   NAV
-========================================================= */
-
-.topbar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 1px solid var(--ceo-line);
-    background: rgb(0 0 0 / 82%);
-    backdrop-filter: blur(18px);
-}
-
-.nav {
-    min-height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brand img {
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--ceo-line);
-    border-radius: 11px;
-    object-fit: cover;
-    background: #090909;
-}
-
-.brand strong {
-    display: block;
-    color: #fff;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 12px;
-}
-
-.brand small {
-    display: block;
-    margin-top: 3px;
-    color: var(--ceo-faint);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 8px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 5px;
-}
-
-.nav-links a {
-    padding: 8px 11px;
-    border: 1px solid transparent;
-    border-radius: 9px;
-    color: var(--ceo-muted);
-    font-size: 10px;
-    font-weight: 700;
-    transition: transform .15s var(--ceo-ease), color .15s ease, background .15s ease, border-color .15s ease;
-}
-
-.nav-links a:hover {
-    color: #fff;
-    background: rgb(255 255 255 / 5%);
-    border-color: var(--ceo-line);
-    transform: translateY(-1px);
-}
-
-.repo-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 12px;
-    border: 1px solid var(--ceo-line);
-    border-radius: 10px;
-    color: #eee;
-    background: #090909;
-    font-size: 10px;
-    font-weight: 800;
-    transition: transform .15s var(--ceo-ease), color .15s ease, border-color .15s ease, background .15s ease;
-}
-
-.repo-btn:hover {
-    color: var(--ceo-teal);
-    background: #0d0d0d;
-    border-color: rgb(32 217 192 / 25%);
-    transform: translateY(-1px);
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-    position: relative;
-    padding: 105px 0 92px;
-}
-
-.hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
-    gap: 70px;
-    align-items: center;
-}
-
-.eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--ceo-teal);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .12em;
-}
-
-.eyebrow::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--ceo-teal);
-    box-shadow: 0 0 0 5px var(--ceo-teal-soft);
-}
-
-h1 {
-    margin: 20px 0 0;
-    color: #fff;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: clamp(50px, 8vw, 90px);
-    line-height: .94;
-    letter-spacing: -.065em;
-}
-
-h1 span {
-    color: var(--ceo-teal);
-}
-
-.hero p {
-    max-width: 720px;
-    margin: 26px 0 0;
-    color: var(--ceo-muted);
-    font-size: 15px;
-    line-height: 1.8;
-}
-
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 9px;
-    margin-top: 30px;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 43px;
-    padding: 0 15px;
-    border: 1px solid transparent;
-    border-radius: 10px;
-    font-size: 10px;
-    font-weight: 800;
-    transition: transform .14s var(--ceo-ease), filter .14s ease, background .14s ease, border-color .14s ease;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-}
-
-.btn:active {
-    transform: translateY(0);
-}
-
-.btn-primary {
-    color: #001311;
-    background: linear-gradient(135deg, var(--ceo-teal), #10b5a4);
-}
-
-.btn-secondary {
-    color: #f3f6f5;
-    border-color: var(--ceo-line);
-    background: #080808;
-}
-
-.btn-secondary:hover {
-    background: #0d0d0d;
-    border-color: rgb(255 255 255 / 17%);
-}
-
-.hero-card {
-    padding: 23px;
-    border: 1px solid var(--ceo-line);
-    border-radius: var(--ceo-radius);
-    background: linear-gradient(145deg, #0d0d0d, #050505);
-    box-shadow: 0 20px 55px rgb(0 0 0 / 45%);
-    animation: ceoEnter .34s var(--ceo-ease) both;
-}
-
-.hero-card-label {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--ceo-line);
-    color: var(--ceo-muted);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 9px;
-}
-
-.hero-card-label strong {
-    color: #fff;
-}
-
-.hero-number {
-    margin-top: 25px;
-    color: #fff;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 70px;
-    line-height: .9;
-    letter-spacing: -.07em;
-}
-
-.hero-number span {
-    color: var(--ceo-teal);
-    font-size: 25px;
-}
-
-.hero-card p {
-    margin: 9px 0 0;
-    color: #d7dfdd;
-    font-size: 12px;
-}
-
-.hero-list {
-    display: grid;
-    margin-top: 25px;
-}
-
-.hero-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 0;
-    border-top: 1px solid var(--ceo-line);
-    font-size: 10px;
-}
-
-.hero-row span:first-child {
-    color: var(--ceo-muted);
-}
-
-.hero-row strong {
-    color: #fff;
-}
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-.section {
-    padding: 90px 0;
-}
-
-.section-head {
-    max-width: 730px;
-    margin-bottom: 35px;
-}
-
-.section-head h2 {
-    margin: 14px 0 10px;
-    color: #fff;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: clamp(32px, 5vw, 54px);
-    line-height: 1;
-    letter-spacing: -.05em;
-}
-
-.section-head p {
-    margin: 0;
-    color: var(--ceo-muted);
-    font-size: 13px;
-    line-height: 1.8;
-}
-
-/* =========================================================
-   MEMBERS
-========================================================= */
-
-.members {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-}
-
-.member {
-    position: relative;
-    min-width: 0;
-    padding: 23px;
-    overflow: hidden;
-    border: 1px solid var(--ceo-line);
-    border-radius: var(--ceo-radius);
-    background: #080808;
-    box-shadow: 0 12px 35px rgb(0 0 0 / 28%);
-    transition: transform .18s var(--ceo-ease), border-color .18s ease, background .18s ease;
-}
-
-.member::after {
-    content: "";
-    position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    background: rgb(32 217 192 / 3%);
-    pointer-events: none;
-}
-
-.member:hover {
-    transform: translateY(-4px);
-    border-color: rgb(32 217 192 / 24%);
-    background: #0a0a0a;
-}
-
-.member-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 15px;
-}
-
-.member-photo {
-    width: 76px;
-    height: 76px;
-    overflow: hidden;
-    border: 1px solid rgb(32 217 192 / 22%);
-    border-radius: 18px;
-    background: var(--ceo-teal-soft);
-}
-
-.member-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.member-tag {
-    padding: 5px 8px;
-    border: 1px solid var(--ceo-line);
-    border-radius: 7px;
-    color: var(--ceo-muted);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 8px;
-}
-
-.member h3 {
-    margin: 19px 0 3px;
-    color: #fff;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 20px;
-    line-height: 1.1;
-}
-
-.role {
-    color: var(--ceo-teal);
-    font-size: 10px;
-    font-weight: 800;
-}
-
-.member-description {
-    margin: 14px 0 0;
-    color: var(--ceo-muted);
-    font-size: 11px;
-    line-height: 1.7;
-}
-
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 17px;
-}
-
-.skill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 6px 8px;
-    border: 1px solid var(--ceo-line);
-    border-radius: 7px;
-    color: #c7cfcd;
-    background: rgb(255 255 255 / 2.5%);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 8px;
-    transition: transform .14s var(--ceo-ease), border-color .14s ease, background .14s ease;
-}
-
-.skill:hover {
-    transform: translateY(-1px);
-    border-color: rgb(255 255 255 / 14%);
-    background: rgb(255 255 255 / 4%);
-}
-
-.skill i {
-    font-size: 13px;
-}
-
-.member-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid var(--ceo-line);
-}
-
-.nim {
-    color: var(--ceo-faint);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 8px;
-}
-
-.ut-link {
-    color: var(--ceo-teal);
-    font-size: 9px;
-    font-weight: 800;
-}
-
-.ut-link:hover {
-    text-decoration: underline;
-}
-
-/* =========================================================
-   TECHNOLOGY
-========================================================= */
-
-.tech-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.tech {
-    min-width: 0;
-    padding: 19px;
-    border: 1px solid var(--ceo-line);
-    border-radius: 17px;
-    background: #080808;
-    transition: transform .16s var(--ceo-ease), border-color .16s ease, background .16s ease;
-}
-
-.tech:hover {
-    transform: translateY(-3px);
-    border-color: rgb(255 255 255 / 15%);
-    background: #0b0b0b;
-}
-
-.tech-icon {
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    margin-bottom: 13px;
-    border: 1px solid rgb(255 255 255 / 6%);
-    border-radius: 11px;
-    background: rgb(255 255 255 / 4%);
-    font-size: 22px;
-}
-
-.tech h3 {
-    margin: 0;
-    color: #fff;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 14px;
-}
-
-.tech p {
-    margin: 7px 0 0;
-    color: var(--ceo-muted);
-    font-size: 9px;
-    line-height: 1.65;
-}
-
-/* =========================================================
-   PROJECT
-========================================================= */
-
-.project-grid {
-    display: grid;
-    grid-template-columns: 1.1fr .9fr;
-    gap: 15px;
-}
-
-.project-card {
-    min-width: 0;
-    padding: 25px;
-    border: 1px solid var(--ceo-line);
-    border-radius: var(--ceo-radius);
-    background: #080808;
-    box-shadow: 0 12px 35px rgb(0 0 0 / 28%);
-}
-
-.project-card h3 {
-    margin: 0 0 10px;
-    color: #fff;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 23px;
-}
-
-.project-card p {
-    margin: 0;
-    color: var(--ceo-muted);
-    font-size: 11px;
-    line-height: 1.8;
-}
-
-.feature-list {
-    display: grid;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.feature {
-    display: grid;
-    grid-template-columns: 30px 1fr;
-    gap: 10px;
-}
-
-.feature-icon {
-    width: 30px;
-    height: 30px;
-    display: grid;
-    place-items: center;
-    border-radius: 8px;
-    color: var(--ceo-teal);
-    background: var(--ceo-teal-soft);
-    font-size: 10px;
-}
-
-.feature strong {
-    display: block;
-    color: #fff;
-    font-size: 10px;
-}
-
-.feature span {
-    display: block;
-    margin-top: 2px;
-    color: var(--ceo-muted);
-    font-size: 9px;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-    padding: 35px 0 50px;
-    border-top: 1px solid var(--ceo-line);
-}
-
-.footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-}
-
-.footer-inner span {
-    color: var(--ceo-muted);
-    font-size: 9px;
-}
-
-/* =========================================================
-   ANIMATION
-========================================================= */
-
-@keyframes ceoEnter {
-    from {
+    /* =========================================================
+       CEO / TERMINAL SYSTEM
+    ========================================================= */
+
+    :root {
+        --black: #000000;
+        --black-1: #030303;
+        --black-2: #070707;
+        --black-3: #0b0b0b;
+
+        --white: #f5f7f7;
+        --white-soft: #cbd2d0;
+        --gray: #858e8b;
+        --gray-dark: #4b5552;
+
+        --green: #28f7c1;
+        --green-dark: #0c9c7d;
+        --green-soft: rgba(40, 247, 193, .08);
+        --green-line: rgba(40, 247, 193, .20);
+
+        --red: #ff4d67;
+        --yellow: #ffd166;
+        --blue: #65a8ff;
+
+        --line: rgba(255,255,255,.075);
+        --line-strong: rgba(255,255,255,.13);
+
+        --mono:
+            "JetBrains Mono",
+            "Fira Code",
+            "Cascadia Code",
+            monospace;
+
+        --display:
+            "Space Grotesk",
+            system-ui,
+            sans-serif;
+
+        --fast:
+            cubic-bezier(.16,1,.3,1);
+
+        --faster:
+            cubic-bezier(.2,.9,.2,1);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        min-height: 100%;
+        background: var(--black);
+        color-scheme: dark;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        position: relative;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+
+        color: var(--white);
+
+        background:
+            radial-gradient(
+                circle at 50% -10%,
+                rgba(40,247,193,.075),
+                transparent 35%
+            ),
+            #000;
+
+        font-family: var(--mono);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+
+        background-image:
+            linear-gradient(
+                rgba(255,255,255,.018) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                90deg,
+                rgba(255,255,255,.018) 1px,
+                transparent 1px
+            );
+
+        background-size: 42px 42px;
+
+        mask-image:
+            linear-gradient(
+                to bottom,
+                black,
+                transparent 85%
+            );
+    }
+
+    body::after {
+        content: "";
+
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+
+        pointer-events: none;
+
+        background:
+            repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,.018) 0,
+                rgba(255,255,255,.018) 1px,
+                transparent 1px,
+                transparent 4px
+            );
+
+        opacity: .16;
+        mix-blend-mode: screen;
+    }
+
+    ::selection {
+        color: #00110c;
+        background: var(--green);
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    button {
+        font: inherit;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--green);
+        outline-offset: 4px;
+    }
+
+    .cursor-glow {
+        position: fixed;
+        z-index: -1;
+
+        width: 280px;
+        height: 280px;
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(40,247,193,.055),
+                transparent 70%
+            );
+
+        transform: translate(-50%, -50%);
+
+        pointer-events: none;
+
         opacity: 0;
-        transform: translateY(8px);
+        transition: opacity .2s ease;
     }
-    to {
+
+    body.cursor-active .cursor-glow {
         opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.hero-card,
-.member,
-.tech,
-.project-card {
-    animation: ceoEnter .32s var(--ceo-ease) both;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media (max-width: 900px) {
-    .hero-grid,
-    .project-grid {
-        grid-template-columns: 1fr;
     }
 
-    .tech-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .hero {
-        padding: 85px 0 75px;
-    }
-}
-
-@media (max-width: 700px) {
-    .nav-links {
-        display: none;
-    }
-
-    .members,
-    .tech-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero {
-        padding: 70px 0;
-    }
-
-    .section {
-        padding: 70px 0;
-    }
-
-    .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 500px) {
     .container {
-        width: min(calc(100% - 24px), 1180px);
+        width: min(
+            calc(100% - 40px),
+            1240px
+        );
+
+        margin-inline: auto;
+    }
+
+
+    /* =========================================================
+       TOP BAR
+    ========================================================= */
+
+    .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+
+        border-bottom: 1px solid var(--line);
+
+        background:
+            rgba(0,0,0,.78);
+
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
     }
 
     .nav {
-        min-height: 62px;
+        min-height: 64px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 18px;
     }
 
-    .repo-btn {
-        padding-inline: 10px;
+    .terminal-brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+
+        min-width: 0;
     }
 
-    .brand strong {
+    .terminal-brand img {
+        width: 34px;
+        height: 34px;
+
+        border: 1px solid var(--green-line);
+        border-radius: 8px;
+
+        object-fit: cover;
+    }
+
+    .brand-terminal {
+        min-width: 0;
+    }
+
+    .brand-terminal strong {
+        display: block;
+
+        color: #fff;
+
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .06em;
+    }
+
+    .brand-terminal span {
+        display: block;
+
+        margin-top: 3px;
+
+        color: var(--gray-dark);
+
+        font-size: 8px;
+    }
+
+    .nav-center {
+        display: flex;
+        gap: 4px;
+    }
+
+    .nav-center a {
+        padding: 7px 10px;
+
+        color: var(--gray);
+
+        border: 1px solid transparent;
+        border-radius: 6px;
+
+        font-size: 9px;
+        font-weight: 700;
+
+        transition:
+            color .12s ease,
+            background .12s ease,
+            border-color .12s ease,
+            transform .12s var(--fast);
+    }
+
+    .nav-center a:hover {
+        color: var(--green);
+
+        background: var(--green-soft);
+        border-color: var(--green-line);
+
+        transform: translateY(-1px);
+    }
+
+    .github-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+
+        padding: 8px 11px;
+
+        border: 1px solid var(--line-strong);
+        border-radius: 7px;
+
+        color: #fff;
+        background: #050505;
+
+        font-size: 9px;
+        font-weight: 800;
+
+        transition:
+            transform .12s var(--fast),
+            color .12s ease,
+            border-color .12s ease,
+            background .12s ease;
+    }
+
+    .github-btn:hover {
+        color: var(--green);
+
+        border-color: var(--green-line);
+        background: var(--green-soft);
+
+        transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+        position: relative;
+
+        min-height: calc(100vh - 64px);
+
+        display: grid;
+        align-items: center;
+
+        padding: 80px 0;
+    }
+
+    .hero-grid {
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(370px, .72fr);
+
+        gap: 70px;
+
+        align-items: center;
+    }
+
+    .terminal-line {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        color: var(--gray);
+
         font-size: 10px;
     }
 
-    .brand small {
+    .terminal-line .user {
+        color: var(--green);
+    }
+
+    .terminal-line .path {
+        color: var(--blue);
+    }
+
+    .terminal-cursor {
+        display: inline-block;
+
+        width: 7px;
+        height: 13px;
+
+        background: var(--green);
+
+        animation:
+            cursorBlink .65s steps(1) infinite;
+    }
+
+    @keyframes cursorBlink {
+        0%,
+        49% {
+            opacity: 1;
+        }
+
+        50%,
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .hero-title {
+        margin: 22px 0 0;
+
+        color: #fff;
+
+        font-family: var(--display);
+        font-size: clamp(
+            54px,
+            8vw,
+            104px
+        );
+
+        font-weight: 700;
+        line-height: .87;
+
+        letter-spacing: -.075em;
+    }
+
+    .hero-title span {
+        display: block;
+        color: var(--green);
+    }
+
+    .hero-subtitle {
+        max-width: 680px;
+
+        margin: 28px 0 0;
+
+        color: var(--gray);
+
+        font-size: 12px;
+        line-height: 1.9;
+    }
+
+    .hero-command {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+
+        margin-top: 27px;
+
+        padding: 10px 12px;
+
+        border: 1px solid var(--line);
+        border-radius: 7px;
+
+        background: #040404;
+
+        color: var(--white-soft);
+
+        font-size: 9px;
+    }
+
+    .hero-command .prompt {
+        color: var(--green);
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        margin-top: 23px;
+    }
+
+    .action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 40px;
+
+        padding: 0 14px;
+
+        border: 1px solid var(--line-strong);
+        border-radius: 7px;
+
+        font-size: 9px;
+        font-weight: 800;
+
+        transition:
+            transform .12s var(--fast),
+            background .12s ease,
+            border-color .12s ease,
+            color .12s ease;
+    }
+
+    .action:hover {
+        transform: translateY(-3px);
+    }
+
+    .action-primary {
+        color: #00130d;
+
+        border-color: var(--green);
+        background: var(--green);
+    }
+
+    .action-primary:hover {
+        box-shadow:
+            0 0 25px rgba(40,247,193,.18);
+    }
+
+    .action-secondary {
+        color: var(--white);
+        background: #050505;
+    }
+
+    .action-secondary:hover {
+        color: var(--green);
+
+        border-color: var(--green-line);
+        background: var(--green-soft);
+    }
+
+
+    /* =========================================================
+       NEOFETCH PANEL
+    ========================================================= */
+
+    .neofetch {
+        position: relative;
+
+        border: 1px solid var(--line-strong);
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                145deg,
+                #090909,
+                #020202
+            );
+
+        box-shadow:
+            0 30px 100px rgba(0,0,0,.65);
+
+        overflow: hidden;
+
+        transform: translateZ(0);
+    }
+
+    .neofetch::before {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background:
+            linear-gradient(
+                115deg,
+                transparent 0 40%,
+                rgba(40,247,193,.035) 50%,
+                transparent 60%
+            );
+
+        transform: translateX(-100%);
+
+        animation:
+            panelSweep 4s linear infinite;
+
+        pointer-events: none;
+    }
+
+    @keyframes panelSweep {
+        to {
+            transform: translateX(100%);
+        }
+    }
+
+    .window-bar {
+        height: 36px;
+
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        padding: 0 12px;
+
+        border-bottom: 1px solid var(--line);
+
+        background: #060606;
+    }
+
+    .window-dot {
+        width: 8px;
+        height: 8px;
+
+        border-radius: 50%;
+    }
+
+    .window-dot.red {
+        background: #ff5f57;
+    }
+
+    .window-dot.yellow {
+        background: #febc2e;
+    }
+
+    .window-dot.green {
+        background: #28c840;
+    }
+
+    .window-title {
+        margin-left: 8px;
+
+        color: var(--gray-dark);
+
+        font-size: 8px;
+    }
+
+    .terminal-body {
+        display: grid;
+
+        grid-template-columns:
+            140px
+            minmax(0, 1fr);
+
+        gap: 24px;
+
+        padding: 28px;
+    }
+
+    .ascii {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 220px;
+
+        color: var(--green);
+
+        font-size: 8px;
+        line-height: 1.35;
+
+        text-shadow:
+            0 0 14px
+            rgba(40,247,193,.20);
+
+        white-space: pre;
+    }
+
+    .neo-info {
+        min-width: 0;
+    }
+
+    .neo-user {
+        margin-bottom: 13px;
+
+        font-size: 11px;
+    }
+
+    .neo-user .name {
+        color: #fff;
+        font-weight: 800;
+    }
+
+    .neo-user .host {
+        color: var(--green);
+    }
+
+    .neo-row {
+        display: grid;
+
+        grid-template-columns: 76px 1fr;
+
+        gap: 8px;
+
+        padding: 7px 0;
+
+        border-bottom: 1px solid rgba(255,255,255,.035);
+
+        font-size: 8px;
+    }
+
+    .neo-row .key {
+        color: var(--gray-dark);
+    }
+
+    .neo-row .value {
+        min-width: 0;
+
+        color: var(--white-soft);
+
+        overflow-wrap: anywhere;
+    }
+
+    .neo-value-green {
+        color: var(--green) !important;
+    }
+
+    .neo-divider {
+        height: 1px;
+
+        margin: 13px 0;
+
+        background: var(--line);
+    }
+
+    .color-palette {
+        display: flex;
+        gap: 4px;
+
+        margin-top: 16px;
+    }
+
+    .color-palette span {
+        width: 18px;
+        height: 8px;
+
+        border-radius: 2px;
+    }
+
+    .c1 {
+        background: #28f7c1;
+    }
+
+    .c2 {
+        background: #65a8ff;
+    }
+
+    .c3 {
+        background: #ff4d67;
+    }
+
+    .c4 {
+        background: #ffd166;
+    }
+
+    .c5 {
+        background: #fff;
+    }
+
+    .c6 {
+        background: #505957;
+    }
+
+
+    /* =========================================================
+       SECTION
+    ========================================================= */
+
+    .section {
+        padding: 105px 0;
+
+        border-top: 1px solid var(--line);
+    }
+
+    .section-kicker {
+        color: var(--green);
+
+        font-size: 9px;
+        font-weight: 800;
+
+        letter-spacing: .18em;
+    }
+
+    .section-title {
+        margin: 13px 0 0;
+
+        color: #fff;
+
+        font-family: var(--display);
+        font-size: clamp(36px, 5vw, 62px);
+        line-height: .95;
+
+        letter-spacing: -.055em;
+    }
+
+    .section-description {
+        max-width: 700px;
+
+        margin: 15px 0 0;
+
+        color: var(--gray);
+
+        font-size: 10px;
+        line-height: 1.8;
+    }
+
+
+    /* =========================================================
+       MEMBER NEOFETCH
+    ========================================================= */
+
+    .member-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap: 12px;
+
+        margin-top: 38px;
+    }
+
+    .member {
+        position: relative;
+
+        overflow: hidden;
+
+        border: 1px solid var(--line);
+        border-radius: 10px;
+
+        background: #050505;
+
+        transition:
+            transform .16s var(--fast),
+            border-color .16s ease,
+            background .16s ease;
+    }
+
+    .member:hover {
+        transform: translateY(-5px);
+
+        border-color: var(--green-line);
+
+        background: #080808;
+    }
+
+    .member-terminal-head {
+        height: 34px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 12px;
+
+        border-bottom: 1px solid var(--line);
+
+        background: #070707;
+    }
+
+    .member-terminal-head span {
+        color: var(--gray-dark);
+
         font-size: 7px;
     }
 
-    .member,
-    .project-card {
+    .member-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+
+        color: var(--green) !important;
+    }
+
+    .member-status::before {
+        content: "";
+
+        width: 5px;
+        height: 5px;
+
+        border-radius: 50%;
+
+        background: var(--green);
+
+        box-shadow:
+            0 0 8px var(--green);
+    }
+
+    .member-content {
+        display: grid;
+
+        grid-template-columns: 115px minmax(0,1fr);
+
+        gap: 18px;
+
+        padding: 20px;
+    }
+
+    .member-visual {
+        min-width: 0;
+    }
+
+    .member-photo {
+        position: relative;
+
+        width: 100px;
+        height: 100px;
+
+        overflow: hidden;
+
+        border: 1px solid var(--green-line);
+        border-radius: 8px;
+
+        background: #020202;
+    }
+
+    .member-photo::after {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background:
+            linear-gradient(
+                to bottom,
+                transparent,
+                rgba(40,247,193,.08)
+            );
+
+        pointer-events: none;
+    }
+
+    .member-photo img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        filter:
+            saturate(.82)
+            contrast(1.06);
+    }
+
+    .member-index {
+        margin-top: 9px;
+
+        color: var(--gray-dark);
+
+        font-size: 7px;
+    }
+
+    .member-main {
+        min-width: 0;
+    }
+
+    .member-command {
+        color: var(--gray-dark);
+
+        font-size: 8px;
+    }
+
+    .member-command b {
+        color: var(--green);
+    }
+
+    .member-name {
+        margin: 7px 0 2px;
+
+        color: #fff;
+
+        font-family: var(--display);
+        font-size: 21px;
+        line-height: 1;
+
+        letter-spacing: -.04em;
+    }
+
+    .member-role {
+        color: var(--green);
+
+        font-size: 8px;
+        font-weight: 800;
+    }
+
+    .member-description {
+        margin: 12px 0 0;
+
+        color: var(--gray);
+
+        font-size: 8px;
+        line-height: 1.7;
+    }
+
+    .member-data {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap: 7px;
+
+        margin-top: 14px;
+    }
+
+    .data-item {
+        min-width: 0;
+
+        padding: 7px 8px;
+
+        border: 1px solid var(--line);
+
+        background: #030303;
+    }
+
+    .data-item small {
+        display: block;
+
+        color: var(--gray-dark);
+
+        font-size: 6px;
+        text-transform: uppercase;
+    }
+
+    .data-item strong {
+        display: block;
+
+        margin-top: 3px;
+
+        color: var(--white-soft);
+
+        font-size: 7px;
+
+        overflow-wrap: anywhere;
+    }
+
+    .skill-list {
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 5px;
+
+        margin-top: 11px;
+    }
+
+    .skill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+
+        padding: 5px 7px;
+
+        border: 1px solid var(--line);
+
+        border-radius: 4px;
+
+        color: var(--white-soft);
+
+        background: rgba(255,255,255,.015);
+
+        font-size: 7px;
+
+        transition:
+            color .1s ease,
+            border-color .1s ease,
+            background .1s ease,
+            transform .1s var(--fast);
+    }
+
+    .skill:hover {
+        color: var(--green);
+
+        border-color: var(--green-line);
+
+        background: var(--green-soft);
+
+        transform: translateY(-1px);
+    }
+
+    .skill i {
+        font-size: 12px;
+    }
+
+    .member-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 8px;
+
+        margin-top: 12px;
+        padding-top: 11px;
+
+        border-top: 1px solid var(--line);
+    }
+
+    .nim {
+        color: var(--gray-dark);
+
+        font-size: 7px;
+    }
+
+    .ut {
+        color: var(--green);
+
+        font-size: 7px;
+        font-weight: 800;
+    }
+
+    .ut:hover {
+        text-decoration: underline;
+    }
+
+
+    /* =========================================================
+       STACK
+    ========================================================= */
+
+    .stack-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+
+        gap: 10px;
+
+        margin-top: 38px;
+    }
+
+    .stack-item {
+        position: relative;
+
+        min-height: 125px;
+
         padding: 18px;
-    }
-}
 
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+
+        background: #050505;
+
+        transition:
+            transform .13s var(--fast),
+            border-color .13s ease,
+            background .13s ease;
     }
 
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
+    .stack-item:hover {
+        transform: translateY(-4px);
+
+        border-color: var(--green-line);
+
+        background: #080808;
     }
-}
+
+    .stack-number {
+        position: absolute;
+
+        top: 12px;
+        right: 13px;
+
+        color: var(--gray-dark);
+
+        font-size: 7px;
+    }
+
+    .stack-icon {
+        width: 35px;
+        height: 35px;
+
+        display: grid;
+        place-items: center;
+
+        margin-bottom: 13px;
+
+        border: 1px solid var(--line);
+
+        border-radius: 6px;
+
+        background: #020202;
+
+        color: var(--green);
+
+        font-size: 19px;
+    }
+
+    .stack-item h3 {
+        margin: 0;
+
+        color: #fff;
+
+        font-family: var(--display);
+        font-size: 13px;
+    }
+
+    .stack-item p {
+        margin: 6px 0 0;
+
+        color: var(--gray);
+
+        font-size: 7px;
+        line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       SYSTEM
+    ========================================================= */
+
+    .system-grid {
+        display: grid;
+
+        grid-template-columns:
+            1.25fr .75fr;
+
+        gap: 12px;
+
+        margin-top: 38px;
+    }
+
+    .system-panel {
+        padding: 22px;
+
+        border: 1px solid var(--line);
+        border-radius: 10px;
+
+        background: #050505;
+    }
+
+    .system-panel h3 {
+        margin: 0;
+
+        color: #fff;
+
+        font-family: var(--display);
+        font-size: 21px;
+    }
+
+    .system-panel > p {
+        margin: 10px 0 0;
+
+        color: var(--gray);
+
+        font-size: 8px;
+        line-height: 1.8;
+    }
+
+    .feature-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap: 7px;
+
+        margin-top: 20px;
+    }
+
+    .feature {
+        padding: 11px;
+
+        border: 1px solid var(--line);
+
+        background: #020202;
+    }
+
+    .feature strong {
+        display: block;
+
+        color: #fff;
+
+        font-size: 8px;
+    }
+
+    .feature span {
+        display: block;
+
+        margin-top: 5px;
+
+        color: var(--gray);
+
+        font-size: 7px;
+        line-height: 1.6;
+    }
+
+    .feature-icon {
+        margin-bottom: 7px;
+
+        color: var(--green);
+
+        font-size: 14px;
+    }
+
+    .repo-terminal {
+        min-height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .repo-code {
+        padding: 13px;
+
+        border: 1px solid var(--line);
+
+        background: #020202;
+
+        color: var(--gray);
+
+        font-size: 7px;
+        line-height: 1.9;
+    }
+
+    .repo-code .green {
+        color: var(--green);
+    }
+
+    .repo-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 38px;
+
+        margin-top: 18px;
+
+        border: 1px solid var(--green-line);
+
+        border-radius: 6px;
+
+        color: var(--green);
+
+        background: var(--green-soft);
+
+        font-size: 8px;
+        font-weight: 800;
+
+        transition:
+            transform .12s var(--fast),
+            background .12s ease;
+    }
+
+    .repo-button:hover {
+        background: rgba(40,247,193,.14);
+
+        transform: translateY(-2px);
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+        padding: 28px 0 45px;
+
+        border-top: 1px solid var(--line);
+    }
+
+    .footer-terminal {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 15px;
+    }
+
+    .footer-terminal span {
+        color: var(--gray-dark);
+
+        font-size: 7px;
+    }
+
+    .footer-terminal .green {
+        color: var(--green);
+    }
+
+
+    /* =========================================================
+       REVEAL
+    ========================================================= */
+
+    .reveal {
+        opacity: 0;
+
+        transform:
+            translateY(18px)
+            scale(.985);
+
+        transition:
+            opacity .35s var(--fast),
+            transform .35s var(--fast);
+    }
+
+    .reveal.visible {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    .hero-content {
+        animation:
+            heroIn .42s var(--fast) both;
+    }
+
+    .neofetch {
+        animation:
+            heroIn .5s .06s var(--fast) both;
+    }
+
+    @keyframes heroIn {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1000px) {
+
+        .hero-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero {
+            min-height: auto;
+            padding: 80px 0;
+        }
+
+        .neofetch {
+            max-width: 720px;
+        }
+
+        .stack-grid {
+            grid-template-columns:
+                repeat(2, minmax(0,1fr));
+        }
+
+        .system-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 760px) {
+
+        .nav-center {
+            display: none;
+        }
+
+        .member-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .terminal-body {
+            grid-template-columns: 1fr;
+        }
+
+        .ascii {
+            min-height: auto;
+
+            justify-content: flex-start;
+        }
+
+        .stack-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 560px) {
+
+        .container {
+            width:
+                min(
+                    calc(100% - 24px),
+                    1240px
+                );
+        }
+
+        .hero {
+            padding: 60px 0;
+        }
+
+        .hero-title {
+            font-size: 54px;
+        }
+
+        .section {
+            padding: 75px 0;
+        }
+
+        .terminal-body {
+            padding: 18px;
+        }
+
+        .member-content {
+            grid-template-columns: 1fr;
+        }
+
+        .member-photo {
+            width: 90px;
+            height: 90px;
+        }
+
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-terminal {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .01ms !important;
+        }
+    }
 
     </style>
 </head>
+
 <body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+
+<!-- =========================================================
+     NAV
+========================================================= -->
+
 <header class="topbar">
+
     <div class="container nav">
-        <a class="brand" href="#top">
-            <img src="/assets/images/logo.png" alt="Sumber Aquarium">
-            <div>
-                <strong>SUMBER AQUARIUM PGK</strong>
-                <small>CAPSTONE · KELOMPOK B</small>
+
+        <a
+            class="terminal-brand"
+            href="#top"
+        >
+
+            <img
+                src="/assets/images/logo.png"
+                alt="Sumber Aquarium"
+            >
+
+            <div class="brand-terminal">
+                <strong>
+                    SUMBER-AQUARIUM
+                </strong>
+
+                <span>
+                    ~/capstone/kelompok-b
+                </span>
             </div>
+
         </a>
-        <nav class="nav-links">
-            <a href="#kelompok">Kelompok</a>
-            <a href="#teknologi">Teknologi</a>
-            <a href="#project">Project</a>
+
+
+        <nav class="nav-center">
+
+            <a href="#kelompok">
+                members
+            </a>
+
+            <a href="#teknologi">
+                stack
+            </a>
+
+            <a href="#system">
+                system
+            </a>
+
         </nav>
-        <a class="repo-btn" href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+
+
+        <a
+            class="github-btn"
+            href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            GitHub ↗
+        </a>
+
     </div>
+
 </header>
 
+
 <main id="top">
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
 <section class="hero">
+
     <div class="container hero-grid">
-        <div>
-            <span class="eyebrow">CAPSTONE PROJECT · KELOMPOK B</span>
-            <h1>Sumber <span>Aquarium</span> PGK.</h1>
-            <p>Sistem informasi web untuk membantu pengelolaan toko ikan hias melalui pengelolaan stok, transaksi penjualan, pencatatan kematian, histori operasional, dashboard, dan autentikasi pengguna.</p>
+
+
+        <div class="hero-content">
+
+            <div class="terminal-line">
+
+                <span class="user">
+                    peng@aquarium
+                </span>
+
+                <span>:</span>
+
+                <span class="path">
+                    ~/capstone
+                </span>
+
+                <span>$</span>
+
+                <span id="typingCommand">
+                    whoami
+                </span>
+
+                <span class="terminal-cursor"></span>
+
+            </div>
+
+
+            <h1 class="hero-title">
+
+                SUMBER
+
+                <span>
+                    AQUARIUM.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-subtitle">
+                Sistem informasi operasional Sumber Aquarium PGK.
+                Stok ikan, penjualan, kematian, histori,
+                authentication, API, dan database berada
+                dalam satu sistem.
+            </p>
+
+
+            <div class="hero-command">
+
+                <span class="prompt">
+                    $
+                </span>
+
+                <span>
+                    ./run-capstone --group B
+                </span>
+
+            </div>
+
+
             <div class="hero-actions">
-                <a class="btn btn-primary" href="#kelompok">Lihat Anggota ↓</a>
-                <a class="btn btn-secondary" href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+
+                <a
+                    class="action action-primary"
+                    href="#kelompok"
+                >
+                    ./members
+                </a>
+
+                <a
+                    class="action action-secondary"
+                    href="#system"
+                >
+                    ./system
+                </a>
+
+                <a
+                    class="action action-secondary"
+                    href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    git remote ↗
+                </a>
+
             </div>
+
         </div>
-        <aside class="hero-card">
-            <div class="hero-card-label"><span>PROJECT SNAPSHOT</span><strong>ACTIVE</strong></div>
-            <div class="hero-number">01 <span>×</span></div>
-            <p>Satu aplikasi untuk menghubungkan data operasional Sumber Aquarium.</p>
-            <div class="hero-list">
-                <div class="hero-row"><span>Anggota</span><strong>4</strong></div>
-                <div class="hero-row"><span>Backend</span><strong>Flask</strong></div>
-                <div class="hero-row"><span>Database</span><strong>PostgreSQL</strong></div>
-                <div class="hero-row"><span>Frontend</span><strong>HTML / CSS / JS</strong></div>
+
+
+        <!-- NEOFETCH -->
+
+        <aside class="neofetch">
+
+            <div class="window-bar">
+
+                <span class="window-dot red"></span>
+                <span class="window-dot yellow"></span>
+                <span class="window-dot green"></span>
+
+                <span class="window-title">
+                    neofetch — aquarium@pgk
+                </span>
+
             </div>
+
+
+            <div class="terminal-body">
+
+
+                <div class="ascii">
+<pre>
+       .---.
+      /     \
+     | () () |
+      \  ^  /
+       |||||
+       |||||
+   ____|||||____
+  /             \
+ /   AQUARIUM    \
+|_________________|
+</pre>
+                </div>
+
+
+                <div class="neo-info">
+
+                    <div class="neo-user">
+
+                        <span class="name">
+                            kelompok-b
+                        </span>
+
+                        <span>
+                            @
+                        </span>
+
+                        <span class="host">
+                            sumber-aquarium
+                        </span>
+
+                    </div>
+
+
+                    <div class="neo-row">
+                        <span class="key">OS</span>
+                        <span class="value neo-value-green">
+                            Sumber Aquarium PGK
+                        </span>
+                    </div>
+
+                    <div class="neo-row">
+                        <span class="key">PROJECT</span>
+                        <span class="value">
+                            Capstone Project
+                        </span>
+                    </div>
+
+                    <div class="neo-row">
+                        <span class="key">GROUP</span>
+                        <span class="value">
+                            Kelompok B
+                        </span>
+                    </div>
+
+                    <div class="neo-row">
+                        <span class="key">MEMBERS</span>
+                        <span class="value">
+                            <span data-counter="4">0</span>
+                        </span>
+                    </div>
+
+                    <div class="neo-row">
+                        <span class="key">BACKEND</span>
+                        <span class="value">
+                            Python / Flask
+                        </span>
+                    </div>
+
+                    <div class="neo-row">
+                        <span class="key">DATABASE</span>
+                        <span class="value">
+                            PostgreSQL
+                        </span>
+                    </div>
+
+                    <div class="neo-row">
+                        <span class="key">FRONTEND</span>
+                        <span class="value">
+                            HTML / CSS / JavaScript
+                        </span>
+                    </div>
+
+                    <div class="neo-row">
+                        <span class="key">STATUS</span>
+                        <span class="value neo-value-green">
+                            ONLINE
+                        </span>
+                    </div>
+
+
+                    <div class="color-palette">
+
+                        <span class="c1"></span>
+                        <span class="c2"></span>
+                        <span class="c3"></span>
+                        <span class="c4"></span>
+                        <span class="c5"></span>
+                        <span class="c6"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </aside>
+
     </div>
+
 </section>
 
-<section class="section" id="kelompok">
+
+
+<!-- =========================================================
+     MEMBERS
+========================================================= -->
+
+<section
+    class="section"
+    id="kelompok"
+>
+
     <div class="container">
-        <div class="section-head">
-            <span class="eyebrow">GROUP B</span>
-            <h2>Orang di balik sistem.</h2>
-            <p>Kami menjoba push diri kami lebih keras !.</p>
+
+        <div class="reveal">
+
+            <div class="section-kicker">
+                $ ls ./members
+            </div>
+
+            <h2 class="section-title">
+                GROUP B.
+            </h2>
+
+            <p class="section-description">
+                Profil kontribusi setiap anggota dalam project.
+            </p>
+
         </div>
 
-        <div class="members">
-            <article class="member">
-                <div class="member-top">
-                    <div class="member-photo"><img src="/assets/images/dimas.png" alt="Foto profil Dimas"></div>
-                    <span class="member-tag">FOUNDATION</span>
+
+        <div class="member-grid">
+
+
+            <!-- DIMAS -->
+
+            <article class="member reveal">
+
+                <div class="member-terminal-head">
+
+                    <span>
+                        user/dimas.profile
+                    </span>
+
+                    <span class="member-status">
+                        active
+                    </span>
+
                 </div>
-                <h3>DIMAS</h3>
-                <div class="role">Fondasi Sistem &amp; Data</div>
-                <p class="member-description">Berkontribusi pada fondasi awal HTML, CSS, JavaScript serta data pendukung project.</p>
-                <div class="skills">
-                    <span class="skill"><i class="devicon-html5-plain"></i>HTML</span>
-                    <span class="skill"><i class="devicon-css3-plain"></i>CSS</span>
-                    <span class="skill"><i class="devicon-javascript-plain"></i>JavaScript</span>
+
+
+                <div class="member-content">
+
+
+                    <div class="member-visual">
+
+                        <div class="member-photo">
+
+                            <img
+                                src="/assets/images/dimas.png"
+                                alt="Foto profil Dimas"
+                            >
+
+                        </div>
+
+                        <div class="member-index">
+                            member_01
+                        </div>
+
+                    </div>
+
+
+                    <div class="member-main">
+
+                        <div class="member-command">
+                            <b>$</b> cat profile.txt
+                        </div>
+
+                        <h3 class="member-name">
+                            DIMAS
+                        </h3>
+
+                        <div class="member-role">
+                            SYSTEM &amp; DATA FOUNDATION
+                        </div>
+
+                        <p class="member-description">
+                            Fondasi awal HTML, CSS, JavaScript
+                            dan data pendukung project.
+                        </p>
+
+
+                        <div class="member-data">
+
+                            <div class="data-item">
+                                <small>NIM</small>
+                                <strong>050039851</strong>
+                            </div>
+
+                            <div class="data-item">
+                                <small>AREA</small>
+                                <strong>Frontend / Data</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="skill-list">
+
+                            <span class="skill">
+                                <i class="devicon-html5-plain"></i>
+                                HTML
+                            </span>
+
+                            <span class="skill">
+                                <i class="devicon-css3-plain"></i>
+                                CSS
+                            </span>
+
+                            <span class="skill">
+                                <i class="devicon-javascript-plain"></i>
+                                JavaScript
+                            </span>
+
+                        </div>
+
+
+                        <div class="member-footer">
+
+                            <span class="nim">
+                                UT / 050039851
+                            </span>
+
+                            <a
+                                class="ut"
+                                href="https://elearning.ut.ac.id/user/view.php?id=278161&course=329858"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                profile ↗
+                            </a>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="member-footer">
-                    <span class="nim">NIM · 050039851</span>
-                    <a class="ut-link" href="https://elearning.ut.ac.id/user/view.php?id=278161&amp;course=329858" target="_blank" rel="noopener noreferrer">Profil UT ↗</a>
-                </div>
+
             </article>
 
-            <article class="member">
-                <div class="member-top">
-                    <div class="member-photo"><img src="/assets/images/dhea.png" alt="Foto profil Dhea Handanur Aini"></div>
-                    <span class="member-tag">DOCUMENTATION</span>
+
+
+            <!-- DHEA -->
+
+            <article class="member reveal">
+
+                <div class="member-terminal-head">
+
+                    <span>
+                        user/dhea.profile
+                    </span>
+
+                    <span class="member-status">
+                        active
+                    </span>
+
                 </div>
-                <h3>DHEA HANDANUR AINI</h3>
-                <div class="role">Dokumentasi &amp; Proposal</div>
-                <p class="member-description">Berkontribusi pada penyusunan proposal dan dokumentasi project untuk kebutuhan akademik kelompok.</p>
-                <div class="skills">
-                    <span class="skill">Dokumentasi</span>
-                    <span class="skill">Proposal</span>
-                    <span class="skill"><i class="devicon-microsoft-word-plain"></i>Word</span>
-                    <span class="skill"><i class="devicon-microsoftpowerpoint-plain"></i>PowerPoint</span>
+
+
+                <div class="member-content">
+
+
+                    <div class="member-visual">
+
+                        <div class="member-photo">
+
+                            <img
+                                src="/assets/images/dhea.png"
+                                alt="Foto profil Dhea Handanur Aini"
+                            >
+
+                        </div>
+
+                        <div class="member-index">
+                            member_02
+                        </div>
+
+                    </div>
+
+
+                    <div class="member-main">
+
+                        <div class="member-command">
+                            <b>$</b> cat profile.txt
+                        </div>
+
+                        <h3 class="member-name">
+                            DHEA
+                        </h3>
+
+                        <div class="member-role">
+                            DOCUMENTATION &amp; PROPOSAL
+                        </div>
+
+                        <p class="member-description">
+                            Penyusunan proposal dan dokumentasi
+                            project untuk kebutuhan akademik.
+                        </p>
+
+
+                        <div class="member-data">
+
+                            <div class="data-item">
+                                <small>NIM</small>
+                                <strong>050417407</strong>
+                            </div>
+
+                            <div class="data-item">
+                                <small>AREA</small>
+                                <strong>Documentation</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="skill-list">
+
+                            <span class="skill">
+                                Documentation
+                            </span>
+
+                            <span class="skill">
+                                Proposal
+                            </span>
+
+                            <span class="skill">
+                                <i class="devicon-microsoft-word-plain"></i>
+                                Word
+                            </span>
+
+                            <span class="skill">
+                                <i class="devicon-microsoftpowerpoint-plain"></i>
+                                PowerPoint
+                            </span>
+
+                        </div>
+
+
+                        <div class="member-footer">
+
+                            <span class="nim">
+                                UT / 050417407
+                            </span>
+
+                            <a
+                                class="ut"
+                                href="https://elearning.ut.ac.id/user/view.php?id=278159&course=329858"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                profile ↗
+                            </a>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="member-footer">
-                    <span class="nim">NIM · 050417407</span>
-                    <a class="ut-link" href="https://elearning.ut.ac.id/user/view.php?id=278159&amp;course=329858" target="_blank" rel="noopener noreferrer">Profil UT ↗</a>
-                </div>
+
             </article>
 
-            <article class="member">
-                <div class="member-top">
-                    <div class="member-photo"><img src="/assets/images/logo.png" alt="Foto profil Kamaludin"></div>
-                    <span class="member-tag">VISUAL</span>
+
+
+            <!-- KAMALUDIN -->
+
+            <article class="member reveal">
+
+                <div class="member-terminal-head">
+
+                    <span>
+                        user/kamaludin.profile
+                    </span>
+
+                    <span class="member-status">
+                        active
+                    </span>
+
                 </div>
-                <h3>KAMALUDIN</h3>
-                <div class="role">Komunikasi Visual &amp; Presentasi</div>
-                <p class="member-description">Berkontribusi pada materi presentasi, poster, dan penyampaian visual project.</p>
-                <div class="skills">
-                    <span class="skill">Visual</span>
-                    <span class="skill">Presentation</span>
-                    <span class="skill"><i class="devicon-microsoftpowerpoint-plain"></i>PowerPoint</span>
-                    <span class="skill">Poster</span>
+
+
+                <div class="member-content">
+
+
+                    <div class="member-visual">
+
+                        <div class="member-photo">
+
+                            <img
+                                src="/assets/images/logo.png"
+                                alt="Profil Kamaludin"
+                            >
+
+                        </div>
+
+                        <div class="member-index">
+                            member_03
+                        </div>
+
+                    </div>
+
+
+                    <div class="member-main">
+
+                        <div class="member-command">
+                            <b>$</b> cat profile.txt
+                        </div>
+
+                        <h3 class="member-name">
+                            KAMALUDIN
+                        </h3>
+
+                        <div class="member-role">
+                            VISUAL &amp; PRESENTATION
+                        </div>
+
+                        <p class="member-description">
+                            Materi presentasi, poster,
+                            dan penyampaian visual project.
+                        </p>
+
+
+                        <div class="member-data">
+
+                            <div class="data-item">
+                                <small>NIM</small>
+                                <strong>050595262</strong>
+                            </div>
+
+                            <div class="data-item">
+                                <small>AREA</small>
+                                <strong>Visual</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="skill-list">
+
+                            <span class="skill">
+                                Visual
+                            </span>
+
+                            <span class="skill">
+                                Presentation
+                            </span>
+
+                            <span class="skill">
+                                <i class="devicon-microsoftpowerpoint-plain"></i>
+                                PowerPoint
+                            </span>
+
+                            <span class="skill">
+                                Poster
+                            </span>
+
+                        </div>
+
+
+                        <div class="member-footer">
+
+                            <span class="nim">
+                                UT / 050595262
+                            </span>
+
+                            <a
+                                class="ut"
+                                href="https://elearning.ut.ac.id/user/view.php?id=278160&course=329858"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                profile ↗
+                            </a>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="member-footer">
-                    <span class="nim">NIM · 050595262</span>
-                    <a class="ut-link" href="https://elearning.ut.ac.id/user/view.php?id=278160&amp;course=329858" target="_blank" rel="noopener noreferrer">Profil UT ↗</a>
-                </div>
+
             </article>
 
-            <article class="member">
-                <div class="member-top">
-                    <div class="member-photo"><img src="/assets/images/arpan.png" alt="Foto profil Muhamad Arpan Kurnia"></div>
-                    <span class="member-tag">FULL-STACK</span>
+
+
+            <!-- ARPAN -->
+
+            <article class="member reveal">
+
+                <div class="member-terminal-head">
+
+                    <span>
+                        user/arpan.profile
+                    </span>
+
+                    <span class="member-status">
+                        active
+                    </span>
+
                 </div>
-                <h3>MUHAMAD ARPAN KURNIA</h3>
-                <div class="role">Full-Stack &amp; System Integration</div>
-                <p class="member-description">Mengembangkan fondasi project menjadi sistem full-stack yang menghubungkan frontend, API, database, authentication, security, dan deployment.</p>
-                <div class="skills">
-                    <span class="skill"><i class="devicon-python-plain"></i>Python</span>
-                    <span class="skill"><i class="devicon-flask-original"></i>Flask</span>
-                    <span class="skill"><i class="devicon-postgresql-plain"></i>PostgreSQL</span>
-                    <span class="skill">Psycopg</span>
-                    <span class="skill">Gunicorn</span>
-                    <span class="skill">Argon2</span>
+
+
+                <div class="member-content">
+
+
+                    <div class="member-visual">
+
+                        <div class="member-photo">
+
+                            <img
+                                src="/assets/images/arpan.png"
+                                alt="Foto profil Muhamad Arpan Kurnia"
+                            >
+
+                        </div>
+
+                        <div class="member-index">
+                            member_04
+                        </div>
+
+                    </div>
+
+
+                    <div class="member-main">
+
+                        <div class="member-command">
+                            <b>$</b> cat profile.txt
+                        </div>
+
+                        <h3 class="member-name">
+                            ARPAN
+                        </h3>
+
+                        <div class="member-role">
+                            FULL-STACK &amp; SYSTEM INTEGRATION
+                        </div>
+
+                        <p class="member-description">
+                            Frontend, API, database,
+                            authentication, security,
+                            dan deployment.
+                        </p>
+
+
+                        <div class="member-data">
+
+                            <div class="data-item">
+                                <small>NIM</small>
+                                <strong>051102736</strong>
+                            </div>
+
+                            <div class="data-item">
+                                <small>AREA</small>
+                                <strong>Full-Stack</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="skill-list">
+
+                            <span class="skill">
+                                <i class="devicon-python-plain"></i>
+                                Python
+                            </span>
+
+                            <span class="skill">
+                                <i class="devicon-flask-original"></i>
+                                Flask
+                            </span>
+
+                            <span class="skill">
+                                <i class="devicon-postgresql-plain"></i>
+                                PostgreSQL
+                            </span>
+
+                            <span class="skill">
+                                Psycopg
+                            </span>
+
+                            <span class="skill">
+                                Gunicorn
+                            </span>
+
+                            <span class="skill">
+                                Argon2
+                            </span>
+
+                        </div>
+
+
+                        <div class="member-footer">
+
+                            <span class="nim">
+                                UT / 051102736
+                            </span>
+
+                            <a
+                                class="ut"
+                                href="https://elearning.ut.ac.id/user/view.php?id=32304&course=329858"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                profile ↗
+                            </a>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="member-footer">
-                    <span class="nim">NIM · 051102736</span>
-                    <a class="ut-link" href="https://elearning.ut.ac.id/user/view.php?id=32304&amp;course=329858" target="_blank" rel="noopener noreferrer">Profil UT ↗</a>
-                </div>
+
             </article>
+
+
         </div>
+
     </div>
+
 </section>
 
-<section class="section" id="teknologi">
+
+
+<!-- =========================================================
+     TECHNOLOGY
+========================================================= -->
+
+<section
+    class="section"
+    id="teknologi"
+>
+
     <div class="container">
-        <div class="section-head">
-            <span class="eyebrow">TECHNOLOGY</span>
-            <h2>Stack yang benar-benar digunakan.</h2>
-            <p>Berdasarkan source code dan dependency yang tersedia di repository.</p>
+
+        <div class="reveal">
+
+            <div class="section-kicker">
+                $ cat stack.txt
+            </div>
+
+            <h2 class="section-title">
+                STACK.
+            </h2>
+
+            <p class="section-description">
+                Teknologi yang digunakan dalam repository.
+            </p>
+
         </div>
-        <div class="tech-grid">
-            <article class="tech"><div class="tech-icon"><i class="devicon-python-plain"></i></div><h3>Python</h3><p>Backend dan business logic.</p></article>
-            <article class="tech"><div class="tech-icon"><i class="devicon-flask-original"></i></div><h3>Flask</h3><p>Routing, API, session, validation, dan server.</p></article>
-            <article class="tech"><div class="tech-icon"><i class="devicon-postgresql-plain"></i></div><h3>PostgreSQL</h3><p>Database relasional project.</p></article>
-            <article class="tech"><div class="tech-icon"><i class="devicon-javascript-plain"></i></div><h3>JavaScript</h3><p>API interaction dan dynamic UI.</p></article>
-            <article class="tech"><div class="tech-icon"><i class="devicon-html5-plain"></i></div><h3>HTML5</h3><p>Struktur dashboard, module, dan authentication.</p></article>
-            <article class="tech"><div class="tech-icon"><i class="devicon-css3-plain"></i></div><h3>CSS3</h3><p>Responsive layout, animation, table, form, dan UI.</p></article>
-            <article class="tech"><div class="tech-icon">🐘</div><h3>Psycopg 3</h3><p>Adapter Python untuk PostgreSQL.</p></article>
-            <article class="tech"><div class="tech-icon">🔐</div><h3>Argon2</h3><p>Password hashing dan verification.</p></article>
-            <article class="tech"><div class="tech-icon">🚀</div><h3>Gunicorn</h3><p>WSGI server untuk deployment.</p></article>
+
+
+        <div class="stack-grid">
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    01
+                </span>
+
+                <div class="stack-icon">
+                    <i class="devicon-python-plain"></i>
+                </div>
+
+                <h3>Python</h3>
+
+                <p>
+                    Backend dan business logic.
+                </p>
+
+            </article>
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    02
+                </span>
+
+                <div class="stack-icon">
+                    <i class="devicon-flask-original"></i>
+                </div>
+
+                <h3>Flask</h3>
+
+                <p>
+                    Routing, API, session,
+                    validation dan server.
+                </p>
+
+            </article>
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    03
+                </span>
+
+                <div class="stack-icon">
+                    <i class="devicon-postgresql-plain"></i>
+                </div>
+
+                <h3>PostgreSQL</h3>
+
+                <p>
+                    Relational database.
+                </p>
+
+            </article>
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    04
+                </span>
+
+                <div class="stack-icon">
+                    <i class="devicon-javascript-plain"></i>
+                </div>
+
+                <h3>JavaScript</h3>
+
+                <p>
+                    API interaction dan
+                    dynamic interface.
+                </p>
+
+            </article>
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    05
+                </span>
+
+                <div class="stack-icon">
+                    <i class="devicon-html5-plain"></i>
+                </div>
+
+                <h3>HTML5</h3>
+
+                <p>
+                    Struktur halaman dan module.
+                </p>
+
+            </article>
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    06
+                </span>
+
+                <div class="stack-icon">
+                    <i class="devicon-css3-plain"></i>
+                </div>
+
+                <h3>CSS3</h3>
+
+                <p>
+                    Layout, responsive interface
+                    dan animation.
+                </p>
+
+            </article>
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    07
+                </span>
+
+                <div class="stack-icon">
+                    🐘
+                </div>
+
+                <h3>Psycopg 3</h3>
+
+                <p>
+                    PostgreSQL adapter untuk Python.
+                </p>
+
+            </article>
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    08
+                </span>
+
+                <div class="stack-icon">
+                    🔐
+                </div>
+
+                <h3>Argon2</h3>
+
+                <p>
+                    Password hashing dan verification.
+                </p>
+
+            </article>
+
+
+            <article class="stack-item reveal">
+
+                <span class="stack-number">
+                    09
+                </span>
+
+                <div class="stack-icon">
+                    🚀
+                </div>
+
+                <h3>Gunicorn</h3>
+
+                <p>
+                    WSGI server deployment.
+                </p>
+
+            </article>
+
+
         </div>
+
     </div>
+
 </section>
 
-<section class="section" id="project">
+
+
+<!-- =========================================================
+     SYSTEM
+========================================================= -->
+
+<section
+    class="section"
+    id="system"
+>
+
     <div class="container">
-        <div class="section-head">
-            <span class="eyebrow">SYSTEM</span>
-            <h2>Apa yang dibangun?</h2>
+
+        <div class="reveal">
+
+            <div class="section-kicker">
+                $ systemctl status aquarium
+            </div>
+
+            <h2 class="section-title">
+                SYSTEM.
+            </h2>
+
         </div>
-        <div class="project-grid">
-            <article class="project-card">
-                <h3>Sistem informasi operasional</h3>
-                <p>Sumber Aquarium PGK menghubungkan data persediaan ikan dengan proses penjualan dan pencatatan kematian. Backend Flask berkomunikasi dengan PostgreSQL melalui Psycopg.</p>
-                <div class="feature-list">
-                    <div class="feature"><div class="feature-icon">🐟</div><div><strong>Manajemen stok</strong><span>Tambah, lihat, cari, dan hapus data ikan.</span></div></div>
-                    <div class="feature"><div class="feature-icon">🛒</div><div><strong>Penjualan</strong><span>Transaksi mengurangi stok dan menyimpan histori.</span></div></div>
-                    <div class="feature"><div class="feature-icon">⚠️</div><div><strong>Mortalitas</strong><span>Kematian mengurangi stok dan disimpan dalam histori.</span></div></div>
-                    <div class="feature"><div class="feature-icon">🔐</div><div><strong>Authentication</strong><span>Session digunakan untuk melindungi endpoint operasional.</span></div></div>
+
+
+        <div class="system-grid">
+
+
+            <article class="system-panel reveal">
+
+                <h3>
+                    Sumber Aquarium PGK
+                </h3>
+
+                <p>
+                    Sistem informasi operasional yang
+                    menghubungkan data persediaan ikan,
+                    transaksi penjualan, pencatatan
+                    kematian, histori dan authentication.
+                </p>
+
+
+                <div class="feature-grid">
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            🐟
+                        </div>
+
+                        <strong>
+                            Stock Management
+                        </strong>
+
+                        <span>
+                            Data ikan dan persediaan.
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            🛒
+                        </div>
+
+                        <strong>
+                            Sales
+                        </strong>
+
+                        <span>
+                            Transaksi dan histori penjualan.
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ⚠
+                        </div>
+
+                        <strong>
+                            Mortality
+                        </strong>
+
+                        <span>
+                            Pencatatan ikan mati.
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            🔐
+                        </div>
+
+                        <strong>
+                            Authentication
+                        </strong>
+
+                        <span>
+                            Session dan protected endpoint.
+                        </span>
+
+                    </div>
+
                 </div>
+
             </article>
-            <article class="project-card">
-                <h3>Repository</h3>
-                <p>Source code, database schema, seed data, documentation, presentation, dan assets project berada dalam repository kelompok.</p>
-                <br>
-                <a class="btn btn-primary" href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B" target="_blank" rel="noopener noreferrer">Buka GitHub ↗</a>
+
+
+
+            <article class="system-panel repo-terminal reveal">
+
+                <div>
+
+                    <h3>
+                        Repository
+                    </h3>
+
+                    <div class="repo-code">
+
+                        <span class="green">
+                            repository
+                        </span>
+
+                        <br>
+
+                        Zzzzzzzpeng/
+
+                        <br>
+
+                        CAPSTONE_PROJECT_KELOMPOK_B
+
+                        <br><br>
+
+                        <span class="green">
+                            branch
+                        </span>
+
+                        <br>
+
+                        main
+
+                        <br><br>
+
+                        <span class="green">
+                            project
+                        </span>
+
+                        <br>
+
+                        Sumber Aquarium PGK
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    class="repo-button"
+                    href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    OPEN REPOSITORY ↗
+                </a>
+
             </article>
+
+
         </div>
+
     </div>
+
 </section>
+
+
 </main>
 
+
+
 <footer>
-    <div class="container footer-inner">
-        <span>Sumber Aquarium PGK · Capstone Project · Kelompok B</span>
-        <span>Universitas Terbuka · Sistem Informasi</span>
+
+    <div class="container footer-terminal">
+
+        <span>
+            <span class="green">
+                ●
+            </span>
+
+            system: sumber-aquarium-pgk
+        </span>
+
+        <span>
+            capstone / kelompok-b / universitas-terbuka
+        </span>
+
     </div>
+
 </footer>
+
+
+
+<script>
+
+    /* =========================================================
+       CURSOR GLOW
+    ========================================================= */
+
+    const cursorGlow =
+        document.getElementById("cursorGlow");
+
+    let glowX = 0;
+    let glowY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    window.addEventListener(
+        "pointermove",
+        event => {
+
+            targetX = event.clientX;
+            targetY = event.clientY;
+
+            document.body.classList.add(
+                "cursor-active"
+            );
+
+        },
+        { passive: true }
+    );
+
+    function animateGlow() {
+
+        glowX +=
+            (targetX - glowX) * .18;
+
+        glowY +=
+            (targetY - glowY) * .18;
+
+        cursorGlow.style.left =
+            `${glowX}px`;
+
+        cursorGlow.style.top =
+            `${glowY}px`;
+
+        requestAnimationFrame(
+            animateGlow
+        );
+    }
+
+    animateGlow();
+
+
+    /* =========================================================
+       REVEAL ON SCROLL
+    ========================================================= */
+
+    const revealItems =
+        document.querySelectorAll(
+            ".reveal"
+        );
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                            revealObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: .08
+            }
+        );
+
+    revealItems.forEach(
+        item =>
+            revealObserver.observe(item)
+    );
+
+
+    /* =========================================================
+       COUNTER
+    ========================================================= */
+
+    const counters =
+        document.querySelectorAll(
+            "[data-counter]"
+        );
+
+    counters.forEach(
+        counter => {
+
+            const target =
+                Number(
+                    counter.dataset.counter
+                );
+
+            let value = 0;
+
+            const timer =
+                setInterval(
+                    () => {
+
+                        value++;
+
+                        counter.textContent =
+                            value;
+
+                        if (
+                            value >= target
+                        ) {
+
+                            clearInterval(
+                                timer
+                            );
+
+                        }
+
+                    },
+                    90
+                );
+
+        }
+    );
+
+
+    /* =========================================================
+       TERMINAL COMMAND
+    ========================================================= */
+
+    const command =
+        document.getElementById(
+            "typingCommand"
+        );
+
+    const commands = [
+        "whoami",
+        "cat profile.txt",
+        "neofetch",
+        "systemctl status aquarium"
+    ];
+
+    let commandIndex = 0;
+    let characterIndex = 0;
+    let deleting = false;
+
+    function typeCommand() {
+
+        const current =
+            commands[commandIndex];
+
+        if (!deleting) {
+
+            command.textContent =
+                current.slice(
+                    0,
+                    characterIndex + 1
+                );
+
+            characterIndex++;
+
+            if (
+                characterIndex ===
+                current.length
+            ) {
+
+                deleting = true;
+
+                setTimeout(
+                    typeCommand,
+                    1100
+                );
+
+                return;
+            }
+
+        } else {
+
+            command.textContent =
+                current.slice(
+                    0,
+                    characterIndex - 1
+                );
+
+            characterIndex--;
+
+            if (
+                characterIndex === 0
+            ) {
+
+                deleting = false;
+
+                commandIndex =
+                    (
+                        commandIndex + 1
+                    ) %
+                    commands.length;
+
+            }
+
+        }
+
+        setTimeout(
+            typeCommand,
+            deleting ? 24 : 45
+        );
+    }
+
+    typeCommand();
+
+</script>
+
 </body>
 </html>

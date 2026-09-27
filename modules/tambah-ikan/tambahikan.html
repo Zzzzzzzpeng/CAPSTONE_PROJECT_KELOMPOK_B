@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
     <meta charset="UTF-8">
@@ -9,23 +10,917 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Tambah Ikan — Sumber Aquarium</title>
+    <title>
+        Tambah Ikan — Sumber Aquarium
+    </title>
 
     <link
         rel="stylesheet"
         href="../../css/style.css"
     >
 
+    <style>
+
+    /* =========================================================
+       ADD FISH — PAGE OVERRIDE
+    ========================================================= */
+
+    .add-fish-page {
+        min-height: 100%;
+    }
+
+    .add-fish-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        margin-bottom: 28px;
+    }
+
+    .add-fish-kicker {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        margin-bottom: 8px;
+
+        color: #20d9c0;
+
+        font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Menlo,
+            Monaco,
+            Consolas,
+            monospace;
+
+        font-size: 9px;
+        font-weight: 800;
+
+        letter-spacing: .12em;
+        text-transform: uppercase;
+    }
+
+    .add-fish-kicker::before {
+        content: "";
+
+        width: 6px;
+        height: 6px;
+
+        border-radius: 50%;
+
+        background: #20d9c0;
+
+        box-shadow:
+            0 0 12px
+            rgba(32,217,192,.7);
+    }
+
+    .add-fish-header h1 {
+        margin: 0;
+
+        color: #fff;
+
+        font-family:
+            "Space Grotesk",
+            system-ui,
+            sans-serif;
+
+        font-size:
+            clamp(32px, 4vw, 48px);
+
+        line-height: .95;
+
+        letter-spacing: -.05em;
+    }
+
+    .add-fish-header p {
+        max-width: 620px;
+
+        margin: 12px 0 0;
+
+        color: #89928f;
+
+        font-size: 11px;
+        line-height: 1.7;
+    }
+
+    .database-state {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        padding: 9px 11px;
+
+        border: 1px solid
+            rgba(32,217,192,.16);
+
+        border-radius: 8px;
+
+        color: #20d9c0;
+
+        background:
+            rgba(32,217,192,.05);
+
+        font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Menlo,
+            Monaco,
+            Consolas,
+            monospace;
+
+        font-size: 8px;
+        font-weight: 800;
+
+        white-space: nowrap;
+    }
+
+    .database-state::before {
+        content: "";
+
+        width: 6px;
+        height: 6px;
+
+        border-radius: 50%;
+
+        background: #20d9c0;
+
+        animation:
+            databasePulse 1.2s
+            ease-in-out infinite;
+    }
+
+    @keyframes databasePulse {
+
+        0%,
+        100% {
+            opacity: .45;
+
+            box-shadow:
+                0 0 0
+                rgba(32,217,192,0);
+        }
+
+        50% {
+            opacity: 1;
+
+            box-shadow:
+                0 0 12px
+                rgba(32,217,192,.75);
+        }
+
+    }
+
+
+    /* =========================================================
+       LAYOUT
+    ========================================================= */
+
+    .add-fish-layout {
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 1.35fr)
+            minmax(280px, .65fr);
+
+        gap: 14px;
+
+        align-items: start;
+    }
+
+
+    /* =========================================================
+       FORM CARD
+    ========================================================= */
+
+    .add-fish-card {
+        position: relative;
+
+        overflow: hidden;
+
+        padding: 25px;
+
+        border: 1px solid
+            rgba(255,255,255,.08);
+
+        border-radius: 16px;
+
+        background:
+            linear-gradient(
+                145deg,
+                #0b0b0b,
+                #050505
+            );
+
+        box-shadow:
+            0 20px 55px
+            rgba(0,0,0,.28);
+    }
+
+    .add-fish-card::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+        height: 1px;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                #20d9c0,
+                transparent
+            );
+
+        opacity: .6;
+    }
+
+    .card-terminal {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 10px;
+
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,.07);
+    }
+
+    .card-terminal-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        color: #68716f;
+
+        font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Menlo,
+            Monaco,
+            Consolas,
+            monospace;
+
+        font-size: 8px;
+    }
+
+    .terminal-dot {
+        width: 7px;
+        height: 7px;
+
+        border-radius: 50%;
+
+        background: #20d9c0;
+
+        box-shadow:
+            0 0 10px
+            rgba(32,217,192,.55);
+    }
+
+    .card-terminal-right {
+        color: #3f4846;
+
+        font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Menlo,
+            Monaco,
+            Consolas,
+            monospace;
+
+        font-size: 7px;
+    }
+
+
+    /* =========================================================
+       FORM
+    ========================================================= */
+
+    .add-fish-form {
+        display: grid;
+        gap: 18px;
+    }
+
+    .field {
+        display: grid;
+        gap: 7px;
+    }
+
+    .field label {
+        color: #d8dedc;
+
+        font-size: 9px;
+        font-weight: 800;
+    }
+
+    .field-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 10px;
+    }
+
+    .field-label span {
+        color: #4f5956;
+
+        font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Menlo,
+            Monaco,
+            Consolas,
+            monospace;
+
+        font-size: 7px;
+    }
+
+    .field input,
+    .field select {
+        width: 100%;
+
+        min-height: 44px;
+
+        padding: 0 13px;
+
+        border: 1px solid
+            rgba(255,255,255,.09);
+
+        border-radius: 9px;
+
+        outline: none;
+
+        color: #f3f6f5;
+        background: #030303;
+
+        font: inherit;
+        font-size: 10px;
+
+        transition:
+            border-color .14s ease,
+            background .14s ease,
+            box-shadow .14s ease,
+            transform .14s ease;
+    }
+
+    .field input::placeholder {
+        color: #414947;
+    }
+
+    .field input:hover,
+    .field select:hover {
+        border-color:
+            rgba(255,255,255,.15);
+    }
+
+    .field input:focus,
+    .field select:focus {
+        border-color:
+            rgba(32,217,192,.55);
+
+        background: #050606;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(32,217,192,.07);
+    }
+
+    .field-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap: 12px;
+    }
+
+    .field select {
+        appearance: none;
+
+        padding-right: 36px;
+
+        background-image:
+            linear-gradient(45deg,
+                transparent 50%,
+                #68716f 50%
+            ),
+            linear-gradient(135deg,
+                #68716f 50%,
+                transparent 50%
+            );
+
+        background-position:
+            calc(100% - 16px) 18px,
+            calc(100% - 11px) 18px;
+
+        background-size:
+            5px 5px,
+            5px 5px;
+
+        background-repeat: no-repeat;
+    }
+
+    .field select option {
+        color: #fff;
+        background: #090909;
+    }
+
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .form-actions {
+        display: grid;
+
+        grid-template-columns:
+            1.2fr .6fr .9fr;
+
+        gap: 8px;
+
+        margin-top: 5px;
+    }
+
+    .add-btn {
+        position: relative;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 44px;
+
+        padding: 0 14px;
+
+        overflow: hidden;
+
+        border: 1px solid transparent;
+        border-radius: 9px;
+
+        cursor: pointer;
+
+        font-size: 9px;
+        font-weight: 900;
+
+        transition:
+            transform .12s
+                cubic-bezier(.2,.9,.2,1),
+            box-shadow .12s ease,
+            background .12s ease,
+            border-color .12s ease,
+            color .12s ease;
+    }
+
+    .add-btn::before {
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            linear-gradient(
+                110deg,
+                transparent 20%,
+                rgba(255,255,255,.28) 50%,
+                transparent 80%
+            );
+
+        transform:
+            translateX(-120%);
+
+        transition:
+            transform .35s
+            cubic-bezier(.2,.9,.2,1);
+    }
+
+    .add-btn:hover::before {
+        transform:
+            translateX(120%);
+    }
+
+    .add-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .add-btn:active {
+        transform: translateY(0);
+    }
+
+    .add-btn:disabled {
+        cursor: wait;
+
+        opacity: .55;
+
+        transform: none;
+    }
+
+    .add-btn-primary {
+        color: #00130e;
+
+        background:
+            linear-gradient(
+                135deg,
+                #20d9c0,
+                #14bda8
+            );
+
+        box-shadow:
+            0 10px 25px
+            rgba(32,217,192,.10);
+    }
+
+    .add-btn-primary:hover {
+        box-shadow:
+            0 14px 35px
+            rgba(32,217,192,.20);
+    }
+
+    .add-btn-secondary {
+        color: #dfe5e3;
+
+        border-color:
+            rgba(255,255,255,.09);
+
+        background: #080808;
+    }
+
+    .add-btn-secondary:hover {
+        color: #20d9c0;
+
+        border-color:
+            rgba(32,217,192,.25);
+
+        background:
+            rgba(32,217,192,.05);
+    }
+
+
+    /* =========================================================
+       RECORD PANEL
+    ========================================================= */
+
+    .record-card {
+        position: sticky;
+        top: 84px;
+
+        padding: 21px;
+
+        border: 1px solid
+            rgba(255,255,255,.08);
+
+        border-radius: 16px;
+
+        background:
+            #050505;
+    }
+
+    .record-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 10px;
+
+        padding-bottom: 14px;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,.07);
+    }
+
+    .record-header strong {
+        color: #fff;
+
+        font-family:
+            "Space Grotesk",
+            system-ui,
+            sans-serif;
+
+        font-size: 15px;
+    }
+
+    .record-header span {
+        color: #3e4745;
+
+        font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Menlo,
+            Monaco,
+            Consolas,
+            monospace;
+
+        font-size: 7px;
+    }
+
+    .record-preview {
+        display: grid;
+
+        gap: 8px;
+
+        margin-top: 18px;
+    }
+
+    .record-row {
+        display: grid;
+
+        grid-template-columns: 75px minmax(0,1fr);
+
+        gap: 10px;
+
+        padding: 9px;
+
+        border: 1px solid
+            rgba(255,255,255,.05);
+
+        background: #020202;
+    }
+
+    .record-row span {
+        color: #4f5956;
+
+        font-family:
+            ui-monospace,
+            SFMono-Regular,
+            Menlo,
+            Monaco,
+            Consolas,
+            monospace;
+
+        font-size: 7px;
+    }
+
+    .record-row strong {
+        min-width: 0;
+
+        color: #dce3e1;
+
+        font-size: 8px;
+
+        overflow-wrap: anywhere;
+    }
+
+    .record-state {
+        margin-top: 16px;
+
+        padding: 12px;
+
+        border: 1px solid
+            rgba(32,217,192,.12);
+
+        background:
+            rgba(32,217,192,.035);
+    }
+
+    .record-state-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 10px;
+    }
+
+    .record-state strong {
+        color: #20d9c0;
+
+        font-size: 8px;
+    }
+
+    .record-state span {
+        color: #68716f;
+
+        font-size: 7px;
+    }
+
+    .record-state-line {
+        height: 2px;
+
+        margin-top: 9px;
+
+        overflow: hidden;
+
+        background:
+            rgba(255,255,255,.05);
+    }
+
+    .record-state-line::before {
+        content: "";
+
+        display: block;
+
+        width: 68%;
+        height: 100%;
+
+        background:
+            linear-gradient(
+                90deg,
+                #20d9c0,
+                transparent
+            );
+
+        animation:
+            recordScan 1.6s
+            ease-in-out infinite;
+    }
+
+    @keyframes recordScan {
+
+        0% {
+            width: 20%;
+            opacity: .45;
+        }
+
+        50% {
+            width: 82%;
+            opacity: 1;
+        }
+
+        100% {
+            width: 20%;
+            opacity: .45;
+        }
+
+    }
+
+    .record-meta {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap: 8px;
+
+        margin-top: 9px;
+    }
+
+    .record-meta-item {
+        padding: 10px;
+
+        border: 1px solid
+            rgba(255,255,255,.05);
+
+        background: #020202;
+    }
+
+    .record-meta-item small {
+        display: block;
+
+        color: #3f4846;
+
+        font-size: 6px;
+        text-transform: uppercase;
+    }
+
+    .record-meta-item strong {
+        display: block;
+
+        margin-top: 4px;
+
+        color: #dce3e1;
+
+        font-size: 8px;
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast {
+        position: fixed;
+
+        right: 22px;
+        bottom: 22px;
+
+        z-index: 9999;
+
+        max-width: 340px;
+
+        padding: 12px 14px;
+
+        border: 1px solid
+            rgba(32,217,192,.2);
+
+        border-radius: 9px;
+
+        color: #dfe7e5;
+
+        background:
+            rgba(5,5,5,.96);
+
+        box-shadow:
+            0 18px 45px
+            rgba(0,0,0,.45);
+
+        font-size: 9px;
+
+        opacity: 0;
+
+        transform:
+            translateY(10px)
+            scale(.98);
+
+        pointer-events: none;
+
+        transition:
+            opacity .16s ease,
+            transform .16s
+                cubic-bezier(.2,.9,.2,1);
+    }
+
+    .toast.show {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 980px) {
+
+        .add-fish-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .record-card {
+            position: relative;
+            top: auto;
+        }
+
+    }
+
+    @media (max-width: 700px) {
+
+        .add-fish-header {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .field-grid,
+        .form-actions {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+    @media (max-width: 500px) {
+
+        .add-fish-card,
+        .record-card {
+            padding: 17px;
+        }
+
+        .toast {
+            right: 12px;
+            bottom: 12px;
+            left: 12px;
+            max-width: none;
+        }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: .01ms !important;
+            transition-duration: .01ms !important;
+        }
+
+    }
+
+    </style>
+
 </head>
 
 
 <body>
 
+
 <div class="app-container">
 
-    <!-- =========================
+
+    <!-- =====================================================
          SIDEBAR
-         ========================= -->
+    ====================================================== -->
 
     <aside class="sidebar">
 
@@ -122,18 +1017,20 @@
     </aside>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          MAIN
-         ========================= -->
+    ====================================================== -->
 
-    <main class="main-content">
+    <main class="main-content add-fish-page">
 
-        <header class="header">
+
+        <header class="add-fish-header">
 
             <div>
 
-                <div class="eyebrow">
-                    Inventory Management
+                <div class="add-fish-kicker">
+                    Inventory / Create Record
                 </div>
 
                 <h1>
@@ -141,37 +1038,77 @@
                 </h1>
 
                 <p>
-                    Tambahkan jenis ikan baru ke
-                    persediaan Sumber Aquarium.
+                    Buat record ikan baru ke database
+                    Sumber Aquarium.
                 </p>
 
+            </div>
+
+
+            <div class="database-state">
+                DATABASE READY
             </div>
 
         </header>
 
 
-        <div class="form-layout">
 
-            <!-- =========================
+        <div class="add-fish-layout">
+
+
+            <!-- =================================================
                  FORM
-                 ========================= -->
+            ================================================== -->
 
-            <section class="form-card">
+            <section class="add-fish-card">
 
-                <form id="addFishForm">
+                <div class="card-terminal">
 
-                    <div class="form-group">
+                    <div class="card-terminal-left">
 
-                        <label for="nama">
-                            Nama Ikan
-                        </label>
+                        <span class="terminal-dot"></span>
+
+                        <span>
+                            /api/ikan
+                        </span>
+
+                    </div>
+
+                    <span class="card-terminal-right">
+                        POST
+                    </span>
+
+                </div>
+
+
+                <form
+                    id="addFishForm"
+                    class="add-fish-form"
+                >
+
+
+                    <!-- NAMA -->
+
+                    <div class="field">
+
+                        <div class="field-label">
+
+                            <label for="nama">
+                                Nama Ikan
+                            </label>
+
+                            <span>
+                                VARCHAR(100)
+                            </span>
+
+                        </div>
 
                         <input
                             id="nama"
                             name="nama"
                             type="text"
                             maxlength="100"
-                            placeholder="Contoh: Koi Kohaku"
+                            placeholder="Koi Kohaku"
                             autocomplete="off"
                             required
                         >
@@ -179,11 +1116,22 @@
                     </div>
 
 
-                    <div class="form-group">
 
-                        <label for="kategori">
-                            Kategori
-                        </label>
+                    <!-- KATEGORI -->
+
+                    <div class="field">
+
+                        <div class="field-label">
+
+                            <label for="kategori">
+                                Kategori
+                            </label>
+
+                            <span>
+                                ENUM
+                            </span>
+
+                        </div>
 
                         <select
                             id="kategori"
@@ -244,13 +1192,25 @@
                     </div>
 
 
-                    <div class="form-grid">
 
-                        <div class="form-group">
+                    <!-- STOCK + PRICE -->
 
-                            <label for="jumlah">
-                                Stok Awal
-                            </label>
+                    <div class="field-grid">
+
+
+                        <div class="field">
+
+                            <div class="field-label">
+
+                                <label for="jumlah">
+                                    Stok Awal
+                                </label>
+
+                                <span>
+                                    INTEGER
+                                </span>
+
+                            </div>
 
                             <input
                                 id="jumlah"
@@ -266,11 +1226,19 @@
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="field">
 
-                            <label for="harga">
-                                Harga Satuan
-                            </label>
+                            <div class="field-label">
+
+                                <label for="harga">
+                                    Harga Satuan
+                                </label>
+
+                                <span>
+                                    NUMERIC
+                                </span>
+
+                            </div>
 
                             <input
                                 id="harga"
@@ -285,29 +1253,27 @@
 
                         </div>
 
+
                     </div>
 
 
-                    <div
-                        style="
-                            display:flex;
-                            flex-wrap:wrap;
-                            gap:8px;
-                            margin-top:4px;
-                        "
-                    >
+
+                    <!-- ACTION -->
+
+                    <div class="form-actions">
+
 
                         <button
-                            class="btn btn-submit"
+                            class="add-btn add-btn-primary"
                             id="submitBtn"
                             type="submit"
                         >
-                            ＋ Simpan ke Database
+                            ＋ Simpan Record
                         </button>
 
 
                         <button
-                            class="btn btn-secondary"
+                            class="add-btn add-btn-secondary"
                             id="resetBtn"
                             type="button"
                         >
@@ -316,141 +1282,167 @@
 
 
                         <a
-                            class="btn btn-secondary"
+                            class="add-btn add-btn-secondary"
                             href="../stok-ikan/stokikan.html"
                         >
-                            ← Kembali ke Stok
+                            ← Stok Ikan
                         </a>
 
+
                     </div>
+
 
                 </form>
 
             </section>
 
 
-            <!-- =========================
-                 INFO
-                 ========================= -->
 
-            <aside class="form-card">
+            <!-- =================================================
+                 RECORD PANEL
+            ================================================== -->
 
-                <div class="eyebrow">
-                    Data validation
-                </div>
-
-                <h2>
-                    Sebelum menyimpan
-                </h2>
-
-                <p class="muted">
-                    Data akan divalidasi oleh browser
-                    dan divalidasi kembali oleh Flask
-                    sebelum masuk PostgreSQL.
-                </p>
+            <aside class="record-card">
 
 
-                <div class="feed">
+                <div class="record-header">
 
-                    <div class="feed-item">
+                    <strong>
+                        DATA RECORD
+                    </strong>
 
-                        <div class="feed-icon">
-                            ✓
-                        </div>
-
-                        <div>
-
-                            <b>
-                                Nama ikan
-                            </b>
-
-                            <span>
-                                Wajib diisi dan maksimal
-                                100 karakter.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feed-item">
-
-                        <div class="feed-icon">
-                            ✓
-                        </div>
-
-                        <div>
-
-                            <b>
-                                Kategori
-                            </b>
-
-                            <span>
-                                Pilih kategori yang sesuai
-                                dengan jenis ikan.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feed-item">
-
-                        <div class="feed-icon">
-                            ✓
-                        </div>
-
-                        <div>
-
-                            <b>
-                                Stok
-                            </b>
-
-                            <span>
-                                Harus berupa bilangan bulat
-                                dan tidak boleh negatif.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feed-item">
-
-                        <div class="feed-icon">
-                            Rp
-                        </div>
-
-                        <div>
-
-                            <b>
-                                Harga
-                            </b>
-
-                            <span>
-                                Nilai tidak boleh negatif
-                                dan mendukung angka desimal.
-                            </span>
-
-                        </div>
-
-                    </div>
+                    <span>
+                        LIVE
+                    </span>
 
                 </div>
+
+
+                <div class="record-preview">
+
+
+                    <div class="record-row">
+
+                        <span>
+                            TABLE
+                        </span>
+
+                        <strong>
+                            products
+                        </strong>
+
+                    </div>
+
+
+                    <div class="record-row">
+
+                        <span>
+                            METHOD
+                        </span>
+
+                        <strong>
+                            POST /api/ikan
+                        </strong>
+
+                    </div>
+
+
+                    <div class="record-row">
+
+                        <span>
+                            DATABASE
+                        </span>
+
+                        <strong>
+                            PostgreSQL
+                        </strong>
+
+                    </div>
+
+
+                    <div class="record-row">
+
+                        <span>
+                            STATUS
+                        </span>
+
+                        <strong id="recordStatus">
+                            READY
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="record-state">
+
+                    <div class="record-state-top">
+
+                        <strong>
+                            CONNECTION
+                        </strong>
+
+                        <span>
+                            ACTIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="record-state-line"></div>
+
+                </div>
+
+
+                <div class="record-meta">
+
+
+                    <div class="record-meta-item">
+
+                        <small>
+                            endpoint
+                        </small>
+
+                        <strong>
+                            /api/ikan
+                        </strong>
+
+                    </div>
+
+
+                    <div class="record-meta-item">
+
+                        <small>
+                            operation
+                        </small>
+
+                        <strong>
+                            INSERT
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
 
             </aside>
 
+
         </div>
+
 
     </main>
 
 </div>
 
 
-<div id="toast" class="toast"></div>
+<div
+    id="toast"
+    class="toast"
+></div>
 
 
 <script src="../../js/auth.js"></script>
@@ -458,13 +1450,14 @@
 
 <script>
 
-const $ = id =>
-    document.getElementById(id);
+const $ =
+    id =>
+        document.getElementById(id);
 
 
-// =========================
-// FORM
-// =========================
+/* =========================================================
+   FORM
+========================================================= */
 
 $("addFishForm")
     .addEventListener(
@@ -507,9 +1500,9 @@ $("addFishForm")
             };
 
 
-            // =========================
-            // CLIENT VALIDATION
-            // =========================
+            /* =================================================
+               VALIDATION
+            ================================================= */
 
             if (
                 !payload.nama ||
@@ -534,9 +1527,9 @@ $("addFishForm")
             }
 
 
-            // =========================
-            // SUBMIT STATE
-            // =========================
+            /* =================================================
+               SUBMIT
+            ================================================= */
 
             button.disabled = true;
 
@@ -544,11 +1537,19 @@ $("addFishForm")
                 "Menyimpan...";
 
 
+            const recordStatus =
+                $("recordStatus");
+
+            recordStatus.textContent =
+                "INSERTING";
+
+
             try {
 
                 await apiJson(
                     "/api/ikan",
                     {
+
                         method: "POST",
 
                         headers: {
@@ -560,6 +1561,7 @@ $("addFishForm")
                             JSON.stringify(
                                 payload
                             )
+
                     }
                 );
 
@@ -568,6 +1570,10 @@ $("addFishForm")
                     `${payload.nama} berhasil ditambahkan.`,
                     "success"
                 );
+
+
+                recordStatus.textContent =
+                    "CREATED";
 
 
                 $("addFishForm")
@@ -582,17 +1588,6 @@ $("addFishForm")
                         }
                     )}`;
 
-
-                /*
-                 * Redirect ke halaman stok.
-                 *
-                 * Sebelumnya ini memang sudah diarahkan
-                 * ke stokikan.html, tetapi karena file stok
-                 * berisi form tambah yang sama, terjadi loop.
-                 *
-                 * Setelah stokikan.html diperbaiki, redirect
-                 * ini sekarang benar.
-                 */
 
                 setTimeout(
                     () => {
@@ -610,6 +1605,10 @@ $("addFishForm")
                 console.error(error);
 
 
+                recordStatus.textContent =
+                    "ERROR";
+
+
                 showToast(
                     error.message,
                     "error"
@@ -621,7 +1620,7 @@ $("addFishForm")
                 button.disabled = false;
 
                 button.textContent =
-                    "＋ Simpan ke Database";
+                    "＋ Simpan Record";
 
             }
 
@@ -629,9 +1628,9 @@ $("addFishForm")
     );
 
 
-// =========================
-// RESET
-// =========================
+/* =========================================================
+   RESET
+========================================================= */
 
 $("resetBtn")
     .addEventListener(
@@ -640,6 +1639,11 @@ $("resetBtn")
 
             $("addFishForm")
                 .reset();
+
+
+            $("recordStatus")
+                .textContent =
+                    "READY";
 
 
             $("nama")
@@ -655,9 +1659,9 @@ $("resetBtn")
     );
 
 
-// =========================
-// INIT
-// =========================
+/* =========================================================
+   INIT
+========================================================= */
 
 (async () => {
 
@@ -674,6 +1678,6 @@ $("resetBtn")
 
 </script>
 
+
 </body>
 </html>
-

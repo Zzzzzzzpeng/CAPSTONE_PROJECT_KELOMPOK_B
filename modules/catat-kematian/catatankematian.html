@@ -2,20 +2,223 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Catat Kematian — Sumber Aquarium</title>
 
-    <link rel="stylesheet" href="../../css/style.css">
+    <link
+        rel="stylesheet"
+        href="../../css/style.css"
+    >
+
+    <style>
+        .death-page {
+            min-width: 0;
+        }
+
+        .death-header {
+            margin-bottom: 22px;
+        }
+
+        .death-header h1 {
+            margin: 5px 0 7px;
+            color: #fff;
+            font-size: clamp(28px, 4vw, 42px);
+            line-height: 1;
+            letter-spacing: -.055em;
+        }
+
+        .death-header p {
+            max-width: 720px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .death-layout {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(280px, .65fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .death-card {
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #0b0b0b,
+                    #050505
+                );
+            box-shadow:
+                0 18px 50px rgb(0 0 0 / 38%);
+        }
+
+        .death-card h2 {
+            margin: 5px 0 21px;
+            color: #fff;
+            font-size: 21px;
+            letter-spacing: -.035em;
+        }
+
+        .death-form {
+            display: grid;
+            gap: 17px;
+        }
+
+        .death-form .form-group {
+            margin: 0;
+        }
+
+        .death-form label {
+            display: block;
+            margin-bottom: 7px;
+            color: #e7ebea;
+            font-size: 9px;
+            font-weight: 850;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .death-form textarea {
+            min-height: 145px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .death-action {
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .death-status {
+            display: grid;
+            gap: 11px;
+        }
+
+        .death-stock-card {
+            padding: 20px;
+            border: 1px solid rgb(255 104 104 / 15%);
+            border-radius: 15px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgb(255 104 104 / 7%),
+                    #080808
+                );
+        }
+
+        .death-stock-label {
+            color: var(--muted);
+            font-size: 9px;
+            font-weight: 850;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+        }
+
+        #stockPreview {
+            display: block;
+            margin-top: 9px;
+            color: #fff;
+            font-family:
+                "Space Grotesk",
+                system-ui,
+                sans-serif;
+            font-size: 28px;
+            font-weight: 750;
+            letter-spacing: -.04em;
+        }
+
+        .death-data {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .death-data-card {
+            padding: 14px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: #080808;
+        }
+
+        .death-data-card span {
+            display: block;
+            color: var(--muted);
+            font-size: 8px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .death-data-card strong {
+            display: block;
+            margin-top: 6px;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        .death-record {
+            padding: 15px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: #080808;
+        }
+
+        .death-record span {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .death-record strong {
+            display: block;
+            margin-top: 5px;
+            color: #fff;
+            font-size: 11px;
+        }
+
+        @media (max-width: 850px) {
+            .death-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .death-card {
+                padding: 18px;
+            }
+
+            .death-data {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .death-card,
+            .death-stock-card,
+            .death-data-card,
+            .death-record {
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="app-container">
+<div class="app-container death-page">
 
     <aside class="sidebar">
 
         <div class="brand">
+
             <img
                 src="../../assets/images/logo.png"
                 alt="Sumber Aquarium"
@@ -25,10 +228,14 @@
                 <h2>SUMBER AQUARIUM</h2>
                 <p>PGK MONITORING</p>
             </div>
+
         </div>
 
 
-        <nav class="nav-links">
+        <nav
+            class="nav-links"
+            aria-label="Navigasi utama"
+        >
 
             <a href="../../dashboard.html">
                 📊 Dashboard
@@ -53,6 +260,7 @@
             <a
                 href="catatankematian.html"
                 class="active"
+                aria-current="page"
             >
                 ⚠️ Catat Kematian
             </a>
@@ -68,6 +276,7 @@
 
             <button
                 class="logout-btn"
+                type="button"
                 onclick="logout()"
             >
                 ↪ Logout
@@ -80,33 +289,40 @@
 
     <main class="main-content">
 
-        <header class="header">
+        <header class="death-header">
 
-            <div>
-
-                <div class="eyebrow">
-                    Mortality Record
-                </div>
-
-                <h1>
-                    Catat Kematian
-                </h1>
-
-                <p>
-                    Catat mortalitas ikan dan keterangan
-                    kondisi untuk menjaga konsistensi stok.
-                </p>
-
+            <div class="eyebrow">
+                MORTALITY
             </div>
+
+            <h1>
+                Catat Kematian
+            </h1>
+
+            <p>
+                Simpan jumlah ikan yang mati beserta
+                keterangan kondisi ke dalam riwayat.
+            </p>
 
         </header>
 
 
-        <div class="form-layout">
+        <div class="death-layout">
 
-            <section class="form-card">
+            <section class="death-card">
 
-                <form id="deathForm">
+                <div class="eyebrow">
+                    DATA KEMATIAN
+                </div>
+
+                <h2>
+                    Catatan Baru
+                </h2>
+
+                <form
+                    id="deathForm"
+                    class="death-form"
+                >
 
                     <div class="form-group">
 
@@ -137,7 +353,8 @@
                             type="number"
                             min="1"
                             step="1"
-                            placeholder="Contoh: 2"
+                            placeholder="Masukkan jumlah"
+                            inputmode="numeric"
                             required
                         >
 
@@ -153,7 +370,7 @@
                         <textarea
                             id="keterangan"
                             maxlength="1000"
-                            placeholder="Contoh: kondisi air, gejala, atau penyebab yang diketahui."
+                            placeholder="Tuliskan kondisi atau penyebab yang diketahui."
                             required
                         ></textarea>
 
@@ -162,7 +379,7 @@
 
                     <button
                         id="submitBtn"
-                        class="btn btn-danger"
+                        class="btn btn-danger death-action"
                         type="submit"
                     >
                         Catat Mortalitas
@@ -173,31 +390,73 @@
             </section>
 
 
-            <aside class="form-card">
+            <aside class="death-card">
 
                 <div class="eyebrow">
-                    Inventory impact
+                    STATUS STOK
                 </div>
 
                 <h2>
-                    Dampak pencatatan
+                    Data Terpilih
                 </h2>
 
-                <p class="muted">
-                    Setelah berhasil, jumlah stok ikan
-                    akan dikurangi dan histori mortalitas
-                    akan dibuat.
-                </p>
 
-                <div class="mini-card">
+                <div class="death-status">
 
-                    <span>
-                        Stok tersedia
-                    </span>
+                    <div class="death-stock-card">
 
-                    <strong id="stockPreview">
-                        —
-                    </strong>
+                        <div class="death-stock-label">
+                            Stok tersedia
+                        </div>
+
+                        <strong id="stockPreview">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="death-data">
+
+                        <div class="death-data-card">
+
+                            <span>
+                                Modul
+                            </span>
+
+                            <strong>
+                                Mortalitas
+                            </strong>
+
+                        </div>
+
+
+                        <div class="death-data-card">
+
+                            <span>
+                                Database
+                            </span>
+
+                            <strong>
+                                PostgreSQL
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="death-record">
+
+                        <span>
+                            Penyimpanan
+                        </span>
+
+                        <strong>
+                            Riwayat kematian
+                        </strong>
+
+                    </div>
 
                 </div>
 
@@ -210,7 +469,10 @@
 </div>
 
 
-<div id="toast" class="toast"></div>
+<div
+    id="toast"
+    class="toast"
+></div>
 
 
 <script src="../../js/auth.js"></script>
@@ -219,12 +481,10 @@
 
 let fish = [];
 
-
 const select =
     document.getElementById(
         "fishSelect"
     );
-
 
 function updateStockPreview() {
 
@@ -245,14 +505,12 @@ function updateStockPreview() {
             : "—";
 }
 
-
 async function loadFish() {
 
     fish =
         await apiJson(
             "/api/ikan"
         );
-
 
     select.innerHTML =
         `<option value="">
@@ -271,12 +529,10 @@ async function loadFish() {
             .join("");
 }
 
-
 select.addEventListener(
     "change",
     updateStockPreview
 );
-
 
 document
     .getElementById("deathForm")
@@ -285,7 +541,6 @@ document
         async event => {
 
             event.preventDefault();
-
 
             const ikan_id =
                 Number(select.value);
@@ -302,13 +557,11 @@ document
                     "keterangan"
                 ).value.trim();
 
-
             const item =
                 fish.find(
                     fish =>
                         Number(fish.id) === ikan_id
                 );
-
 
             if (!item) {
 
@@ -319,7 +572,6 @@ document
 
                 return;
             }
-
 
             if (
                 !Number.isInteger(jumlah) ||
@@ -334,7 +586,6 @@ document
                 return;
             }
 
-
             if (
                 jumlah >
                 Number(item.jumlah)
@@ -348,7 +599,6 @@ document
                 return;
             }
 
-
             if (!keterangan) {
 
                 showToast(
@@ -359,18 +609,15 @@ document
                 return;
             }
 
-
             const button =
                 document.getElementById(
                     "submitBtn"
                 );
 
-
             button.disabled = true;
 
             button.textContent =
                 "Mencatat...";
-
 
             try {
 
@@ -393,12 +640,10 @@ document
                     }
                 );
 
-
                 showToast(
                     "Mortalitas berhasil dicatat.",
                     "success"
                 );
-
 
                 setTimeout(
                     () => {
@@ -423,7 +668,6 @@ document
 
         }
     );
-
 
 (async () => {
 
