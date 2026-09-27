@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Tambah Ikan — Sumber Aquarium</title>
 
-    <link rel="stylesheet" href="../../css/style.css">
+    <link
+        rel="stylesheet"
+        href="../../css/style.css"
+    >
+
 </head>
+
 
 <body>
 
 <div class="app-container">
 
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+
     <aside class="sidebar">
 
         <div class="brand">
+
             <img
                 src="../../assets/images/logo.png"
                 alt="Sumber Aquarium"
             >
 
             <div>
-                <h2>SUMBER AQUARIUM</h2>
-                <p>PGK MONITORING</p>
+
+                <h2>
+                    SUMBER AQUARIUM
+                </h2>
+
+                <p>
+                    PGK MONITORING
+                </p>
+
             </div>
+
         </div>
 
 
-        <nav class="nav-links">
+        <nav
+            class="nav-links"
+            aria-label="Navigasi utama"
+        >
 
             <a href="../../dashboard.html">
                 📊 Dashboard
@@ -41,6 +67,7 @@
             <a
                 href="tambahikan.html"
                 class="active"
+                aria-current="page"
             >
                 ＋ Tambah Ikan
             </a>
@@ -63,19 +90,41 @@
 
         </nav>
 
+
         <div class="side-bottom">
+
+            <div class="system-pill">
+
+                <strong>
+                    <span class="dot"></span>
+                    Sistem aktif
+                </strong>
+
+                <br>
+
+                <small id="lastSync">
+                    Siap menerima data baru
+                </small>
+
+            </div>
+
 
             <button
                 class="logout-btn"
+                type="button"
                 onclick="logout()"
             >
-                ↪ Logout
+                ↪ Keluar
             </button>
 
         </div>
 
     </aside>
 
+
+    <!-- =========================
+         MAIN
+         ========================= -->
 
     <main class="main-content">
 
@@ -92,8 +141,8 @@
                 </h1>
 
                 <p>
-                    Tambahkan jenis ikan baru ke persediaan
-                    Sumber Aquarium.
+                    Tambahkan jenis ikan baru ke
+                    persediaan Sumber Aquarium.
                 </p>
 
             </div>
@@ -102,6 +151,10 @@
 
 
         <div class="form-layout">
+
+            <!-- =========================
+                 FORM
+                 ========================= -->
 
             <section class="form-card">
 
@@ -115,9 +168,11 @@
 
                         <input
                             id="nama"
+                            name="nama"
                             type="text"
                             maxlength="100"
                             placeholder="Contoh: Koi Kohaku"
+                            autocomplete="off"
                             required
                         >
 
@@ -132,6 +187,7 @@
 
                         <select
                             id="kategori"
+                            name="kategori"
                             required
                         >
 
@@ -198,9 +254,11 @@
 
                             <input
                                 id="jumlah"
+                                name="jumlah"
                                 type="number"
                                 min="0"
                                 step="1"
+                                inputmode="numeric"
                                 placeholder="0"
                                 required
                             >
@@ -216,9 +274,11 @@
 
                             <input
                                 id="harga"
+                                name="harga"
                                 type="number"
                                 min="0"
-                                step="1"
+                                step="0.01"
+                                inputmode="decimal"
                                 placeholder="0"
                                 required
                             >
@@ -228,18 +288,50 @@
                     </div>
 
 
-                    <button
-                        class="btn btn-submit"
-                        id="submitBtn"
-                        type="submit"
+                    <div
+                        style="
+                            display:flex;
+                            flex-wrap:wrap;
+                            gap:8px;
+                            margin-top:4px;
+                        "
                     >
-                        Simpan ke Database
-                    </button>
+
+                        <button
+                            class="btn btn-submit"
+                            id="submitBtn"
+                            type="submit"
+                        >
+                            ＋ Simpan ke Database
+                        </button>
+
+
+                        <button
+                            class="btn btn-secondary"
+                            id="resetBtn"
+                            type="button"
+                        >
+                            ↺ Reset
+                        </button>
+
+
+                        <a
+                            class="btn btn-secondary"
+                            href="../stok-ikan/stokikan.html"
+                        >
+                            ← Kembali ke Stok
+                        </a>
+
+                    </div>
 
                 </form>
 
             </section>
 
+
+            <!-- =========================
+                 INFO
+                 ========================= -->
 
             <aside class="form-card">
 
@@ -252,43 +344,99 @@
                 </h2>
 
                 <p class="muted">
-                    Data akan divalidasi kembali oleh Flask
+                    Data akan divalidasi oleh browser
+                    dan divalidasi kembali oleh Flask
                     sebelum masuk PostgreSQL.
                 </p>
+
 
                 <div class="feed">
 
                     <div class="feed-item">
-                        <div class="feed-icon">✓</div>
+
+                        <div class="feed-icon">
+                            ✓
+                        </div>
 
                         <div>
-                            <b>Nama</b>
+
+                            <b>
+                                Nama ikan
+                            </b>
+
                             <span>
-                                Maksimal 100 karakter.
+                                Wajib diisi dan maksimal
+                                100 karakter.
                             </span>
+
                         </div>
+
                     </div>
 
+
                     <div class="feed-item">
-                        <div class="feed-icon">✓</div>
+
+                        <div class="feed-icon">
+                            ✓
+                        </div>
 
                         <div>
-                            <b>Stok</b>
+
+                            <b>
+                                Kategori
+                            </b>
+
                             <span>
-                                Tidak boleh negatif.
+                                Pilih kategori yang sesuai
+                                dengan jenis ikan.
                             </span>
+
                         </div>
+
                     </div>
 
+
                     <div class="feed-item">
-                        <div class="feed-icon">✓</div>
+
+                        <div class="feed-icon">
+                            ✓
+                        </div>
 
                         <div>
-                            <b>Harga</b>
+
+                            <b>
+                                Stok
+                            </b>
+
                             <span>
-                                Maksimal dua angka desimal.
+                                Harus berupa bilangan bulat
+                                dan tidak boleh negatif.
                             </span>
+
                         </div>
+
+                    </div>
+
+
+                    <div class="feed-item">
+
+                        <div class="feed-icon">
+                            Rp
+                        </div>
+
+                        <div>
+
+                            <b>
+                                Harga
+                            </b>
+
+                            <span>
+                                Nilai tidak boleh negatif
+                                dan mendukung angka desimal.
+                            </span>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -307,27 +455,33 @@
 
 <script src="../../js/auth.js"></script>
 
+
 <script>
 
-document
-    .getElementById("addFishForm")
+const $ = id =>
+    document.getElementById(id);
+
+
+// =========================
+// FORM
+// =========================
+
+$("addFishForm")
     .addEventListener(
         "submit",
         async event => {
 
             event.preventDefault();
 
+
             const button =
-                document.getElementById(
-                    "submitBtn"
-                );
+                $("submitBtn");
 
 
             const payload = {
 
                 nama:
-                    document
-                        .getElementById("nama")
+                    $("nama")
                         .value
                         .trim(),
 
@@ -335,32 +489,39 @@ document
                     "/assets/images/logo.png",
 
                 kategori:
-                    document
-                        .getElementById("kategori")
+                    $("kategori")
                         .value,
 
                 jumlah:
                     Number(
-                        document
-                            .getElementById("jumlah")
+                        $("jumlah")
                             .value
                     ),
 
                 harga:
                     Number(
-                        document
-                            .getElementById("harga")
+                        $("harga")
                             .value
                     )
+
             };
 
 
+            // =========================
+            // CLIENT VALIDATION
+            // =========================
+
             if (
                 !payload.nama ||
+                payload.nama.length > 100 ||
                 !payload.kategori ||
-                !Number.isInteger(payload.jumlah) ||
+                !Number.isInteger(
+                    payload.jumlah
+                ) ||
                 payload.jumlah < 0 ||
-                !Number.isFinite(payload.harga) ||
+                !Number.isFinite(
+                    payload.harga
+                ) ||
                 payload.harga < 0
             ) {
 
@@ -373,7 +534,12 @@ document
             }
 
 
+            // =========================
+            // SUBMIT STATE
+            // =========================
+
             button.disabled = true;
+
             button.textContent =
                 "Menyimpan...";
 
@@ -391,7 +557,9 @@ document
                         },
 
                         body:
-                            JSON.stringify(payload)
+                            JSON.stringify(
+                                payload
+                            )
                     }
                 );
 
@@ -402,31 +570,110 @@ document
                 );
 
 
+                $("addFishForm")
+                    .reset();
+
+
+                $("lastSync").textContent =
+                    `Data tersimpan ${new Date().toLocaleTimeString(
+                        "id-ID",
+                        {
+                            hour12: false
+                        }
+                    )}`;
+
+
+                /*
+                 * Redirect ke halaman stok.
+                 *
+                 * Sebelumnya ini memang sudah diarahkan
+                 * ke stokikan.html, tetapi karena file stok
+                 * berisi form tambah yang sama, terjadi loop.
+                 *
+                 * Setelah stokikan.html diperbaiki, redirect
+                 * ini sekarang benar.
+                 */
+
                 setTimeout(
                     () => {
+
                         window.location.href =
                             "../stok-ikan/stokikan.html";
+
                     },
-                    900
+                    800
                 );
 
+
             } catch (error) {
+
+                console.error(error);
+
 
                 showToast(
                     error.message,
                     "error"
                 );
 
+
+            } finally {
+
                 button.disabled = false;
 
                 button.textContent =
-                    "Simpan ke Database";
+                    "＋ Simpan ke Database";
+
             }
 
         }
     );
 
+
+// =========================
+// RESET
+// =========================
+
+$("resetBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            $("addFishForm")
+                .reset();
+
+
+            $("nama")
+                .focus();
+
+
+            showToast(
+                "Form telah dikosongkan.",
+                "success"
+            );
+
+        }
+    );
+
+
+// =========================
+// INIT
+// =========================
+
+(async () => {
+
+    const auth =
+        await window.authReady;
+
+
+    if (!auth) return;
+
+
+    $("nama").focus();
+
+})();
+
 </script>
 
 </body>
 </html>
+

@@ -2,46 +2,430 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Tambah Ikan — Sumber Aquarium</title>
+    <title>Stok Ikan — Sumber Aquarium</title>
 
-    <link rel="stylesheet" href="../../css/style.css">
+    <link
+        rel="stylesheet"
+        href="../../css/style.css"
+    >
+
+    <style>
+        /* =========================
+           STOCK PAGE
+           ========================= */
+
+        .stock-summary {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 11px;
+
+            margin-bottom: 18px;
+        }
+
+        .stock-summary-card {
+            padding: 15px 16px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 15px;
+
+            background:
+                var(--surface);
+
+            box-shadow:
+                var(--shadow);
+        }
+
+        .stock-summary-label {
+            color: var(--muted);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+
+        .stock-summary-value {
+            margin-top: 6px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size: 24px;
+            font-weight: 700;
+
+            letter-spacing: -.04em;
+        }
+
+        .stock-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 12px;
+
+            margin-bottom: 16px;
+        }
+
+        .stock-toolbar-left {
+            display: flex;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            min-width: 0;
+        }
+
+        .stock-toolbar-right {
+            display: flex;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+        .filter-select {
+            min-width: 155px;
+            width: auto;
+        }
+
+        .stock-photo {
+            width: 42px;
+            height: 42px;
+
+            display: block;
+
+            border-radius: 10px;
+
+            object-fit: cover;
+
+            background:
+                var(--surface-soft);
+
+            border:
+                1px solid var(--line);
+        }
+
+        .fish-name {
+            font-weight: 800;
+        }
+
+        .fish-meta {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 8px;
+        }
+
+        .stock-number {
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-weight: 700;
+        }
+
+        .row-actions {
+            display: flex;
+            align-items: center;
+
+            gap: 6px;
+
+            white-space: nowrap;
+        }
+
+        .btn-edit {
+            min-height: 31px;
+
+            padding: 5px 9px;
+
+            border:
+                1px solid #cfe0f5;
+
+            border-radius: 8px;
+
+            color: var(--blue);
+
+            background:
+                var(--blue-soft);
+
+            font-size: 9px;
+            font-weight: 850;
+        }
+
+        .btn-edit:hover {
+            color: white;
+
+            background:
+                var(--blue);
+
+            border-color:
+                var(--blue);
+        }
+
+        .stock-loading {
+            padding: 35px !important;
+
+            color: var(--muted) !important;
+
+            text-align: center !important;
+        }
+
+        /* =========================
+           MODAL
+           ========================= */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 1000;
+
+            display: grid;
+            place-items: center;
+
+            padding: 20px;
+
+            background:
+                rgb(8 30 27 / 48%);
+
+            backdrop-filter:
+                blur(5px);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                opacity .2s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            width: min(100%, 560px);
+
+            max-height:
+                min(720px, calc(100vh - 40px));
+
+            overflow-y: auto;
+
+            padding: 23px;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 20px;
+
+            background:
+                var(--surface);
+
+            box-shadow:
+                0 30px 80px
+                rgb(10 40 35 / 20%);
+
+            transform:
+                translateY(12px)
+                scale(.98);
+
+            transition:
+                transform .2s var(--ease);
+        }
+
+        .modal.show .modal-card {
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+        .modal-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .modal-head h2 {
+            margin: 0;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size: 21px;
+
+            letter-spacing: -.035em;
+        }
+
+        .modal-head p {
+            margin: 5px 0 0;
+
+            color: var(--muted);
+
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .modal-close {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            flex: 0 0 auto;
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 10px;
+
+            color: var(--muted);
+
+            background:
+                var(--surface-soft);
+
+            font-size: 17px;
+        }
+
+        .modal-close:hover {
+            color: var(--ink);
+
+            background:
+                var(--teal-soft);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            margin-top: 20px;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        @media (max-width: 850px) {
+            .stock-toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .stock-toolbar-left,
+            .stock-toolbar-right {
+                width: 100%;
+            }
+
+            .search-input {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .stock-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .stock-toolbar-left,
+            .stock-toolbar-right {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .stock-toolbar .btn {
+                width: 100%;
+            }
+
+            .modal-actions {
+                flex-direction: column-reverse;
+            }
+
+            .modal-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="app-container">
 
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+
     <aside class="sidebar">
 
         <div class="brand">
+
             <img
                 src="../../assets/images/logo.png"
                 alt="Sumber Aquarium"
             >
 
             <div>
-                <h2>SUMBER AQUARIUM</h2>
-                <p>PGK MONITORING</p>
+                <h2>
+                    SUMBER AQUARIUM
+                </h2>
+
+                <p>
+                    PGK MONITORING
+                </p>
             </div>
+
         </div>
 
 
-        <nav class="nav-links">
+        <nav
+            class="nav-links"
+            aria-label="Navigasi utama"
+        >
 
             <a href="../../dashboard.html">
                 📊 Dashboard
             </a>
 
-            <a href="../stok-ikan/stokikan.html">
+            <a
+                href="stokikan.html"
+                class="active"
+                aria-current="page"
+            >
                 🐟 Stok Ikan
             </a>
 
-            <a
-                href="tambahikan.html"
-                class="active"
-            >
+            <a href="../tambah-ikan/tambahikan.html">
                 ＋ Tambah Ikan
             </a>
 
@@ -63,19 +447,41 @@
 
         </nav>
 
+
         <div class="side-bottom">
+
+            <div class="system-pill">
+
+                <strong>
+                    <span class="dot"></span>
+                    Sistem aktif
+                </strong>
+
+                <br>
+
+                <small id="lastSync">
+                    Menyiapkan sinkronisasi...
+                </small>
+
+            </div>
+
 
             <button
                 class="logout-btn"
+                type="button"
                 onclick="logout()"
             >
-                ↪ Logout
+                ↪ Keluar
             </button>
 
         </div>
 
     </aside>
 
+
+    <!-- =========================
+         MAIN CONTENT
+         ========================= -->
 
     <main class="main-content">
 
@@ -88,12 +494,13 @@
                 </div>
 
                 <h1>
-                    Tambah Ikan
+                    Stok Ikan
                 </h1>
 
                 <p>
-                    Tambahkan jenis ikan baru ke persediaan
-                    Sumber Aquarium.
+                    Pantau persediaan ikan, kategori,
+                    harga, dan status stok secara langsung
+                    dari database PostgreSQL.
                 </p>
 
             </div>
@@ -101,203 +508,441 @@
         </header>
 
 
-        <div class="form-layout">
+        <!-- =========================
+             SUMMARY
+             ========================= -->
 
-            <section class="form-card">
+        <section class="stock-summary">
 
-                <form id="addFishForm">
+            <article class="stock-summary-card">
 
-                    <div class="form-group">
+                <div class="stock-summary-label">
+                    Jenis ikan
+                </div>
 
-                        <label for="nama">
-                            Nama Ikan
-                        </label>
+                <div
+                    class="stock-summary-value"
+                    id="totalTypes"
+                >
+                    —
+                </div>
 
-                        <input
-                            id="nama"
-                            type="text"
-                            maxlength="100"
-                            placeholder="Contoh: Koi Kohaku"
-                            required
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="kategori">
-                            Kategori
-                        </label>
-
-                        <select
-                            id="kategori"
-                            required
-                        >
-
-                            <option value="">
-                                Pilih kategori
-                            </option>
-
-                            <option value="Predator">
-                                Predator
-                            </option>
-
-                            <option value="Hias Kecil">
-                                Hias Kecil
-                            </option>
-
-                            <option value="Cupang">
-                                Cupang
-                            </option>
-
-                            <option value="Pembersih">
-                                Pembersih
-                            </option>
-
-                            <option value="Molly">
-                                Molly
-                            </option>
-
-                            <option value="Koki">
-                                Koki
-                            </option>
-
-                            <option value="Koi">
-                                Koi
-                            </option>
-
-                            <option value="Channa">
-                                Channa
-                            </option>
-
-                            <option value="Crustacea">
-                                Crustacea
-                            </option>
-
-                            <option value="Hias">
-                                Hias
-                            </option>
-
-                            <option value="Hias Besar">
-                                Hias Besar
-                            </option>
-
-                        </select>
-
-                    </div>
+            </article>
 
 
-                    <div class="form-grid">
+            <article class="stock-summary-card">
 
-                        <div class="form-group">
+                <div class="stock-summary-label">
+                    Total persediaan
+                </div>
 
-                            <label for="jumlah">
-                                Stok Awal
-                            </label>
+                <div
+                    class="stock-summary-value"
+                    id="totalStock"
+                >
+                    —
+                </div>
 
-                            <input
-                                id="jumlah"
-                                type="number"
-                                min="0"
-                                step="1"
-                                placeholder="0"
-                                required
-                            >
-
-                        </div>
+            </article>
 
 
-                        <div class="form-group">
+            <article class="stock-summary-card">
 
-                            <label for="harga">
-                                Harga Satuan
-                            </label>
+                <div class="stock-summary-label">
+                    Stok perhatian
+                </div>
 
-                            <input
-                                id="harga"
-                                type="number"
-                                min="0"
-                                step="1"
-                                placeholder="0"
-                                required
-                            >
+                <div
+                    class="stock-summary-value"
+                    id="lowStock"
+                >
+                    —
+                </div>
 
-                        </div>
+            </article>
 
-                    </div>
+        </section>
 
+
+        <!-- =========================
+             TABLE PANEL
+             ========================= -->
+
+        <section class="panel">
+
+            <div class="panel-head">
+
+                <div>
+
+                    <h2>
+                        🐟 Daftar Persediaan
+                    </h2>
+
+                    <span id="resultInfo">
+                        Memuat data ikan...
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stock-toolbar">
+
+                <div class="stock-toolbar-left">
+
+                    <input
+                        id="searchInput"
+                        class="search-input"
+                        type="search"
+                        placeholder="Cari nama atau kategori ikan..."
+                        autocomplete="off"
+                        aria-label="Cari ikan"
+                    >
+
+
+                    <select
+                        id="categoryFilter"
+                        class="filter-select"
+                        aria-label="Filter kategori"
+                    >
+
+                        <option value="">
+                            Semua kategori
+                        </option>
+
+                        <option value="Predator">
+                            Predator
+                        </option>
+
+                        <option value="Hias Kecil">
+                            Hias Kecil
+                        </option>
+
+                        <option value="Cupang">
+                            Cupang
+                        </option>
+
+                        <option value="Pembersih">
+                            Pembersih
+                        </option>
+
+                        <option value="Molly">
+                            Molly
+                        </option>
+
+                        <option value="Koki">
+                            Koki
+                        </option>
+
+                        <option value="Koi">
+                            Koi
+                        </option>
+
+                        <option value="Channa">
+                            Channa
+                        </option>
+
+                        <option value="Crustacea">
+                            Crustacea
+                        </option>
+
+                        <option value="Hias">
+                            Hias
+                        </option>
+
+                        <option value="Hias Besar">
+                            Hias Besar
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="stock-toolbar-right">
 
                     <button
-                        class="btn btn-submit"
-                        id="submitBtn"
-                        type="submit"
+                        class="btn btn-secondary"
+                        id="refreshBtn"
+                        type="button"
                     >
-                        Simpan ke Database
+                        ↻ Refresh
                     </button>
 
-                </form>
+                    <a
+                        class="btn btn-primary"
+                        href="../tambah-ikan/tambahikan.html"
+                    >
+                        ＋ Tambah Ikan
+                    </a>
 
-            </section>
+                </div>
+
+            </div>
 
 
-            <aside class="form-card">
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Ikan
+                            </th>
+
+                            <th>
+                                Kategori
+                            </th>
+
+                            <th>
+                                Stok
+                            </th>
+
+                            <th>
+                                Harga
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Aksi
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="fishTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="stock-loading"
+                            >
+                                Memuat data persediaan...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================
+     EDIT MODAL
+     ========================= -->
+
+<div
+    class="modal"
+    id="editModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="editModalTitle"
+    >
+
+        <div class="modal-head">
+
+            <div>
 
                 <div class="eyebrow">
-                    Data validation
+                    Inventory Update
                 </div>
 
-                <h2>
-                    Sebelum menyimpan
+                <h2 id="editModalTitle">
+                    Edit Data Ikan
                 </h2>
 
-                <p class="muted">
-                    Data akan divalidasi kembali oleh Flask
-                    sebelum masuk PostgreSQL.
+                <p>
+                    Perubahan akan langsung disimpan
+                    melalui API Flask.
                 </p>
 
-                <div class="feed">
+            </div>
 
-                    <div class="feed-item">
-                        <div class="feed-icon">✓</div>
 
-                        <div>
-                            <b>Nama</b>
-                            <span>
-                                Maksimal 100 karakter.
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="feed-item">
-                        <div class="feed-icon">✓</div>
-
-                        <div>
-                            <b>Stok</b>
-                            <span>
-                                Tidak boleh negatif.
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="feed-item">
-                        <div class="feed-icon">✓</div>
-
-                        <div>
-                            <b>Harga</b>
-                            <span>
-                                Maksimal dua angka desimal.
-                            </span>
-                        </div>
-                    </div>
-
-                </div>
-
-            </aside>
+            <button
+                class="modal-close"
+                id="closeModalBtn"
+                type="button"
+                aria-label="Tutup"
+            >
+                ×
+            </button>
 
         </div>
 
-    </main>
+
+        <form id="editFishForm">
+
+            <input
+                id="editId"
+                type="hidden"
+            >
+
+
+            <div class="form-group">
+
+                <label for="editNama">
+                    Nama Ikan
+                </label>
+
+                <input
+                    id="editNama"
+                    type="text"
+                    maxlength="100"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="editKategori">
+                    Kategori
+                </label>
+
+                <select
+                    id="editKategori"
+                    required
+                >
+
+                    <option value="">
+                        Pilih kategori
+                    </option>
+
+                    <option value="Predator">
+                        Predator
+                    </option>
+
+                    <option value="Hias Kecil">
+                        Hias Kecil
+                    </option>
+
+                    <option value="Cupang">
+                        Cupang
+                    </option>
+
+                    <option value="Pembersih">
+                        Pembersih
+                    </option>
+
+                    <option value="Molly">
+                        Molly
+                    </option>
+
+                    <option value="Koki">
+                        Koki
+                    </option>
+
+                    <option value="Koi">
+                        Koi
+                    </option>
+
+                    <option value="Channa">
+                        Channa
+                    </option>
+
+                    <option value="Crustacea">
+                        Crustacea
+                    </option>
+
+                    <option value="Hias">
+                        Hias
+                    </option>
+
+                    <option value="Hias Besar">
+                        Hias Besar
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="editJumlah">
+                        Jumlah Stok
+                    </label>
+
+                    <input
+                        id="editJumlah"
+                        type="number"
+                        min="0"
+                        step="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="editHarga">
+                        Harga Satuan
+                    </label>
+
+                    <input
+                        id="editHarga"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    class="btn btn-secondary"
+                    id="cancelModalBtn"
+                    type="button"
+                >
+                    Batal
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    id="saveEditBtn"
+                    type="submit"
+                >
+                    Simpan Perubahan
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 
 </div>
 
@@ -309,58 +954,519 @@
 
 <script>
 
-document
-    .getElementById("addFishForm")
+const $ = id =>
+    document.getElementById(id);
+
+
+let fishData = [];
+
+
+// =========================
+// FILTER
+// =========================
+
+function getFilteredFish() {
+
+    const search =
+        $("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
+
+    const category =
+        $("categoryFilter")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    return fishData.filter(fish => {
+
+        const name =
+            String(fish.nama || "")
+                .toLowerCase();
+
+        const fishCategory =
+            String(fish.kategori || "")
+                .toLowerCase();
+
+
+        const matchesSearch =
+            !search ||
+            name.includes(search) ||
+            fishCategory.includes(search);
+
+
+        const matchesCategory =
+            !category ||
+            fishCategory === category;
+
+
+        return (
+            matchesSearch &&
+            matchesCategory
+        );
+
+    });
+
+}
+
+
+// =========================
+// STOCK STATUS
+// =========================
+
+function getStockStatus(quantity) {
+
+    const stock =
+        Number(quantity) || 0;
+
+
+    if (stock === 0) {
+
+        return {
+            label: "Habis",
+            className: "badge badge-danger"
+        };
+
+    }
+
+
+    if (stock <= 10) {
+
+        return {
+            label: "Perhatian",
+            className: "badge badge-warn"
+        };
+
+    }
+
+
+    return {
+        label: "Tersedia",
+        className: "badge"
+    };
+
+}
+
+
+// =========================
+// RENDER
+// =========================
+
+function renderFish() {
+
+    const tbody =
+        $("fishTableBody");
+
+
+    const filtered =
+        getFilteredFish();
+
+
+    $("resultInfo").textContent =
+        `${filtered.length} dari ${fishData.length} data ikan`;
+
+
+    if (!filtered.length) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="empty"
+                >
+                    Tidak ada data ikan yang cocok
+                    dengan pencarian.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    tbody.innerHTML =
+        filtered.map(fish => {
+
+            const stock =
+                Number(fish.jumlah) || 0;
+
+
+            const status =
+                getStockStatus(stock);
+
+
+            const photo =
+                fish.foto ||
+                "/assets/images/logo.png";
+
+
+            return `
+                <tr>
+
+                    <td>
+
+                        <div
+                            style="
+                                display:flex;
+                                align-items:center;
+                                gap:10px;
+                            "
+                        >
+
+                            <img
+                                class="stock-photo"
+                                src="${escapeHTML(photo)}"
+                                alt="${escapeHTML(fish.nama)}"
+                                loading="lazy"
+                                onerror="
+                                    this.src='/assets/images/logo.png'
+                                "
+                            >
+
+                            <div>
+
+                                <strong class="fish-name">
+                                    ${escapeHTML(fish.nama)}
+                                </strong>
+
+                                <span class="fish-meta">
+                                    ID #${escapeHTML(fish.id)}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        <span class="badge badge-blue">
+                            ${escapeHTML(fish.kategori)}
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <span class="stock-number">
+                            ${stock.toLocaleString("id-ID")}
+                        </span>
+
+                        <span class="fish-meta">
+                            ekor
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            formatRupiah(fish.harga)
+                        )}
+                    </td>
+
+
+                    <td>
+                        <span class="${status.className}">
+                            ${status.label}
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="row-actions">
+
+                            <button
+                                class="btn-edit"
+                                type="button"
+                                data-action="edit"
+                                data-id="${escapeHTML(fish.id)}"
+                            >
+                                ✎ Edit
+                            </button>
+
+                            <button
+                                class="btn-delete"
+                                type="button"
+                                data-action="delete"
+                                data-id="${escapeHTML(fish.id)}"
+                            >
+                                Hapus
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            `;
+
+        }).join("");
+
+}
+
+
+// =========================
+// SUMMARY
+// =========================
+
+function updateSummary() {
+
+    const totalTypes =
+        fishData.length;
+
+
+    const totalStock =
+        fishData.reduce(
+            (total, fish) =>
+                total +
+                (Number(fish.jumlah) || 0),
+            0
+        );
+
+
+    const lowStock =
+        fishData.filter(
+            fish =>
+                Number(fish.jumlah) <= 10
+        ).length;
+
+
+    $("totalTypes").textContent =
+        totalTypes.toLocaleString("id-ID");
+
+
+    $("totalStock").textContent =
+        totalStock.toLocaleString("id-ID");
+
+
+    $("lowStock").textContent =
+        lowStock.toLocaleString("id-ID");
+
+}
+
+
+// =========================
+// LOAD DATA
+// =========================
+
+async function loadFish() {
+
+    $("refreshBtn").disabled = true;
+
+    $("refreshBtn").textContent =
+        "Memuat...";
+
+
+    try {
+
+        const data =
+            await apiJson("/api/ikan");
+
+
+        fishData =
+            Array.isArray(data)
+                ? data
+                : [];
+
+
+        updateSummary();
+
+        renderFish();
+
+
+        $("lastSync").textContent =
+            `Sinkronisasi ${new Date().toLocaleTimeString(
+                "id-ID",
+                {
+                    hour12: false
+                }
+            )}`;
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        $("fishTableBody").innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="empty"
+                >
+                    Gagal mengambil data persediaan.
+                    Silakan tekan Refresh.
+                </td>
+            </tr>
+        `;
+
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+    } finally {
+
+        $("refreshBtn").disabled = false;
+
+        $("refreshBtn").textContent =
+            "↻ Refresh";
+
+    }
+
+}
+
+
+// =========================
+// EDIT MODAL
+// =========================
+
+function openEditModal(fish) {
+
+    $("editId").value =
+        fish.id;
+
+    $("editNama").value =
+        fish.nama || "";
+
+    $("editKategori").value =
+        fish.kategori || "";
+
+    $("editJumlah").value =
+        Number(fish.jumlah) || 0;
+
+    $("editHarga").value =
+        Number(fish.harga) || 0;
+
+
+    $("editModal")
+        .classList
+        .add("show");
+
+
+    $("editModal")
+        .setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+    document.body
+        .classList
+        .add("modal-open");
+
+
+    setTimeout(
+        () =>
+            $("editNama").focus(),
+        100
+    );
+
+}
+
+
+function closeEditModal() {
+
+    $("editModal")
+        .classList
+        .remove("show");
+
+
+    $("editModal")
+        .setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+    document.body
+        .classList
+        .remove("modal-open");
+
+}
+
+
+// =========================
+// SAVE EDIT
+// =========================
+
+$("editFishForm")
     .addEventListener(
         "submit",
         async event => {
 
             event.preventDefault();
 
-            const button =
-                document.getElementById(
-                    "submitBtn"
+
+            const id =
+                Number(
+                    $("editId").value
                 );
+
+
+            const fish =
+                fishData.find(
+                    item =>
+                        Number(item.id) === id
+                );
+
+
+            if (!fish) {
+
+                showToast(
+                    "Data ikan tidak ditemukan.",
+                    "error"
+                );
+
+                return;
+            }
 
 
             const payload = {
 
                 nama:
-                    document
-                        .getElementById("nama")
+                    $("editNama")
                         .value
                         .trim(),
 
                 foto:
+                    fish.foto ||
                     "/assets/images/logo.png",
 
                 kategori:
-                    document
-                        .getElementById("kategori")
+                    $("editKategori")
                         .value,
 
                 jumlah:
                     Number(
-                        document
-                            .getElementById("jumlah")
+                        $("editJumlah")
                             .value
                     ),
 
                 harga:
                     Number(
-                        document
-                            .getElementById("harga")
+                        $("editHarga")
                             .value
                     )
+
             };
 
 
             if (
                 !payload.nama ||
                 !payload.kategori ||
-                !Number.isInteger(payload.jumlah) ||
+                !Number.isInteger(
+                    payload.jumlah
+                ) ||
                 payload.jumlah < 0 ||
-                !Number.isFinite(payload.harga) ||
+                !Number.isFinite(
+                    payload.harga
+                ) ||
                 payload.harga < 0
             ) {
 
@@ -373,7 +1479,12 @@ document
             }
 
 
+            const button =
+                $("saveEditBtn");
+
+
             button.disabled = true;
+
             button.textContent =
                 "Menyimpan...";
 
@@ -381,9 +1492,9 @@ document
             try {
 
                 await apiJson(
-                    "/api/ikan",
+                    `/api/ikan/${id}`,
                     {
-                        method: "POST",
+                        method: "PUT",
 
                         headers: {
                             "Content-Type":
@@ -396,19 +1507,16 @@ document
                 );
 
 
+                closeEditModal();
+
+
                 showToast(
-                    `${payload.nama} berhasil ditambahkan.`,
+                    `${payload.nama} berhasil diperbarui.`,
                     "success"
                 );
 
 
-                setTimeout(
-                    () => {
-                        window.location.href =
-                            "../stok-ikan/stokikan.html";
-                    },
-                    900
-                );
+                await loadFish();
 
             } catch (error) {
 
@@ -417,14 +1525,238 @@ document
                     "error"
                 );
 
+            } finally {
+
                 button.disabled = false;
 
                 button.textContent =
-                    "Simpan ke Database";
+                    "Simpan Perubahan";
+
             }
 
         }
     );
+
+
+// =========================
+// DELETE
+// =========================
+
+async function deleteFish(id) {
+
+    const fish =
+        fishData.find(
+            item =>
+                Number(item.id) === Number(id)
+        );
+
+
+    if (!fish) {
+
+        showToast(
+            "Data ikan tidak ditemukan.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const confirmed =
+        window.confirm(
+            `Hapus "${fish.nama}" dari stok?\n\n` +
+            `Data yang sudah memiliki riwayat ` +
+            `penjualan atau kematian tidak dapat dihapus.`
+        );
+
+
+    if (!confirmed) return;
+
+
+    try {
+
+        await apiJson(
+            `/api/ikan/${id}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+
+        showToast(
+            `${fish.nama} berhasil dihapus.`,
+            "success"
+        );
+
+
+        await loadFish();
+
+    } catch (error) {
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+// =========================
+// TABLE ACTIONS
+// =========================
+
+$("fishTableBody")
+    .addEventListener(
+        "click",
+        event => {
+
+            const button =
+                event.target.closest(
+                    "button[data-action]"
+                );
+
+
+            if (!button) return;
+
+
+            const id =
+                Number(
+                    button.dataset.id
+                );
+
+
+            const fish =
+                fishData.find(
+                    item =>
+                        Number(item.id) === id
+                );
+
+
+            if (!fish) return;
+
+
+            if (
+                button.dataset.action ===
+                "edit"
+            ) {
+
+                openEditModal(fish);
+
+                return;
+            }
+
+
+            if (
+                button.dataset.action ===
+                "delete"
+            ) {
+
+                deleteFish(id);
+
+            }
+
+        }
+    );
+
+
+// =========================
+// SEARCH / FILTER
+// =========================
+
+$("searchInput")
+    .addEventListener(
+        "input",
+        renderFish
+    );
+
+
+$("categoryFilter")
+    .addEventListener(
+        "change",
+        renderFish
+    );
+
+
+// =========================
+// BUTTONS
+// =========================
+
+$("refreshBtn")
+    .addEventListener(
+        "click",
+        loadFish
+    );
+
+
+$("closeModalBtn")
+    .addEventListener(
+        "click",
+        closeEditModal
+    );
+
+
+$("cancelModalBtn")
+    .addEventListener(
+        "click",
+        closeEditModal
+    );
+
+
+$("editModal")
+    .addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                $("editModal")
+            ) {
+
+                closeEditModal();
+
+            }
+
+        }
+    );
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape" &&
+            $("editModal")
+                .classList
+                .contains("show")
+        ) {
+
+            closeEditModal();
+
+        }
+
+    }
+);
+
+
+// =========================
+// INIT
+// =========================
+
+(async () => {
+
+    const auth =
+        await window.authReady;
+
+
+    if (!auth) return;
+
+
+    await loadFish();
+
+})();
 
 </script>
 
