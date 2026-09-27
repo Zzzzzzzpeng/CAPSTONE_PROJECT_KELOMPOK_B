@@ -871,7 +871,7 @@ Form untuk menambahkan data ikan baru ke dalam sistem.
 Halaman untuk mencatat transaksi penjualan ikan.
 
 <p align="center">
-  <img src="assets/readme/catat%20penjualan.png" width="80%" alt="Catatan Penjualan">
+  <img src="assets/readme/catatanpenjualan.png" width="80%" alt="Catatan Penjualan">
 </p>
 
 #### 📋 Riwayat Penjualan
