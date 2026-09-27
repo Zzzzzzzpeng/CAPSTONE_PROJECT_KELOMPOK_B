@@ -734,7 +734,6 @@ CAPSTONE_PROJECT_KELOMPOK_B/
 │   │   └── *.jpg
 │   └── readme/
 │       ├── login.png
-│       ├── dasboard.png
 │       └── profile.png
 │
 ├── css/
@@ -841,14 +840,6 @@ Halaman autentikasi untuk pengguna masuk ke dalam sistem.
 
 <p align="center">
   <img src="assets/readme/login.png" width="80%" alt="Login">
-</p>
-
-#### 📊 Dashboard
-
-Halaman utama yang menampilkan ringkasan dan informasi utama sistem.
-
-<p align="center">
-  <img src="assets/readme/dasboard.png" width="80%" alt="Dashboard">
 </p>
 
 #### 📈 Dashboard Monitoring
