@@ -1,1903 +1,966 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Profil Kelompok B — Capstone Project Sumber Aquarium PGK."
-    >
-
-    <title>
-        Kelompok B — Sumber Aquarium PGK
-    </title>
-
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-    >
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profil Kelompok B — Capstone Project Sumber Aquarium PGK.">
+    <title>Kelompok B — Sumber Aquarium PGK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <style>
 
-        :root {
-            --bg: #071312;
-            --surface: #0d1d1b;
-            --surface-2: #112421;
-
-            --line:
-                rgba(255,255,255,.09);
-
-            --text: #f3faf8;
-            --muted: #9aada9;
-
-            --teal: #32d0bd;
-            --teal-soft:
-                rgba(50,208,189,.11);
-
-            --blue: #67a8ff;
-            --orange: #ffb36b;
-
-            --radius: 22px;
-
-            --ease:
-                cubic-bezier(.2,.8,.2,1);
-        }
-
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-            margin: 0;
-
-            background:
-                radial-gradient(
-                    circle at 80% 0%,
-                    rgba(50,208,189,.08),
-                    transparent 30rem
-                ),
-                var(--bg);
-
-            color: var(--text);
-
-            font-family:
-                "Inter",
-                system-ui,
-                sans-serif;
-        }
-
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-
-        .container {
-            width:
-                min(
-                    calc(100% - 36px),
-                    1180px
-                );
-
-            margin-inline: auto;
-        }
-
-
-        /* NAV */
-
-        .topbar {
-            position: sticky;
-            top: 0;
-
-            z-index: 50;
-
-            border-bottom:
-                1px solid var(--line);
-
-            background:
-                rgba(7,19,18,.86);
-
-            backdrop-filter:
-                blur(18px);
-        }
-
-
-        .nav {
-            min-height: 70px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 18px;
-        }
-
-
-        .brand {
-            display: flex;
-            align-items: center;
-
-            gap: 10px;
-        }
-
-
-        .brand img {
-            width: 38px;
-            height: 38px;
-
-            border-radius: 11px;
-
-            object-fit: cover;
-        }
-
-
-        .brand strong {
-            display: block;
-
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 12px;
-        }
-
-
-        .brand small {
-            display: block;
-
-            margin-top: 3px;
-
-            color: var(--muted);
-
-            font-family: monospace;
-
-            font-size: 8px;
-        }
-
-
-        .nav-links {
-            display: flex;
-            gap: 5px;
-        }
-
-
-        .nav-links a {
-            padding:
-                8px 11px;
-
-            border-radius: 9px;
-
-            color: var(--muted);
-
-            font-size: 10px;
-            font-weight: 700;
-
-            transition: .18s var(--ease);
-        }
-
-
-        .nav-links a:hover {
-            color: white;
-
-            background:
-                rgba(255,255,255,.06);
-        }
-
-
-        .repo-btn {
-            display: inline-flex;
-            align-items: center;
-
-            gap: 7px;
-
-            padding:
-                9px 12px;
-
-            border:
-                1px solid var(--line);
-
-            border-radius: 10px;
-
-            background:
-                var(--surface);
-
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-
-        .repo-btn:hover {
-            border-color:
-                rgba(50,208,189,.4);
-
-            color: var(--teal);
-        }
-
-
-        /* HERO */
-
-        .hero {
-            padding:
-                110px 0 95px;
-        }
-
-
-        .hero-grid {
-            display: grid;
-
-            grid-template-columns:
-                minmax(0, 1.35fr)
-                minmax(300px, .65fr);
-
-            gap: 70px;
-
-            align-items: center;
-        }
-
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-
-            gap: 8px;
-
-            color: var(--teal);
-
-            font-family: monospace;
-
-            font-size: 10px;
-            font-weight: 800;
-
-            letter-spacing: .12em;
-        }
-
-
-        .eyebrow::before {
-            content: "";
-
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: var(--teal);
-
-            box-shadow:
-                0 0 0 5px
-                var(--teal-soft);
-        }
-
-
-        h1 {
-            margin:
-                20px 0 0;
-
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size:
-                clamp(50px, 8vw, 90px);
-
-            line-height: .94;
-
-            letter-spacing:
-                -.065em;
-        }
-
-
-        h1 span {
-            color: var(--teal);
-        }
-
-
-        .hero p {
-            max-width: 720px;
-
-            margin:
-                26px 0 0;
-
-            color: var(--muted);
-
-            font-size: 15px;
-
-            line-height: 1.8;
-        }
-
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-
-            gap: 9px;
-
-            margin-top: 30px;
-        }
-
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            min-height: 43px;
-
-            padding:
-                0 15px;
-
-            border-radius: 10px;
-
-            font-size: 10px;
-            font-weight: 800;
-
-            transition: .18s var(--ease);
-        }
-
-
-        .btn:hover {
-            transform:
-                translateY(-2px);
-        }
-
-
-        .btn-primary {
-            color: #04100e;
-
-            background:
-                var(--teal);
-        }
-
-
-        .btn-secondary {
-            border:
-                1px solid var(--line);
-
-            background:
-                var(--surface);
-        }
-
-
-        .hero-card {
-            padding: 23px;
-
-            border:
-                1px solid var(--line);
-
-            border-radius: var(--radius);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    #112421,
-                    #091716
-                );
-        }
-
-
-        .hero-card-label {
-            display: flex;
-            justify-content: space-between;
-
-            padding-bottom: 15px;
-
-            border-bottom:
-                1px solid var(--line);
-
-            color: var(--muted);
-
-            font-family: monospace;
-
-            font-size: 9px;
-        }
-
-
-        .hero-number {
-            margin-top: 25px;
-
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 70px;
-
-            letter-spacing: -.07em;
-        }
-
-
-        .hero-number span {
-            color: var(--teal);
-
-            font-size: 25px;
-        }
-
-
-        .hero-card p {
-            margin:
-                9px 0 0;
-
-            font-size: 12px;
-        }
-
-
-        .hero-list {
-            display: grid;
-
-            margin-top: 25px;
-        }
-
-
-        .hero-row {
-            display: flex;
-            justify-content: space-between;
-
-            padding:
-                10px 0;
-
-            border-top:
-                1px solid var(--line);
-
-            font-size: 10px;
-        }
-
-
-        .hero-row span:first-child {
-            color: var(--muted);
-        }
-
-
-        .hero-row strong {
-            font-weight: 700;
-        }
-
-
-        /* SECTION */
-
-        .section {
-            padding:
-                90px 0;
-        }
-
-
-        .section-head {
-            max-width: 730px;
-
-            margin-bottom: 35px;
-        }
-
-
-        .section-head h2 {
-            margin:
-                14px 0 10px;
-
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size:
-                clamp(32px, 5vw, 54px);
-
-            line-height: 1;
-
-            letter-spacing: -.05em;
-        }
-
-
-        .section-head p {
-            margin: 0;
-
-            color: var(--muted);
-
-            font-size: 13px;
-
-            line-height: 1.8;
-        }
-
-
-        /* MEMBERS */
-
-        .members {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 15px;
-        }
-
-
-        .member {
-            position: relative;
-
-            padding: 23px;
-
-            border:
-                1px solid var(--line);
-
-            border-radius: var(--radius);
-
-            background:
-                var(--surface);
-
-            overflow: hidden;
-
-            transition:
-                transform .2s var(--ease),
-                border-color .2s var(--ease);
-        }
-
-
-        .member:hover {
-            transform:
-                translateY(-4px);
-
-            border-color:
-                rgba(50,208,189,.3);
-        }
-
-
-        .member-top {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-
-            gap: 15px;
-        }
-
-
-        .member-photo {
-            width: 76px;
-            height: 76px;
-
-            overflow: hidden;
-
-            border-radius: 18px;
-
-            border:
-                1px solid
-                rgba(50,208,189,.25);
-
-            background:
-                var(--teal-soft);
-        }
-
-
-        .member-photo img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-        }
-
-
-        .member-tag {
-            padding:
-                5px 8px;
-
-            border:
-                1px solid var(--line);
-
-            border-radius: 7px;
-
-            color: var(--muted);
-
-            font-family: monospace;
-
-            font-size: 8px;
-        }
-
-
-        .member h3 {
-            margin:
-                19px 0 3px;
-
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 20px;
-        }
-
-
-        .role {
-            color: var(--teal);
-
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-
-        .member-description {
-            margin:
-                14px 0 0;
-
-            color: var(--muted);
-
-            font-size: 11px;
-
-            line-height: 1.7;
-        }
-
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-
-            gap: 6px;
-
-            margin-top: 17px;
-        }
-
-
-        .skill {
-            display: inline-flex;
-            align-items: center;
-
-            gap: 5px;
-
-            padding:
-                6px 8px;
-
-            border:
-                1px solid var(--line);
-
-            border-radius: 7px;
-
-            background:
-                rgba(255,255,255,.025);
-
-            color: #c3cfcc;
-
-            font-family: monospace;
-
-            font-size: 8px;
-        }
-
-
-        .skill i {
-            font-size: 13px;
-        }
-
-
-        .member-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 10px;
-
-            margin-top: 20px;
-            padding-top: 15px;
-
-            border-top:
-                1px solid var(--line);
-        }
-
-
-        .nim {
-            color: var(--muted);
-
-            font-family: monospace;
-
-            font-size: 8px;
-        }
-
-
-        .ut-link {
-            color: var(--teal);
-
-            font-size: 9px;
-            font-weight: 800;
-        }
-
-
-        .ut-link:hover {
-            text-decoration: underline;
-        }
-
-
-        /* TECH */
-
-        .tech-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 12px;
-        }
-
-
-        .tech {
-            padding: 19px;
-
-            border:
-                1px solid var(--line);
-
-            border-radius: 17px;
-
-            background:
-                var(--surface);
-
-            transition: .2s var(--ease);
-        }
-
-
-        .tech:hover {
-            transform:
-                translateY(-3px);
-
-            border-color:
-                rgba(255,255,255,.18);
-        }
-
-
-        .tech-icon {
-            width: 42px;
-            height: 42px;
-
-            display: grid;
-            place-items: center;
-
-            margin-bottom: 13px;
-
-            border-radius: 11px;
-
-            background:
-                rgba(255,255,255,.05);
-
-            font-size: 22px;
-        }
-
-
-        .tech h3 {
-            margin: 0;
-
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 14px;
-        }
-
-
-        .tech p {
-            margin:
-                7px 0 0;
-
-            color: var(--muted);
-
-            font-size: 9px;
-
-            line-height: 1.65;
-        }
-
-
-        /* PROJECT */
-
-        .project-grid {
-            display: grid;
-
-            grid-template-columns:
-                1.1fr .9fr;
-
-            gap: 15px;
-        }
-
-
-        .project-card {
-            padding: 25px;
-
-            border:
-                1px solid var(--line);
-
-            border-radius: var(--radius);
-
-            background:
-                var(--surface);
-        }
-
-
-        .project-card h3 {
-            margin:
-                0 0 10px;
-
-            font-family:
-                "Space Grotesk",
-                sans-serif;
-
-            font-size: 23px;
-        }
-
-
-        .project-card p {
-            margin: 0;
-
-            color: var(--muted);
-
-            font-size: 11px;
-
-            line-height: 1.8;
-        }
-
-
-        .feature-list {
-            display: grid;
-
-            gap: 10px;
-
-            margin-top: 20px;
-        }
-
-
-        .feature {
-            display: grid;
-
-            grid-template-columns:
-                30px 1fr;
-
-            gap: 10px;
-        }
-
-
-        .feature-icon {
-            width: 30px;
-            height: 30px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 8px;
-
-            color: var(--teal);
-
-            background:
-                var(--teal-soft);
-
-            font-size: 10px;
-        }
-
-
-        .feature strong {
-            display: block;
-
-            font-size: 10px;
-        }
-
-
-        .feature span {
-            display: block;
-
-            margin-top: 2px;
-
-            color: var(--muted);
-
-            font-size: 9px;
-        }
-
-
-        /* FOOTER */
-
-        footer {
-            padding:
-                35px 0 50px;
-
-            border-top:
-                1px solid var(--line);
-        }
-
-
-        .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 15px;
-        }
-
-
-        .footer-inner span {
-            color: var(--muted);
-
-            font-size: 9px;
-        }
-
-
-        @media (max-width: 900px) {
-
-            .hero-grid,
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-
-
-            .tech-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-        }
-
-
-        @media (max-width: 700px) {
-
-            .nav-links {
-                display: none;
-            }
-
-
-            .members,
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-
-
-            .hero {
-                padding:
-                    75px 0;
-            }
-
-
-            .footer-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-        }
-
-
-        @media (prefers-reduced-motion: reduce) {
-
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                transition-duration: .01ms !important;
-            }
-
-        }
+/* =========================================================
+   CEO PROFILE — PURE BLACK THEME
+========================================================= */
+
+:root {
+    --ceo-bg: #000;
+    --ceo-surface: #080808;
+    --ceo-surface-2: #0d0d0d;
+    --ceo-line: rgb(255 255 255 / 8%);
+    --ceo-text: #f5f7f7;
+    --ceo-muted: #929b98;
+    --ceo-faint: #697471;
+    --ceo-teal: #20d9c0;
+    --ceo-teal-soft: rgb(32 217 192 / 9%);
+    --ceo-radius: 20px;
+    --ceo-ease: cubic-bezier(.2,.8,.2,1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: #000;
+    color-scheme: dark;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ceo-text);
+    background:
+        radial-gradient(circle at 82% 0%, rgb(32 217 192 / 5%), transparent 30rem),
+        #000;
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body::selection {
+    color: #001311;
+    background: var(--ceo-teal);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+    outline: 2px solid var(--ceo-teal);
+    outline-offset: 3px;
+}
+
+.container {
+    width: min(calc(100% - 36px), 1180px);
+    margin-inline: auto;
+}
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--ceo-line);
+    background: rgb(0 0 0 / 82%);
+    backdrop-filter: blur(18px);
+}
+
+.nav {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand img {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--ceo-line);
+    border-radius: 11px;
+    object-fit: cover;
+    background: #090909;
+}
+
+.brand strong {
+    display: block;
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 12px;
+}
+
+.brand small {
+    display: block;
+    margin-top: 3px;
+    color: var(--ceo-faint);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 8px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 5px;
+}
+
+.nav-links a {
+    padding: 8px 11px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: var(--ceo-muted);
+    font-size: 10px;
+    font-weight: 700;
+    transition: transform .15s var(--ceo-ease), color .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.nav-links a:hover {
+    color: #fff;
+    background: rgb(255 255 255 / 5%);
+    border-color: var(--ceo-line);
+    transform: translateY(-1px);
+}
+
+.repo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 12px;
+    border: 1px solid var(--ceo-line);
+    border-radius: 10px;
+    color: #eee;
+    background: #090909;
+    font-size: 10px;
+    font-weight: 800;
+    transition: transform .15s var(--ceo-ease), color .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.repo-btn:hover {
+    color: var(--ceo-teal);
+    background: #0d0d0d;
+    border-color: rgb(32 217 192 / 25%);
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+    padding: 105px 0 92px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
+    gap: 70px;
+    align-items: center;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ceo-teal);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ceo-teal);
+    box-shadow: 0 0 0 5px var(--ceo-teal-soft);
+}
+
+h1 {
+    margin: 20px 0 0;
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(50px, 8vw, 90px);
+    line-height: .94;
+    letter-spacing: -.065em;
+}
+
+h1 span {
+    color: var(--ceo-teal);
+}
+
+.hero p {
+    max-width: 720px;
+    margin: 26px 0 0;
+    color: var(--ceo-muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    padding: 0 15px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 800;
+    transition: transform .14s var(--ceo-ease), filter .14s ease, background .14s ease, border-color .14s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    color: #001311;
+    background: linear-gradient(135deg, var(--ceo-teal), #10b5a4);
+}
+
+.btn-secondary {
+    color: #f3f6f5;
+    border-color: var(--ceo-line);
+    background: #080808;
+}
+
+.btn-secondary:hover {
+    background: #0d0d0d;
+    border-color: rgb(255 255 255 / 17%);
+}
+
+.hero-card {
+    padding: 23px;
+    border: 1px solid var(--ceo-line);
+    border-radius: var(--ceo-radius);
+    background: linear-gradient(145deg, #0d0d0d, #050505);
+    box-shadow: 0 20px 55px rgb(0 0 0 / 45%);
+    animation: ceoEnter .34s var(--ceo-ease) both;
+}
+
+.hero-card-label {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--ceo-line);
+    color: var(--ceo-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 9px;
+}
+
+.hero-card-label strong {
+    color: #fff;
+}
+
+.hero-number {
+    margin-top: 25px;
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 70px;
+    line-height: .9;
+    letter-spacing: -.07em;
+}
+
+.hero-number span {
+    color: var(--ceo-teal);
+    font-size: 25px;
+}
+
+.hero-card p {
+    margin: 9px 0 0;
+    color: #d7dfdd;
+    font-size: 12px;
+}
+
+.hero-list {
+    display: grid;
+    margin-top: 25px;
+}
+
+.hero-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--ceo-line);
+    font-size: 10px;
+}
+
+.hero-row span:first-child {
+    color: var(--ceo-muted);
+}
+
+.hero-row strong {
+    color: #fff;
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section {
+    padding: 90px 0;
+}
+
+.section-head {
+    max-width: 730px;
+    margin-bottom: 35px;
+}
+
+.section-head h2 {
+    margin: 14px 0 10px;
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(32px, 5vw, 54px);
+    line-height: 1;
+    letter-spacing: -.05em;
+}
+
+.section-head p {
+    margin: 0;
+    color: var(--ceo-muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   MEMBERS
+========================================================= */
+
+.members {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.member {
+    position: relative;
+    min-width: 0;
+    padding: 23px;
+    overflow: hidden;
+    border: 1px solid var(--ceo-line);
+    border-radius: var(--ceo-radius);
+    background: #080808;
+    box-shadow: 0 12px 35px rgb(0 0 0 / 28%);
+    transition: transform .18s var(--ceo-ease), border-color .18s ease, background .18s ease;
+}
+
+.member::after {
+    content: "";
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: rgb(32 217 192 / 3%);
+    pointer-events: none;
+}
+
+.member:hover {
+    transform: translateY(-4px);
+    border-color: rgb(32 217 192 / 24%);
+    background: #0a0a0a;
+}
+
+.member-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.member-photo {
+    width: 76px;
+    height: 76px;
+    overflow: hidden;
+    border: 1px solid rgb(32 217 192 / 22%);
+    border-radius: 18px;
+    background: var(--ceo-teal-soft);
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-tag {
+    padding: 5px 8px;
+    border: 1px solid var(--ceo-line);
+    border-radius: 7px;
+    color: var(--ceo-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 8px;
+}
+
+.member h3 {
+    margin: 19px 0 3px;
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 20px;
+    line-height: 1.1;
+}
+
+.role {
+    color: var(--ceo-teal);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.member-description {
+    margin: 14px 0 0;
+    color: var(--ceo-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 17px;
+}
+
+.skill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 8px;
+    border: 1px solid var(--ceo-line);
+    border-radius: 7px;
+    color: #c7cfcd;
+    background: rgb(255 255 255 / 2.5%);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 8px;
+    transition: transform .14s var(--ceo-ease), border-color .14s ease, background .14s ease;
+}
+
+.skill:hover {
+    transform: translateY(-1px);
+    border-color: rgb(255 255 255 / 14%);
+    background: rgb(255 255 255 / 4%);
+}
+
+.skill i {
+    font-size: 13px;
+}
+
+.member-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--ceo-line);
+}
+
+.nim {
+    color: var(--ceo-faint);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 8px;
+}
+
+.ut-link {
+    color: var(--ceo-teal);
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.ut-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   TECHNOLOGY
+========================================================= */
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.tech {
+    min-width: 0;
+    padding: 19px;
+    border: 1px solid var(--ceo-line);
+    border-radius: 17px;
+    background: #080808;
+    transition: transform .16s var(--ceo-ease), border-color .16s ease, background .16s ease;
+}
+
+.tech:hover {
+    transform: translateY(-3px);
+    border-color: rgb(255 255 255 / 15%);
+    background: #0b0b0b;
+}
+
+.tech-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 13px;
+    border: 1px solid rgb(255 255 255 / 6%);
+    border-radius: 11px;
+    background: rgb(255 255 255 / 4%);
+    font-size: 22px;
+}
+
+.tech h3 {
+    margin: 0;
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px;
+}
+
+.tech p {
+    margin: 7px 0 0;
+    color: var(--ceo-muted);
+    font-size: 9px;
+    line-height: 1.65;
+}
+
+/* =========================================================
+   PROJECT
+========================================================= */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 15px;
+}
+
+.project-card {
+    min-width: 0;
+    padding: 25px;
+    border: 1px solid var(--ceo-line);
+    border-radius: var(--ceo-radius);
+    background: #080808;
+    box-shadow: 0 12px 35px rgb(0 0 0 / 28%);
+}
+
+.project-card h3 {
+    margin: 0 0 10px;
+    color: #fff;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 23px;
+}
+
+.project-card p {
+    margin: 0;
+    color: var(--ceo-muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.feature-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.feature {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 10px;
+}
+
+.feature-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: var(--ceo-teal);
+    background: var(--ceo-teal-soft);
+    font-size: 10px;
+}
+
+.feature strong {
+    display: block;
+    color: #fff;
+    font-size: 10px;
+}
+
+.feature span {
+    display: block;
+    margin-top: 2px;
+    color: var(--ceo-muted);
+    font-size: 9px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding: 35px 0 50px;
+    border-top: 1px solid var(--ceo-line);
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.footer-inner span {
+    color: var(--ceo-muted);
+    font-size: 9px;
+}
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes ceoEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-card,
+.member,
+.tech,
+.project-card {
+    animation: ceoEnter .32s var(--ceo-ease) both;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+    .hero-grid,
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero {
+        padding: 85px 0 75px;
+    }
+}
+
+@media (max-width: 700px) {
+    .nav-links {
+        display: none;
+    }
+
+    .members,
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding: 70px 0;
+    }
+
+    .section {
+        padding: 70px 0;
+    }
+
+    .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        width: min(calc(100% - 24px), 1180px);
+    }
+
+    .nav {
+        min-height: 62px;
+    }
+
+    .repo-btn {
+        padding-inline: 10px;
+    }
+
+    .brand strong {
+        font-size: 10px;
+    }
+
+    .brand small {
+        font-size: 7px;
+    }
+
+    .member,
+    .project-card {
+        padding: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
 
     </style>
-
 </head>
-
-
 <body>
-
-
 <header class="topbar">
-
     <div class="container nav">
-
-        <a
-            class="brand"
-            href="#top"
-        >
-
-            <img
-                src="/assets/images/logo.png"
-                alt="Sumber Aquarium"
-            >
-
+        <a class="brand" href="#top">
+            <img src="/assets/images/logo.png" alt="Sumber Aquarium">
             <div>
-
-                <strong>
-                    SUMBER AQUARIUM PGK
-                </strong>
-
-                <small>
-                    CAPSTONE · KELOMPOK B
-                </small>
-
+                <strong>SUMBER AQUARIUM PGK</strong>
+                <small>CAPSTONE · KELOMPOK B</small>
             </div>
-
         </a>
-
-
         <nav class="nav-links">
-
-            <a href="#kelompok">
-                Kelompok
-            </a>
-
-            <a href="#teknologi">
-                Teknologi
-            </a>
-
-            <a href="#project">
-                Project
-            </a>
-
+            <a href="#kelompok">Kelompok</a>
+            <a href="#teknologi">Teknologi</a>
+            <a href="#project">Project</a>
         </nav>
-
-
-        <a
-            class="repo-btn"
-            href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            GitHub ↗
-        </a>
-
+        <a class="repo-btn" href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     </div>
-
 </header>
 
-
 <main id="top">
-
-
 <section class="hero">
-
     <div class="container hero-grid">
-
         <div>
-
-            <span class="eyebrow">
-                CAPSTONE PROJECT · KELOMPOK B
-            </span>
-
-
-            <h1>
-                Sumber
-                <span>Aquarium</span>
-                PGK.
-            </h1>
-
-
-            <p>
-                Sistem informasi web untuk membantu
-                pengelolaan toko ikan hias melalui
-                pengelolaan stok, transaksi penjualan,
-                pencatatan kematian, histori operasional,
-                dashboard, dan autentikasi pengguna.
-            </p>
-
-
+            <span class="eyebrow">CAPSTONE PROJECT · KELOMPOK B</span>
+            <h1>Sumber <span>Aquarium</span> PGK.</h1>
+            <p>Sistem informasi web untuk membantu pengelolaan toko ikan hias melalui pengelolaan stok, transaksi penjualan, pencatatan kematian, histori operasional, dashboard, dan autentikasi pengguna.</p>
             <div class="hero-actions">
-
-                <a
-                    class="btn btn-primary"
-                    href="#kelompok"
-                >
-                    Lihat Anggota ↓
-                </a>
-
-                <a
-                    class="btn btn-secondary"
-                    href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Repository ↗
-                </a>
-
+                <a class="btn btn-primary" href="#kelompok">Lihat Anggota ↓</a>
+                <a class="btn btn-secondary" href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B" target="_blank" rel="noopener noreferrer">Repository ↗</a>
             </div>
-
         </div>
-
-
         <aside class="hero-card">
-
-            <div class="hero-card-label">
-
-                <span>
-                    PROJECT SNAPSHOT
-                </span>
-
-                <strong>
-                    ACTIVE
-                </strong>
-
-            </div>
-
-
-            <div class="hero-number">
-                01
-                <span>×</span>
-            </div>
-
-
-            <p>
-                Satu aplikasi untuk menghubungkan
-                data operasional Sumber Aquarium.
-            </p>
-
-
+            <div class="hero-card-label"><span>PROJECT SNAPSHOT</span><strong>ACTIVE</strong></div>
+            <div class="hero-number">01 <span>×</span></div>
+            <p>Satu aplikasi untuk menghubungkan data operasional Sumber Aquarium.</p>
             <div class="hero-list">
-
-                <div class="hero-row">
-                    <span>Anggota</span>
-                    <strong>4</strong>
-                </div>
-
-                <div class="hero-row">
-                    <span>Backend</span>
-                    <strong>Flask</strong>
-                </div>
-
-                <div class="hero-row">
-                    <span>Database</span>
-                    <strong>PostgreSQL</strong>
-                </div>
-
-                <div class="hero-row">
-                    <span>Frontend</span>
-                    <strong>HTML / CSS / JS</strong>
-                </div>
-
+                <div class="hero-row"><span>Anggota</span><strong>4</strong></div>
+                <div class="hero-row"><span>Backend</span><strong>Flask</strong></div>
+                <div class="hero-row"><span>Database</span><strong>PostgreSQL</strong></div>
+                <div class="hero-row"><span>Frontend</span><strong>HTML / CSS / JS</strong></div>
             </div>
-
         </aside>
-
     </div>
-
 </section>
 
-
-<section
-    class="section"
-    id="kelompok"
->
-
+<section class="section" id="kelompok">
     <div class="container">
-
         <div class="section-head">
-
-            <span class="eyebrow">
-                GROUP B
-            </span>
-
-            <h2>
-                Orang di balik sistem.
-            </h2>
-
-            <p>
-                Informasi anggota mengikuti data yang
-                sudah tercantum pada repository project.
-                Setiap card menunjukkan kontribusi,
-                NIM, skill, dan link profil UT.
-            </p>
-
+            <span class="eyebrow">GROUP B</span>
+            <h2>Orang di balik sistem.</h2>
+            <p>Kami menjoba push diri kami lebih keras !.</p>
         </div>
-
 
         <div class="members">
-
-
-            <!-- DIMAS -->
-
             <article class="member">
-
                 <div class="member-top">
-
-                    <div class="member-photo">
-
-                        <img
-                            src="/assets/images/dimas.png"
-                            alt="Foto profil Dimas"
-                        >
-
-                    </div>
-
-                    <span class="member-tag">
-                        FOUNDATION
-                    </span>
-
+                    <div class="member-photo"><img src="/assets/images/dimas.png" alt="Foto profil Dimas"></div>
+                    <span class="member-tag">FOUNDATION</span>
                 </div>
-
-
-                <h3>
-                    DIMAS
-                </h3>
-
-
-                <div class="role">
-                    Fondasi Sistem & Data
-                </div>
-
-
-                <p class="member-description">
-                    Berkontribusi pada fondasi awal
-                    HTML, CSS, JavaScript serta data
-                    pendukung project.
-                </p>
-
-
+                <h3>DIMAS</h3>
+                <div class="role">Fondasi Sistem &amp; Data</div>
+                <p class="member-description">Berkontribusi pada fondasi awal HTML, CSS, JavaScript serta data pendukung project.</p>
                 <div class="skills">
-
-                    <span class="skill">
-                        <i class="devicon-html5-plain"></i>
-                        HTML
-                    </span>
-
-                    <span class="skill">
-                        <i class="devicon-css3-plain"></i>
-                        CSS
-                    </span>
-
-                    <span class="skill">
-                        <i class="devicon-javascript-plain"></i>
-                        JavaScript
-                    </span>
-
+                    <span class="skill"><i class="devicon-html5-plain"></i>HTML</span>
+                    <span class="skill"><i class="devicon-css3-plain"></i>CSS</span>
+                    <span class="skill"><i class="devicon-javascript-plain"></i>JavaScript</span>
                 </div>
-
-
                 <div class="member-footer">
-
-                    <span class="nim">
-                        NIM · 050039851
-                    </span>
-
-                    <a
-                        class="ut-link"
-                        href="https://elearning.ut.ac.id/user/view.php?id=278161&course=329858"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Profil UT ↗
-                    </a>
-
+                    <span class="nim">NIM · 050039851</span>
+                    <a class="ut-link" href="https://elearning.ut.ac.id/user/view.php?id=278161&amp;course=329858" target="_blank" rel="noopener noreferrer">Profil UT ↗</a>
                 </div>
-
             </article>
 
-
-            <!-- DHEA -->
-
             <article class="member">
-
                 <div class="member-top">
-
-                    <div class="member-photo">
-
-                        <img
-                            src="/assets/images/dhea.png"
-                            alt="Foto profil Dhea Handanur Aini"
-                        >
-
-                    </div>
-
-                    <span class="member-tag">
-                        DOCUMENTATION
-                    </span>
-
+                    <div class="member-photo"><img src="/assets/images/dhea.png" alt="Foto profil Dhea Handanur Aini"></div>
+                    <span class="member-tag">DOCUMENTATION</span>
                 </div>
-
-
-                <h3>
-                    DHEA HANDANUR AINI
-                </h3>
-
-
-                <div class="role">
-                    Dokumentasi & Proposal
-                </div>
-
-
-                <p class="member-description">
-                    Berkontribusi pada penyusunan proposal
-                    dan dokumentasi project untuk kebutuhan
-                    akademik kelompok.
-                </p>
-
-
+                <h3>DHEA HANDANUR AINI</h3>
+                <div class="role">Dokumentasi &amp; Proposal</div>
+                <p class="member-description">Berkontribusi pada penyusunan proposal dan dokumentasi project untuk kebutuhan akademik kelompok.</p>
                 <div class="skills">
-
-                    <span class="skill">
-                        Dokumentasi
-                    </span>
-
-                    <span class="skill">
-                        Proposal
-                    </span>
-
-                    <span class="skill">
-                        <i class="devicon-microsoft-word-plain"></i>
-                        Word
-                    </span>
-
-                    <span class="skill">
-                        <i class="devicon-microsoftpowerpoint-plain"></i>
-                        PowerPoint
-                    </span>
-
+                    <span class="skill">Dokumentasi</span>
+                    <span class="skill">Proposal</span>
+                    <span class="skill"><i class="devicon-microsoft-word-plain"></i>Word</span>
+                    <span class="skill"><i class="devicon-microsoftpowerpoint-plain"></i>PowerPoint</span>
                 </div>
-
-
                 <div class="member-footer">
-
-                    <span class="nim">
-                        NIM · 050417407
-                    </span>
-
-                    <a
-                        class="ut-link"
-                        href="https://elearning.ut.ac.id/user/view.php?id=278159&course=329858"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Profil UT ↗
-                    </a>
-
+                    <span class="nim">NIM · 050417407</span>
+                    <a class="ut-link" href="https://elearning.ut.ac.id/user/view.php?id=278159&amp;course=329858" target="_blank" rel="noopener noreferrer">Profil UT ↗</a>
                 </div>
-
             </article>
 
-
-            <!-- KAMALUDIN -->
-
             <article class="member">
-
                 <div class="member-top">
-
-                    <div class="member-photo">
-
-                        <img
-                            src="/assets/images/logo.png"
-                            alt="Foto profil Kamaludin"
-                        >
-
-                    </div>
-
-                    <span class="member-tag">
-                        VISUAL
-                    </span>
-
+                    <div class="member-photo"><img src="/assets/images/logo.png" alt="Foto profil Kamaludin"></div>
+                    <span class="member-tag">VISUAL</span>
                 </div>
-
-
-                <h3>
-                    KAMALUDIN
-                </h3>
-
-
-                <div class="role">
-                    Komunikasi Visual & Presentasi
-                </div>
-
-
-                <p class="member-description">
-                    Berkontribusi pada materi presentasi,
-                    poster, dan penyampaian visual project.
-                </p>
-
-
+                <h3>KAMALUDIN</h3>
+                <div class="role">Komunikasi Visual &amp; Presentasi</div>
+                <p class="member-description">Berkontribusi pada materi presentasi, poster, dan penyampaian visual project.</p>
                 <div class="skills">
-
-                    <span class="skill">
-                        Visual
-                    </span>
-
-                    <span class="skill">
-                        Presentation
-                    </span>
-
-                    <span class="skill">
-                        <i class="devicon-microsoftpowerpoint-plain"></i>
-                        PowerPoint
-                    </span>
-
-                    <span class="skill">
-                        Poster
-                    </span>
-
+                    <span class="skill">Visual</span>
+                    <span class="skill">Presentation</span>
+                    <span class="skill"><i class="devicon-microsoftpowerpoint-plain"></i>PowerPoint</span>
+                    <span class="skill">Poster</span>
                 </div>
-
-
                 <div class="member-footer">
-
-                    <span class="nim">
-                        NIM · 050595262
-                    </span>
-
-                    <a
-                        class="ut-link"
-                        href="https://elearning.ut.ac.id/user/view.php?id=278160&course=329858"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Profil UT ↗
-                    </a>
-
+                    <span class="nim">NIM · 050595262</span>
+                    <a class="ut-link" href="https://elearning.ut.ac.id/user/view.php?id=278160&amp;course=329858" target="_blank" rel="noopener noreferrer">Profil UT ↗</a>
                 </div>
-
             </article>
 
-
-            <!-- ARPAN -->
-
             <article class="member">
-
                 <div class="member-top">
-
-                    <div class="member-photo">
-
-                        <img
-                            src="/assets/images/arpan.png"
-                            alt="Foto profil Muhamad Arpan Kurnia"
-                        >
-
-                    </div>
-
-                    <span class="member-tag">
-                        FULL-STACK
-                    </span>
-
+                    <div class="member-photo"><img src="/assets/images/arpan.png" alt="Foto profil Muhamad Arpan Kurnia"></div>
+                    <span class="member-tag">FULL-STACK</span>
                 </div>
-
-
-                <h3>
-                    MUHAMAD ARPAN KURNIA
-                </h3>
-
-
-                <div class="role">
-                    Full-Stack & System Integration
-                </div>
-
-
-                <p class="member-description">
-                    Mengembangkan fondasi project menjadi
-                    sistem full-stack yang menghubungkan
-                    frontend, API, database, authentication,
-                    security, dan deployment.
-                </p>
-
-
+                <h3>MUHAMAD ARPAN KURNIA</h3>
+                <div class="role">Full-Stack &amp; System Integration</div>
+                <p class="member-description">Mengembangkan fondasi project menjadi sistem full-stack yang menghubungkan frontend, API, database, authentication, security, dan deployment.</p>
                 <div class="skills">
-
-                    <span class="skill">
-                        <i class="devicon-python-plain"></i>
-                        Python
-                    </span>
-
-                    <span class="skill">
-                        <i class="devicon-flask-original"></i>
-                        Flask
-                    </span>
-
-                    <span class="skill">
-                        <i class="devicon-postgresql-plain"></i>
-                        PostgreSQL
-                    </span>
-
-                    <span class="skill">
-                        Psycopg
-                    </span>
-
-                    <span class="skill">
-                        Gunicorn
-                    </span>
-
-                    <span class="skill">
-                        Argon2
-                    </span>
-
+                    <span class="skill"><i class="devicon-python-plain"></i>Python</span>
+                    <span class="skill"><i class="devicon-flask-original"></i>Flask</span>
+                    <span class="skill"><i class="devicon-postgresql-plain"></i>PostgreSQL</span>
+                    <span class="skill">Psycopg</span>
+                    <span class="skill">Gunicorn</span>
+                    <span class="skill">Argon2</span>
                 </div>
-
-
                 <div class="member-footer">
-
-                    <span class="nim">
-                        NIM · 051102736
-                    </span>
-
-                    <a
-                        class="ut-link"
-                        href="https://elearning.ut.ac.id/user/view.php?id=32304&course=329858"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Profil UT ↗
-                    </a>
-
+                    <span class="nim">NIM · 051102736</span>
+                    <a class="ut-link" href="https://elearning.ut.ac.id/user/view.php?id=32304&amp;course=329858" target="_blank" rel="noopener noreferrer">Profil UT ↗</a>
                 </div>
-
             </article>
-
-
         </div>
-
     </div>
-
 </section>
 
-
-<section
-    class="section"
-    id="teknologi"
->
-
+<section class="section" id="teknologi">
     <div class="container">
-
         <div class="section-head">
-
-            <span class="eyebrow">
-                TECHNOLOGY
-            </span>
-
-            <h2>
-                Stack yang benar-benar digunakan.
-            </h2>
-
-            <p>
-                Berdasarkan source code dan dependency
-                yang tersedia di repository.
-            </p>
-
+            <span class="eyebrow">TECHNOLOGY</span>
+            <h2>Stack yang benar-benar digunakan.</h2>
+            <p>Berdasarkan source code dan dependency yang tersedia di repository.</p>
         </div>
-
-
         <div class="tech-grid">
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    <i class="devicon-python-plain"></i>
-                </div>
-
-                <h3>Python</h3>
-
-                <p>
-                    Backend dan business logic.
-                </p>
-
-            </article>
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    <i class="devicon-flask-original"></i>
-                </div>
-
-                <h3>Flask</h3>
-
-                <p>
-                    Routing, API, session,
-                    validation, dan server.
-                </p>
-
-            </article>
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    <i class="devicon-postgresql-plain"></i>
-                </div>
-
-                <h3>PostgreSQL</h3>
-
-                <p>
-                    Database relasional project.
-                </p>
-
-            </article>
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    <i class="devicon-javascript-plain"></i>
-                </div>
-
-                <h3>JavaScript</h3>
-
-                <p>
-                    API interaction dan dynamic UI.
-                </p>
-
-            </article>
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    <i class="devicon-html5-plain"></i>
-                </div>
-
-                <h3>HTML5</h3>
-
-                <p>
-                    Struktur dashboard,
-                    module, dan authentication.
-                </p>
-
-            </article>
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    <i class="devicon-css3-plain"></i>
-                </div>
-
-                <h3>CSS3</h3>
-
-                <p>
-                    Responsive layout,
-                    animation, table, form, dan UI.
-                </p>
-
-            </article>
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    🐘
-                </div>
-
-                <h3>Psycopg 3</h3>
-
-                <p>
-                    Adapter Python untuk PostgreSQL.
-                </p>
-
-            </article>
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    🔐
-                </div>
-
-                <h3>Argon2</h3>
-
-                <p>
-                    Password hashing dan verification.
-                </p>
-
-            </article>
-
-
-            <article class="tech">
-
-                <div class="tech-icon">
-                    🚀
-                </div>
-
-                <h3>Gunicorn</h3>
-
-                <p>
-                    WSGI server untuk deployment.
-                </p>
-
-            </article>
-
-
+            <article class="tech"><div class="tech-icon"><i class="devicon-python-plain"></i></div><h3>Python</h3><p>Backend dan business logic.</p></article>
+            <article class="tech"><div class="tech-icon"><i class="devicon-flask-original"></i></div><h3>Flask</h3><p>Routing, API, session, validation, dan server.</p></article>
+            <article class="tech"><div class="tech-icon"><i class="devicon-postgresql-plain"></i></div><h3>PostgreSQL</h3><p>Database relasional project.</p></article>
+            <article class="tech"><div class="tech-icon"><i class="devicon-javascript-plain"></i></div><h3>JavaScript</h3><p>API interaction dan dynamic UI.</p></article>
+            <article class="tech"><div class="tech-icon"><i class="devicon-html5-plain"></i></div><h3>HTML5</h3><p>Struktur dashboard, module, dan authentication.</p></article>
+            <article class="tech"><div class="tech-icon"><i class="devicon-css3-plain"></i></div><h3>CSS3</h3><p>Responsive layout, animation, table, form, dan UI.</p></article>
+            <article class="tech"><div class="tech-icon">🐘</div><h3>Psycopg 3</h3><p>Adapter Python untuk PostgreSQL.</p></article>
+            <article class="tech"><div class="tech-icon">🔐</div><h3>Argon2</h3><p>Password hashing dan verification.</p></article>
+            <article class="tech"><div class="tech-icon">🚀</div><h3>Gunicorn</h3><p>WSGI server untuk deployment.</p></article>
         </div>
-
     </div>
-
 </section>
 
-
-<section
-    class="section"
-    id="project"
->
-
+<section class="section" id="project">
     <div class="container">
-
         <div class="section-head">
-
-            <span class="eyebrow">
-                SYSTEM
-            </span>
-
-            <h2>
-                Apa yang dibangun?
-            </h2>
-
+            <span class="eyebrow">SYSTEM</span>
+            <h2>Apa yang dibangun?</h2>
         </div>
-
-
         <div class="project-grid">
-
             <article class="project-card">
-
-                <h3>
-                    Sistem informasi operasional
-                </h3>
-
-                <p>
-                    Sumber Aquarium PGK menghubungkan
-                    data persediaan ikan dengan proses
-                    penjualan dan pencatatan kematian.
-                    Backend Flask berkomunikasi dengan
-                    PostgreSQL melalui Psycopg.
-                </p>
-
-
+                <h3>Sistem informasi operasional</h3>
+                <p>Sumber Aquarium PGK menghubungkan data persediaan ikan dengan proses penjualan dan pencatatan kematian. Backend Flask berkomunikasi dengan PostgreSQL melalui Psycopg.</p>
                 <div class="feature-list">
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            🐟
-                        </div>
-
-                        <div>
-                            <strong>
-                                Manajemen stok
-                            </strong>
-
-                            <span>
-                                Tambah, lihat, cari, dan hapus
-                                data ikan.
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            🛒
-                        </div>
-
-                        <div>
-                            <strong>
-                                Penjualan
-                            </strong>
-
-                            <span>
-                                Transaksi mengurangi stok dan
-                                menyimpan histori.
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            ⚠️
-                        </div>
-
-                        <div>
-                            <strong>
-                                Mortalitas
-                            </strong>
-
-                            <span>
-                                Kematian mengurangi stok dan
-                                disimpan dalam histori.
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            🔐
-                        </div>
-
-                        <div>
-                            <strong>
-                                Authentication
-                            </strong>
-
-                            <span>
-                                Session digunakan untuk melindungi
-                                endpoint operasional.
-                            </span>
-                        </div>
-
-                    </div>
-
+                    <div class="feature"><div class="feature-icon">🐟</div><div><strong>Manajemen stok</strong><span>Tambah, lihat, cari, dan hapus data ikan.</span></div></div>
+                    <div class="feature"><div class="feature-icon">🛒</div><div><strong>Penjualan</strong><span>Transaksi mengurangi stok dan menyimpan histori.</span></div></div>
+                    <div class="feature"><div class="feature-icon">⚠️</div><div><strong>Mortalitas</strong><span>Kematian mengurangi stok dan disimpan dalam histori.</span></div></div>
+                    <div class="feature"><div class="feature-icon">🔐</div><div><strong>Authentication</strong><span>Session digunakan untuk melindungi endpoint operasional.</span></div></div>
                 </div>
-
             </article>
-
-
             <article class="project-card">
-
-                <h3>
-                    Repository
-                </h3>
-
-                <p>
-                    Source code, database schema,
-                    seed data, documentation,
-                    presentation, dan assets project
-                    berada dalam repository kelompok.
-                </p>
-
-
+                <h3>Repository</h3>
+                <p>Source code, database schema, seed data, documentation, presentation, dan assets project berada dalam repository kelompok.</p>
                 <br>
-
-
-                <a
-                    class="btn btn-primary"
-                    href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Buka GitHub ↗
-                </a>
-
+                <a class="btn btn-primary" href="https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B" target="_blank" rel="noopener noreferrer">Buka GitHub ↗</a>
             </article>
-
         </div>
-
     </div>
-
 </section>
-
-
 </main>
 
-
 <footer>
-
     <div class="container footer-inner">
-
-        <span>
-            Sumber Aquarium PGK · Capstone Project · Kelompok B
-        </span>
-
-        <span>
-            Universitas Terbuka · Sistem Informasi
-        </span>
-
+        <span>Sumber Aquarium PGK · Capstone Project · Kelompok B</span>
+        <span>Universitas Terbuka · Sistem Informasi</span>
     </div>
-
 </footer>
-
-
 </body>
-
 </html>
