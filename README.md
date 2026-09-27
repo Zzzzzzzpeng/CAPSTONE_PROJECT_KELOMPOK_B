@@ -820,15 +820,92 @@ Halaman profil project dan anggota kelompok.
 ---
 
 
-# 🖼️ Interface Preview
 
-## 🔐 Login
+# 🐟 Sumber Aquarium
 
-![Login Sumber Aquarium](assets/readme/login.png)
+## 🖼️ Interface Preview
 
-## 📊 Dashboard
+### 🎬 Project Preview
 
-![Dashboard Sumber Aquarium](assets/readme/dasboard.png)
+[▶️ Play `ceo.mp4`](assets/ceo.mp4)
+
+Video preview yang menunjukkan tampilan dan alur penggunaan sistem Sumber Aquarium.
+
+---
+
+### 🖥️ Interface
+
+#### 🔐 Login
+
+Halaman autentikasi untuk pengguna masuk ke dalam sistem.
+
+<p align="center">
+  <img src="assets/readme/login.png" width="80%" alt="Login">
+</p>
+
+#### 📊 Dashboard
+
+Halaman utama yang menampilkan ringkasan dan informasi utama sistem.
+
+<p align="center">
+  <img src="assets/readme/dasboard.png" width="80%" alt="Dashboard">
+</p>
+
+#### 📈 Dashboard Monitoring
+
+Tampilan monitoring untuk melihat informasi operasional aquarium secara lebih terstruktur.
+
+<p align="center">
+  <img src="assets/readme/dashboard.png" width="80%" alt="Dashboard Monitoring">
+</p>
+
+#### 🐟 Stok Ikan
+
+Digunakan untuk melihat data dan jumlah stok ikan yang tersedia.
+
+<p align="center">
+  <img src="assets/readme/stokikan.png" width="80%" alt="Stok Ikan">
+</p>
+
+#### ➕ Tambah Ikan
+
+Form untuk menambahkan data ikan baru ke dalam sistem.
+
+<p align="center">
+  <img src="assets/readme/tambahikan.png" width="80%" alt="Tambah Ikan">
+</p>
+
+#### 🧾 Catat Penjualan
+
+Halaman untuk mencatat transaksi penjualan ikan.
+
+<p align="center">
+  <img src="assets/readme/catat%20penjualan.png" width="80%" alt="Catatan Penjualan">
+</p>
+
+#### 📋 Riwayat Penjualan
+
+Menampilkan daftar dan riwayat transaksi penjualan yang telah tercatat.
+
+<p align="center">
+  <img src="assets/readme/riwayatpenjualan.png" width="80%" alt="Riwayat Penjualan">
+</p>
+
+#### ☠️ Catat Kematian
+
+Halaman untuk mencatat data ikan yang mengalami kematian.
+
+<p align="center">
+  <img src="assets/readme/catatankematian.png" width="80%" alt="Catatan Kematian">
+</p>
+
+#### 📜 Riwayat Kematian
+
+Menampilkan riwayat data kematian ikan yang telah dicatat dalam sistem.
+
+<p align="center">
+  <img src="assets/readme/riwayatkematian.png" width="80%" alt="Riwayat Kematian">
+</p>
 
 
 
