@@ -1,375 +1,577 @@
+ 
 # 🐟 Sumber Aquarium PGK
 
 ### Sistem Informasi Pengelolaan Toko Ikan Hias
 
 **Capstone Project — Program Studi S1 Sistem Informasi, Universitas Terbuka**
 
-> **Satu sistem. Satu alur data. Satu pusat informasi operasional.**
+> Satu sistem untuk mengelola persediaan, penjualan, mortalitas, dan histori operasional toko ikan hias.
 
-Sumber Aquarium PGK adalah aplikasi web yang dikembangkan oleh **Kelompok B** sebagai proyek akademik pada bidang Sistem Informasi. Sistem ini dirancang untuk membantu pengelolaan operasional toko ikan hias melalui integrasi **data persediaan ikan, transaksi penjualan, pencatatan kematian ikan, riwayat operasional, dashboard, dan autentikasi pengguna** dalam satu aplikasi.
+Sumber Aquarium PGK adalah aplikasi sistem informasi berbasis web yang dikembangkan sebagai **Capstone Project Kelompok B Program Studi S1 Sistem Informasi Universitas Terbuka**.
 
-Project ini menghubungkan antarmuka web dengan backend Flask dan database PostgreSQL menggunakan pendekatan client-server sederhana yang berfokus pada integrasi data dan proses bisnis.
+Sistem ini dirancang untuk membantu pengelolaan data operasional toko ikan hias melalui satu aplikasi yang mengintegrasikan:
 
----
+* data persediaan ikan;
+* kategori dan harga ikan;
+* pencatatan penjualan;
+* pencatatan kematian ikan;
+* histori penjualan;
+* histori mortalitas;
+* dashboard operasional;
+* autentikasi pengguna;
+* database relasional PostgreSQL.
 
-## 🎓 Tentang Project
-
-Universitas Terbuka menjelaskan Capstone Project sebagai tahap akhir pembelajaran yang memberi kesempatan kepada mahasiswa untuk menerapkan pengetahuan dan keterampilan akademik dalam penyelesaian permasalahan nyata melalui perancangan, implementasi, dan evaluasi sistem informasi. Pendekatan tersebut menjadi dasar akademik bagi pengembangan Sumber Aquarium PGK sebagai proyek kelompok pada Program Studi S1 Sistem Informasi.
-
-Project ini tidak hanya berfokus pada tampilan antarmuka, tetapi juga mencakup:
-
-* perancangan struktur database;
-* implementasi backend dan API;
-* autentikasi berbasis session;
-* validasi data;
-* pengelolaan stok;
-* transaksi penjualan;
-* pencatatan mortalitas ikan;
-* histori operasional;
-* integrasi frontend dan backend;
-* dokumentasi proyek.
+Aplikasi menggunakan arsitektur client-server sederhana dengan **HTML, CSS, Vanilla JavaScript, Python/Flask, Psycopg 3, dan PostgreSQL**.
 
 ---
 
-## 👥 Kelompok B
+# 🎓 Tentang Project
 
-### Universitas Terbuka — S1 Sistem Informasi
+Sumber Aquarium PGK dikembangkan dalam konteks pembelajaran Capstone Project pada Program Studi S1 Sistem Informasi.
 
-| Anggota                  | NIM         | Peran dalam Project                                                                                            |
-| ------------------------ | ----------- | -------------------------------------------------------------------------------------------------------------- |
-| **DIMAS**                | `050039851` | **Fondasi Sistem & Data** — kontribusi pada fondasi awal HTML, CSS, JavaScript, serta data pendukung proyek    |
-| **DHEA HANDANUR AINI**   | `050417407` | **Dokumentasi & Proposal** — penyusunan proposal dan dokumentasi proyek untuk kebutuhan akademik               |
-| **KAMALUDIN**            | `050595262` | **Komunikasi Visual & Presentasi** — materi presentasi, poster, dan penyampaian visual proyek                  |
-| **MUHAMAD ARPAN KURNIA** | `051102736` | **Full-Stack & System Integration** — integrasi frontend, API, database, autentikasi, security, dan deployment |
+Project ini berfokus pada penerapan kemampuan perancangan dan implementasi sistem informasi, bukan pada klaim kebaruan teknologi.
 
+Implementasi mencakup beberapa lapisan sistem:
 
+```text
+User Interface
+      ↓
+Vanilla JavaScript
+      ↓
+HTTP / JSON API
+      ↓
+Flask Backend
+      ↓
+Psycopg 3
+      ↓
+PostgreSQL
+```
 
----
-
-## 🎯 Tujuan Sistem
-
-Sumber Aquarium PGK dikembangkan untuk menyediakan satu alur informasi operasional yang lebih terstruktur.
-
-Fokus utama sistem:
-
-* 🐟 mengelola data dan jumlah stok ikan;
-* 🛒 mencatat transaksi penjualan;
-* ⚠️ mencatat kejadian kematian ikan;
-* 📋 menyediakan histori penjualan dan kematian;
-* 📊 menampilkan ringkasan operasional melalui dashboard;
-* 🔐 membatasi akses sistem melalui autentikasi pengguna;
-* 🗄️ menyimpan data terpusat pada PostgreSQL.
+Sistem dibuat untuk menunjukkan bagaimana proses operasional toko ikan hias dapat dimodelkan menjadi data dan proses digital yang saling terintegrasi.
 
 ---
 
-## 🧩 Fitur Sistem
+# 👥 Kelompok B
 
-### 📊 Dashboard
+**Program Studi S1 Sistem Informasi
+Universitas Terbuka**
 
-Dashboard menyajikan ringkasan:
+| Anggota                  | NIM         | Kontribusi                                                                                    |
+| ------------------------ | ----------- | --------------------------------------------------------------------------------------------- |
+| **DIMAS**                | `050039851` | Fondasi sistem dan data, termasuk kontribusi awal HTML, CSS, JavaScript, serta data pendukung |
+| **DHEA HANDANUR AINI**   | `050417407` | Dokumentasi dan proposal proyek                                                               |
+| **KAMALUDIN**            | `050595262` | Komunikasi visual, presentasi, dan materi penyampaian proyek                                  |
+| **MUHAMAD ARPAN KURNIA** | `051102736` | Full-stack integration, API, database, autentikasi, keamanan aplikasi, dan deployment         |
 
-* total persediaan ikan;
+> Pembagian kontribusi di atas mengikuti dokumentasi project pada repository.
+
+---
+
+# 🎯 Tujuan Sistem
+
+Sumber Aquarium PGK dikembangkan untuk menyediakan pengelolaan informasi operasional yang lebih terstruktur.
+
+Tujuan utama sistem:
+
+1. Mengelola data ikan dan stok.
+2. Mencatat harga serta kategori ikan.
+3. Mencatat transaksi penjualan.
+4. Mengurangi stok secara otomatis ketika terjadi penjualan.
+5. Mencatat kejadian kematian ikan.
+6. Mengurangi stok berdasarkan pencatatan mortalitas.
+7. Menyimpan histori penjualan dan kematian.
+8. Menampilkan ringkasan operasional melalui dashboard.
+9. Membatasi akses terhadap data melalui autentikasi session.
+10. Menyimpan data secara terpusat pada PostgreSQL.
+
+---
+
+# 🧩 Fitur Utama
+
+## 📊 Dashboard
+
+Dashboard mengambil data dari tiga endpoint utama:
+
+```text
+GET /api/ikan
+GET /api/penjualan
+GET /api/kematian
+```
+
+Data kemudian dihitung dan ditampilkan pada sisi frontend.
+
+Informasi yang ditampilkan meliputi:
+
+* total stok ikan;
 * jumlah jenis ikan;
-* jumlah transaksi;
+* jumlah transaksi penjualan;
 * jumlah kejadian kematian;
-* jumlah stok dengan batas perhatian;
-* nilai akumulasi penjualan;
+* jumlah jenis ikan dengan stok ≤ 10;
+* akumulasi nilai transaksi penjualan;
 * lima transaksi penjualan terakhir;
 * lima kejadian kematian terakhir;
-* status sesi pengguna;
-* waktu sinkronisasi sesi.
+* username pengguna yang sedang login;
+* waktu sinkronisasi dashboard.
 
-Data dashboard diperoleh melalui API server dan dihitung di sisi frontend.
+Perhitungan total stok dilakukan berdasarkan jumlah seluruh `jumlah` pada data ikan.
+
+Batas stok perhatian pada dashboard saat ini adalah:
+
+```text
+jumlah <= 10
+```
 
 ---
 
-### 🐟 Manajemen Stok Ikan
+## 🐟 Manajemen Stok
 
-Modul stok menyediakan:
+Modul stok menyediakan informasi:
 
-* daftar seluruh ikan;
 * ID ikan;
 * nama ikan;
 * kategori;
 * jumlah stok;
 * harga satuan;
-* pencarian berdasarkan nama atau kategori;
-* penghapusan data ikan.
+* foto ikan;
+* pencarian data;
+* pengeditan data;
+* penghapusan data.
 
-Data stok berasal dari tabel `ikan` pada PostgreSQL.
+Data bersumber dari tabel:
+
+```text
+ikan
+```
+
+Penghapusan dibatasi oleh foreign key database sehingga ikan yang sudah memiliki histori penjualan atau kematian tidak dapat dihapus begitu saja.
 
 ---
 
-### ➕ Tambah Ikan
+## ➕ Tambah Ikan
 
-Modul tambah ikan menerima:
+Data ikan baru dapat ditambahkan melalui modul tambah ikan.
 
-* nama ikan;
+Field utama:
+
+```text
+Nama ikan
+Kategori
+Stok awal
+Harga
+```
+
+Data dikirim ke backend menggunakan:
+
+```http
+POST /api/ikan
+```
+
+Backend melakukan validasi terhadap:
+
+* nama;
 * kategori;
-* stok awal;
-* harga satuan.
+* jumlah;
+* harga;
+* path foto.
 
-Foto default sistem menggunakan:
+Jika foto tidak diberikan, sistem menggunakan:
 
 ```text
 /assets/images/logo.png
 ```
 
-Data dikirim ke backend melalui `POST /api/ikan`.
+---
+
+## ✏️ Edit Data Ikan
+
+Data ikan dapat diperbarui melalui:
+
+```http
+PUT /api/ikan/<id>
+```
+
+Backend memperbarui:
+
+```text
+nama
+foto
+kategori
+jumlah
+harga
+```
+
+Database juga memiliki trigger untuk memperbarui `updated_at` ketika data ikan berubah.
 
 ---
 
-### 🛒 Pencatatan Penjualan
+## 🛒 Pencatatan Penjualan
 
-Transaksi penjualan menerima:
+Pencatatan penjualan menerima:
 
-* ikan yang dipilih;
-* jumlah ikan terjual.
+```text
+ikan_id
+jumlah
+```
 
-Backend kemudian:
+Proses pada backend:
 
-1. memeriksa keberadaan ikan;
-2. mengunci row ikan;
-3. memeriksa kecukupan stok;
-4. menghitung total harga;
-5. mengurangi stok;
-6. menyimpan histori transaksi.
+```text
+Request
+   ↓
+Validasi input
+   ↓
+SELECT ikan ... FOR UPDATE
+   ↓
+Periksa keberadaan ikan
+   ↓
+Periksa kecukupan stok
+   ↓
+Hitung total harga
+   ↓
+Kurangi stok
+   ↓
+Simpan histori penjualan
+   ↓
+Commit transaction
+```
 
-Proses tersebut dilakukan di dalam transaksi database.
+Total transaksi dihitung menggunakan:
+
+```text
+harga ikan × jumlah terjual
+```
+
+Histori disimpan pada:
+
+```text
+riwayat_penjualan
+```
+
+Endpoint:
+
+```http
+GET  /api/penjualan
+POST /api/penjualan
+```
 
 ---
 
-### ⚠️ Pencatatan Kematian
+## ⚠️ Pencatatan Mortalitas
 
-Modul mortalitas menerima:
+Modul mortalitas digunakan untuk mencatat ikan yang mengalami kematian.
 
-* ikan;
-* jumlah ikan mati;
-* keterangan penyebab atau kondisi.
+Input:
 
-Backend kemudian:
+```text
+ikan
+jumlah ikan mati
+keterangan
+```
 
-1. memeriksa ikan;
-2. mengunci row ikan;
-3. memeriksa stok;
-4. mengurangi jumlah stok;
-5. menyimpan histori kematian.
+Alurnya:
+
+```text
+Request
+   ↓
+Validasi input
+   ↓
+SELECT ikan ... FOR UPDATE
+   ↓
+Periksa stok
+   ↓
+Kurangi stok
+   ↓
+Simpan histori kematian
+   ↓
+Commit transaction
+```
+
+Endpoint:
+
+```http
+GET  /api/kematian
+POST /api/kematian
+```
+
+Histori disimpan pada:
+
+```text
+riwayat_kematian
+```
+
+Keterangan mortalitas dapat digunakan untuk mencatat kondisi atau penyebab yang diketahui oleh pengguna.
 
 ---
 
-### 📜 Riwayat Penjualan
+# 📜 Histori Penjualan
 
-Menampilkan:
+Halaman histori penjualan menampilkan:
 
 * waktu transaksi;
 * nama ikan;
-* jumlah ikan terjual;
+* jumlah;
 * harga satuan;
-* total revenue.
+* total harga.
 
-Data disusun dari tabel `riwayat_penjualan` dan relasinya dengan tabel `ikan`.
+Data diambil dari relasi:
+
+```text
+riwayat_penjualan
+        ↓
+      ikan
+```
+
+Data transaksi diurutkan dari transaksi terbaru.
 
 ---
 
-### 📋 Riwayat Kematian
+# 📋 Histori Mortalitas
 
-Menampilkan:
+Halaman histori mortalitas menampilkan:
 
-* tanggal dan waktu;
+* waktu kejadian;
 * nama ikan;
 * jumlah ikan mati;
 * keterangan.
 
-Data berasal dari tabel `riwayat_kematian` yang terhubung dengan `ikan`.
+Halaman juga menyediakan ringkasan:
+
+* jumlah kejadian;
+* total ikan yang mati;
+* jumlah jenis ikan yang terdampak.
+
+Pencarian dapat dilakukan berdasarkan:
+
+```text
+Nama ikan
+Keterangan
+```
 
 ---
 
-### 🔐 Autentikasi CEO
+# 🔐 Autentikasi
 
-Sistem menyediakan alur:
+Sistem menggunakan autentikasi berbasis session.
+
+Alurnya:
 
 ```text
 Login
   ↓
-Server Verification
+POST /api/auth/login
   ↓
-Session Creation
+Cari username aktif
+  ↓
+Verifikasi password hash
+  ↓
+Session dibuat
   ↓
 Dashboard
 ```
 
-Pengguna yang belum memiliki session `ceo_id` tidak dapat mengakses endpoint maupun halaman yang dilindungi.
+Session menyimpan:
+
+```python
+session["ceo_id"]
+session["ceo_username"]
+```
+
+Endpoint autentikasi:
+
+```http
+POST /api/auth/login
+GET  /api/auth/me
+POST /api/auth/logout
+```
+
+Endpoint operasional menggunakan decorator:
+
+```python
+@auth_required
+```
+
+sehingga hanya session yang valid yang dapat mengakses data operasional.
 
 ---
 
 # 🏗️ Arsitektur Sistem
 
 ```text
-┌─────────────────────────────┐
-│        WEB BROWSER          │
-│ HTML + CSS + Vanilla JS     │
-└──────────────┬──────────────┘
-               │ HTTP / JSON
-               ▼
-┌─────────────────────────────┐
-│       FLASK BACKEND         │
-│ Routing + API + Session     │
-│ Validation + Business Logic │
-└──────────────┬──────────────┘
-               │ Psycopg
-               ▼
-┌─────────────────────────────┐
-│        POSTGRESQL           │
-│ Inventory + Sales + Death   │
-│ CEO Authentication Data     │
-└─────────────────────────────┘
-```
-
-### Alur autentikasi
-
-```text
-login.html
-    │
-    │ POST /api/auth/login
-    ▼
-Flask
-    │
-    ├── cari username aktif
-    ├── verifikasi password hash
-    ├── clear session lama
-    └── simpan ceo_id + username
-    │
-    ▼
-dashboard.html
-```
-
-### Alur transaksi penjualan
-
-```text
-Frontend
-   │
-   │ POST /api/penjualan
-   ▼
-Flask
-   │
-   ├── validasi input
-   ├── SELECT ... FOR UPDATE
-   ├── cek stok
-   ├── hitung total harga
-   ├── kurangi stok
-   └── INSERT histori penjualan
-   │
-   ▼
-PostgreSQL
-```
-
-### Alur pencatatan kematian
-
-```text
-Frontend
-   │
-   │ POST /api/kematian
-   ▼
-Flask
-   │
-   ├── validasi input
-   ├── SELECT ... FOR UPDATE
-   ├── cek stok
-   ├── kurangi stok
-   └── INSERT histori kematian
-   │
-   ▼
-PostgreSQL
+┌─────────────────────────────────┐
+│          WEB BROWSER            │
+│                                 │
+│ HTML5 + CSS3 + Vanilla JS       │
+└───────────────┬─────────────────┘
+                │
+                │ HTTP / JSON
+                ▼
+┌─────────────────────────────────┐
+│         FLASK BACKEND           │
+│                                 │
+│ Routing                         │
+│ API                             │
+│ Authentication                  │
+│ Validation                      │
+│ Business Logic                  │
+│ Session Management              │
+└───────────────┬─────────────────┘
+                │
+                │ Psycopg 3
+                ▼
+┌─────────────────────────────────┐
+│          POSTGRESQL             │
+│                                 │
+│ Inventory                       │
+│ Sales History                   │
+│ Mortality History               │
+│ CEO Accounts                    │
+└─────────────────────────────────┘
 ```
 
 ---
 
-# 🛠️ Teknologi yang Digunakan
+# 🛠️ Technology Stack
 
-| Teknologi                | Fungsi dalam Project                                              |
-| ------------------------ | ----------------------------------------------------------------- |
-| 🐍 **Python**            | Bahasa utama backend dan business logic                           |
-| 🌶️ **Flask**            | Web framework, routing, API, session, dan server-side logic       |
-| 🐘 **PostgreSQL**        | Database relasional utama                                         |
-| 🔌 **Psycopg 3**         | Adapter Python untuk PostgreSQL                                   |
-| ⚡ **Vanilla JavaScript** | Interaksi frontend, fetch API, rendering data, form dan dashboard |
-| 🌐 **HTML5**             | Struktur halaman dan interface                                    |
-| 🎨 **CSS3**              | Layout, responsive design, visual interface dan animation         |
-| 🔐 **Argon2**            | Hashing dan verifikasi password akun CEO                          |
-| 🛡️ **Flask-Limiter**    | Pembatasan jumlah request                                         |
-| 🚀 **Gunicorn**          | WSGI server untuk menjalankan aplikasi Flask                      |
-| ⚙️ **python-dotenv**     | Membaca konfigurasi environment                                   |
-| 🔧 **Git**               | Version control                                                   |
-| ☁️ **GitHub**            | Repository dan kolaborasi source code                             |
+| Teknologi              | Penggunaan                           |
+| ---------------------- | ------------------------------------ |
+| **Python**             | Backend dan business logic           |
+| **Flask**              | Web framework, routing, API, session |
+| **PostgreSQL**         | Database relasional                  |
+| **Psycopg 3**          | Koneksi Python ke PostgreSQL         |
+| **Vanilla JavaScript** | Interaksi frontend dan API           |
+| **HTML5**              | Struktur halaman                     |
+| **CSS3**               | Layout, responsive design, animation |
+| **Argon2**             | Password hashing dan verification    |
+| **Flask-Limiter**      | Rate limiting                        |
+| **Gunicorn**           | WSGI server                          |
+| **python-dotenv**      | Environment configuration            |
+| **Git**                | Version control                      |
+| **GitHub**             | Repository dan kolaborasi            |
 
 ---
 
-# 🎨 UI & Frontend
+# 🎨 UI / UX
 
-Antarmuka menggunakan pendekatan **native HTML + CSS + Vanilla JavaScript**, tanpa React, Vue, atau framework JavaScript lainnya.
+Frontend menggunakan:
 
-CSS utama menggunakan:
+```text
+HTML5
+CSS3
+Vanilla JavaScript
+```
+
+Tidak menggunakan:
+
+```text
+React
+Vue
+Angular
+Next.js
+Bootstrap
+Tailwind CSS
+```
+
+Styling utama menggunakan CSS native dengan:
 
 * CSS Custom Properties;
 * CSS Grid;
 * Flexbox;
 * media queries;
 * responsive layout;
-* `@layer`;
 * CSS animation;
-* transition;
+* transitions;
 * `prefers-reduced-motion`.
 
-Palet visual utama berorientasi pada nuansa:
+Global stylesheet menggunakan font:
 
 ```text
-Teal
-Blue
-Green
-Coral
-Amber
-White
-Light Background
+Inter
+Space Grotesk
 ```
 
-### Library UI eksternal
+Halaman CEO juga menggunakan:
 
-`login/login.html` menggunakan:
+```text
+JetBrains Mono
+Space Grotesk
+```
 
-* Google Fonts — Inter;
-* Google Fonts — DM Mono;
-* Font Awesome.
-
-`CEO.html` menggunakan:
-
-* Google Fonts — Inter;
-* Google Fonts — Space Grotesk;
-* Devicon.
-
-Library tersebut digunakan untuk kebutuhan visual interface dan iconography, bukan sebagai inti business logic sistem.
+Repository menggunakan **Devicon** untuk beberapa icon teknologi pada halaman profil/CEO.
 
 ---
 
-# 🗄️ Struktur Database
+# 🖥️ Halaman Aplikasi
 
-Database utama terdiri dari empat tabel.
+Struktur utama aplikasi:
 
-## `ikan`
+```text
+/
+├── Login
+│
+├── Dashboard
+│
+├── Stok Ikan
+│
+├── Tambah Ikan
+│
+├── Catat Penjualan
+│
+├── Riwayat Penjualan
+│
+├── Catat Kematian
+│
+├── Riwayat Kematian
+│
+└── Profil / CEO
+```
 
-Menyimpan data persediaan ikan.
+File utama:
+
+```text
+login/login.html
+dashboard.html
+CEO.html
+
+modules/
+├── stok-ikan/stokikan.html
+├── tambah-ikan/tambahikan.html
+├── catat-penjualan/catatanpenjualan.html
+├── riwayat-penjualan/riwayatpenjualan.html
+├── catat-kematian/catatankematian.html
+└── riwayat-kematian/riwayatkematian.html
+```
+
+---
+
+# 🗄️ Database
+
+Database menggunakan PostgreSQL.
+
+Struktur utama terdiri dari:
+
+```text
+ikan
+riwayat_penjualan
+riwayat_kematian
+ceo_accounts
+```
+
+## Tabel `ikan`
+
+Menyimpan data persediaan.
 
 | Kolom        | Tipe          | Keterangan      |
 | ------------ | ------------- | --------------- |
 | `id`         | BIGINT        | Primary key     |
 | `nama`       | VARCHAR(100)  | Nama ikan       |
 | `foto`       | TEXT          | Path foto       |
-| `kategori`   | VARCHAR(100)  | Kategori ikan   |
+| `kategori`   | VARCHAR(100)  | Kategori        |
 | `jumlah`     | INTEGER       | Jumlah stok     |
 | `harga`      | NUMERIC(15,2) | Harga satuan    |
 | `created_at` | TIMESTAMPTZ   | Waktu pembuatan |
 | `updated_at` | TIMESTAMPTZ   | Waktu perubahan |
 
-Constraint penting:
+Constraint:
 
 ```text
 jumlah >= 0
@@ -381,38 +583,38 @@ kategori NOT NULL
 
 ---
 
-## `riwayat_penjualan`
+## Tabel `riwayat_penjualan`
 
 Menyimpan transaksi penjualan.
 
-| Kolom          | Tipe          | Keterangan            |
-| -------------- | ------------- | --------------------- |
-| `id`           | BIGINT        | Primary key           |
-| `ikan_id`      | BIGINT        | Foreign key ke `ikan` |
-| `jumlah`       | INTEGER       | Jumlah terjual        |
-| `harga_satuan` | NUMERIC(15,2) | Harga pada transaksi  |
-| `total_harga`  | NUMERIC(15,2) | Total transaksi       |
-| `created_at`   | TIMESTAMPTZ   | Waktu transaksi       |
+| Kolom          | Tipe          | Keterangan             |
+| -------------- | ------------- | ---------------------- |
+| `id`           | BIGINT        | Primary key            |
+| `ikan_id`      | BIGINT        | Foreign key            |
+| `jumlah`       | INTEGER       | Jumlah terjual         |
+| `harga_satuan` | NUMERIC(15,2) | Harga ketika transaksi |
+| `total_harga`  | NUMERIC(15,2) | Total transaksi        |
+| `created_at`   | TIMESTAMPTZ   | Waktu transaksi        |
 
 ---
 
-## `riwayat_kematian`
+## Tabel `riwayat_kematian`
 
-Menyimpan kejadian mortalitas ikan.
+Menyimpan kejadian mortalitas.
 
-| Kolom        | Tipe        | Keterangan               |
-| ------------ | ----------- | ------------------------ |
-| `id`         | BIGINT      | Primary key              |
-| `ikan_id`    | BIGINT      | Foreign key ke `ikan`    |
-| `jumlah`     | INTEGER     | Jumlah ikan mati         |
-| `keterangan` | TEXT        | Catatan kondisi/penyebab |
-| `created_at` | TIMESTAMPTZ | Waktu pencatatan         |
+| Kolom        | Tipe        | Keterangan         |
+| ------------ | ----------- | ------------------ |
+| `id`         | BIGINT      | Primary key        |
+| `ikan_id`    | BIGINT      | Foreign key        |
+| `jumlah`     | INTEGER     | Jumlah ikan mati   |
+| `keterangan` | TEXT        | Kondisi/keterangan |
+| `created_at` | TIMESTAMPTZ | Waktu pencatatan   |
 
 ---
 
-## `ceo_accounts`
+## Tabel `ceo_accounts`
 
-Menyimpan akun autentikasi.
+Menyimpan data autentikasi.
 
 | Kolom           | Tipe        | Keterangan      |
 | --------------- | ----------- | --------------- |
@@ -423,36 +625,34 @@ Menyimpan akun autentikasi.
 | `created_at`    | TIMESTAMPTZ | Waktu pembuatan |
 | `updated_at`    | TIMESTAMPTZ | Waktu perubahan |
 
-Password tidak disimpan sebagai plaintext.
+Password tidak disimpan dalam bentuk plaintext.
 
 ---
 
-# 🔗 Relasi Data
+# 🔗 Relasi Database
 
 ```text
-                 ┌──────────────────┐
-                 │       ikan       │
-                 │──────────────────│
-                 │ id (PK)          │
-                 │ nama             │
-                 │ kategori         │
-                 │ jumlah           │
-                 │ harga            │
-                 └───────┬──────────┘
-                         │
-               ┌─────────┴─────────┐
-               │                   │
-               ▼                   ▼
-┌──────────────────────┐  ┌──────────────────────┐
-│ riwayat_penjualan    │  │ riwayat_kematian     │
-│──────────────────────│  │──────────────────────│
-│ id                   │  │ id                   │
-│ ikan_id (FK)         │  │ ikan_id (FK)         │
-│ jumlah               │  │ jumlah               │
-│ harga_satuan         │  │ keterangan           │
-│ total_harga          │  │ created_at           │
-│ created_at           │  │                      │
-└──────────────────────┘  └──────────────────────┘
+                    ┌───────────────┐
+                    │     ikan      │
+                    │───────────────│
+                    │ id PK         │
+                    │ nama          │
+                    │ kategori      │
+                    │ jumlah        │
+                    │ harga         │
+                    └───────┬───────┘
+                            │
+                 ┌──────────┴──────────┐
+                 │                     │
+                 ▼                     ▼
+       ┌──────────────────┐   ┌──────────────────┐
+       │ riwayat_penjualan│   │ riwayat_kematian │
+       │──────────────────│   │──────────────────│
+       │ ikan_id FK       │   │ ikan_id FK       │
+       │ jumlah           │   │ jumlah           │
+       │ harga_satuan     │   │ keterangan       │
+       │ total_harga      │   │ created_at       │
+       └──────────────────┘   └──────────────────┘
 ```
 
 Foreign key menggunakan:
@@ -461,52 +661,46 @@ Foreign key menggunakan:
 ON DELETE RESTRICT
 ```
 
-Artinya data ikan tidak dapat dihapus ketika masih memiliki histori penjualan atau histori kematian yang terkait.
+Artinya data ikan yang masih memiliki histori terkait tidak dapat dihapus.
+
+Database juga menggunakan index pada:
+
+```text
+riwayat_kematian.ikan_id
+riwayat_kematian.created_at
+riwayat_penjualan.ikan_id
+riwayat_penjualan.created_at
+```
 
 ---
 
 # 🔌 API Reference
 
-Semua endpoint berikut adalah endpoint yang benar-benar didefinisikan pada `app.py`.
+Semua endpoint utama didefinisikan pada `app.py`.
 
-| Method   | Endpoint           | Auth    | Fungsi                             |
-| -------- | ------------------ | ------- | ---------------------------------- |
-| `GET`    | `/api/health`      | No      | Health check aplikasi dan database |
-| `GET`    | `/api/ikan`        | Yes     | Mengambil seluruh data ikan        |
-| `GET`    | `/api/ikan/<id>`   | Yes     | Mengambil satu data ikan           |
-| `POST`   | `/api/ikan`        | Yes     | Menambah ikan                      |
-| `PUT`    | `/api/ikan/<id>`   | Yes     | Memperbarui ikan                   |
-| `PUT`    | `/api/ikan`        | Yes     | Bulk synchronisation data ikan     |
-| `DELETE` | `/api/ikan/<id>`   | Yes     | Menghapus ikan                     |
-| `GET`    | `/api/kematian`    | Yes     | Mengambil histori kematian         |
-| `POST`   | `/api/kematian`    | Yes     | Mencatat kematian                  |
-| `GET`    | `/api/penjualan`   | Yes     | Mengambil histori penjualan        |
-| `POST`   | `/api/penjualan`   | Yes     | Mencatat transaksi penjualan       |
-| `POST`   | `/api/auth/login`  | No      | Autentikasi CEO                    |
-| `GET`    | `/api/auth/me`     | Session | Memeriksa sesi login               |
-| `POST`   | `/api/auth/logout` | Session | Menghapus sesi                     |
-
-Login dibatasi secara khusus:
-
-```text
-5 request / minute
-```
-
-Aplikasi juga memiliki default rate limit:
-
-```text
-300 request / minute
-```
+| Method | Endpoint           | Auth    | Fungsi             |
+| ------ | ------------------ | ------- | ------------------ |
+| GET    | `/api/health`      | Tidak   | Health check       |
+| GET    | `/api/ikan`        | Ya      | Seluruh data ikan  |
+| GET    | `/api/ikan/<id>`   | Ya      | Detail ikan        |
+| POST   | `/api/ikan`        | Ya      | Tambah ikan        |
+| PUT    | `/api/ikan/<id>`   | Ya      | Edit ikan          |
+| DELETE | `/api/ikan/<id>`   | Ya      | Hapus ikan         |
+| GET    | `/api/kematian`    | Ya      | Histori kematian   |
+| POST   | `/api/kematian`    | Ya      | Catat kematian     |
+| GET    | `/api/penjualan`   | Ya      | Histori penjualan  |
+| POST   | `/api/penjualan`   | Ya      | Catat penjualan    |
+| POST   | `/api/auth/login`  | Tidak   | Login              |
+| GET    | `/api/auth/me`     | Session | Status autentikasi |
+| POST   | `/api/auth/logout` | Session | Logout             |
 
 ---
 
-# 🔐 Security Implementation
+# 🔒 Security Implementation
 
-Project menerapkan beberapa lapisan pengamanan pada sisi aplikasi.
+Project menerapkan beberapa mekanisme keamanan pada level aplikasi dan database.
 
-### Password Hashing
-
-Akun CEO tidak menyimpan password plaintext.
+## Password Hashing
 
 `create_ceo.py` menggunakan:
 
@@ -514,15 +708,19 @@ Akun CEO tidak menyimpan password plaintext.
 PasswordHasher()
 ```
 
-untuk menghasilkan password hash sebelum dimasukkan ke database.
+Password disimpan sebagai hash pada:
 
-Pendekatan ini sesuai dengan rekomendasi OWASP bahwa password tidak seharusnya disimpan dalam plaintext dan sebaiknya menggunakan password hashing yang adaptif seperti Argon2.
+```text
+ceo_accounts.password_hash
+```
+
+Sistem tidak menyimpan password plaintext.
 
 ---
 
-### Session Authentication
+## Session Authentication
 
-Akses halaman dan API operasional dikontrol melalui session:
+Akses endpoint operasional membutuhkan session:
 
 ```python
 session["ceo_id"]
@@ -535,71 +733,54 @@ Decorator:
 @auth_required
 ```
 
-digunakan pada endpoint yang membutuhkan login.
+digunakan untuk membatasi endpoint.
 
 ---
 
-### Session Cookie
+## Session Cookie
 
-Aplikasi mengaktifkan:
+Konfigurasi aplikasi:
 
 ```text
 HttpOnly = True
-SameSite = Lax
+SameSite = configurable
 Secure = configurable
 ```
 
-Nilai `SESSION_COOKIE_SECURE` dapat dikendalikan melalui environment.
-
-Untuk deployment HTTPS, konfigurasi sebaiknya menggunakan:
+Environment yang tersedia:
 
 ```text
-SESSION_COOKIE_SECURE=true
+SESSION_COOKIE_SAMESITE
+SESSION_COOKIE_SECURE
 ```
+
+Untuk deployment HTTPS, `SESSION_COOKIE_SECURE` sebaiknya diaktifkan.
 
 ---
 
-### Secret Key
+## Secret Key
 
-Secret Flask diperoleh dari:
+Flask menggunakan:
 
 ```text
 FLASK_SECRET_KEY
 ```
 
-Jika variabel tersebut tidak tersedia, aplikasi membuat secret sementara menggunakan `secrets.token_hex(32)`.
+Jika tidak tersedia, aplikasi membuat secret sementara menggunakan:
 
-Untuk deployment, secret key sebaiknya ditentukan secara eksplisit melalui environment agar session tidak berubah ketika process restart.
+```python
+secrets.token_hex(32)
+```
+
+Untuk deployment, secret sebaiknya diberikan secara eksplisit melalui environment.
 
 ---
 
-### Environment Variables
+## SQL Parameterization
 
-Konfigurasi database tidak ditulis langsung dalam source code.
+Query PostgreSQL menggunakan parameter binding Psycopg.
 
-Aplikasi mendukung:
-
-```text
-DATABASE_URL
-```
-
-atau:
-
-```text
-DB_HOST
-DB_PORT
-DB_NAME
-DB_USER
-DB_PASSWORD
-```
-
-File `.env` dimasukkan ke `.gitignore`.
-
----
-
-### SQL Parameterisation
-
-Query database menggunakan parameter binding Psycopg:
+Contoh:
 
 ```python
 conn.execute(
@@ -608,37 +789,58 @@ conn.execute(
 )
 ```
 
-Pendekatan tersebut mencegah penyusunan query SQL menggunakan string concatenation dari input user.
+Input pengguna tidak digabungkan langsung ke string SQL.
 
 ---
 
-### Transaction & Row Locking
+## Transaction dan Row Locking
 
-Operasi penjualan dan kematian menggunakan transaksi database dan:
+Transaksi penjualan dan mortalitas menggunakan:
 
 ```sql
+SELECT ...
 FOR UPDATE
 ```
 
-untuk mengunci row ikan selama proses perubahan stok.
+Tujuannya untuk mengunci row ikan selama proses pemeriksaan dan perubahan stok.
 
-Tujuannya adalah menjaga konsistensi ketika stok dibaca, diperiksa, dan dikurangi dalam satu transaksi.
-
----
-
-### Request Size Limit
-
-Aplikasi menetapkan:
+Dengan demikian alurnya menjadi:
 
 ```text
-MAX_CONTENT_LENGTH = 64 KiB
+Read stock
+   ↓
+Lock row
+   ↓
+Validate stock
+   ↓
+Update stock
+   ↓
+Insert history
+   ↓
+Commit
 ```
-
-untuk membatasi ukuran request.
 
 ---
 
-### HTTP Security Headers
+## Request Size Limit
+
+Flask dikonfigurasi dengan:
+
+```python
+MAX_CONTENT_LENGTH = 64 * 1024
+```
+
+atau:
+
+```text
+64 KiB
+```
+
+Request yang melebihi batas akan ditolak pada level Flask.
+
+---
+
+## HTTP Security Headers
 
 Aplikasi menambahkan:
 
@@ -648,7 +850,7 @@ X-Frame-Options: DENY
 Referrer-Policy: strict-origin-when-cross-origin
 ```
 
-API juga menggunakan:
+Untuk endpoint API:
 
 ```text
 Cache-Control: no-store
@@ -656,47 +858,62 @@ Cache-Control: no-store
 
 ---
 
-### Rate Limiting
+## Rate Limiting
 
-Flask-Limiter digunakan dengan:
+Flask-Limiter digunakan dengan konfigurasi:
 
 ```text
-default = 300/minute
-login = 5/minute
+Default:
+300 request / minute
+
+Login:
+5 request / minute
 ```
 
-Default storage saat ini:
+Storage default:
 
 ```text
 memory://
 ```
 
-Konfigurasi storage dapat diubah melalui:
+Konfigurasi storage dapat diganti melalui:
 
 ```text
 RATELIMIT_STORAGE_URI
 ```
 
-Untuk deployment multi-worker, shared storage lebih sesuai daripada in-memory storage.
+Untuk deployment multi-worker, shared storage perlu dipertimbangkan.
 
 ---
 
-# 📊 Dataset Awal
+# 📊 Dataset Seed
 
-`database/seed.sql` menyediakan dataset contoh untuk kebutuhan pengembangan dan pengujian.
+Repository menyediakan dataset contoh melalui:
 
-Hasil perhitungan dari dataset seed saat ini:
+```text
+database/seed.sql
+```
 
-| Data                                            |             Nilai |
-| ----------------------------------------------- | ----------------: |
-| Jenis data ikan                                 |            **31** |
-| Kategori                                        |            **11** |
-| Total stok awal                                 |    **4.280 ekor** |
-| Nilai nominal stok berdasarkan `jumlah × harga` | **Rp162.660.000** |
+Dataset tersebut digunakan untuk pengembangan dan demonstrasi sistem.
 
-Nilai tersebut berasal dari **dataset contoh di repository**, bukan hasil audit pasar atau survei harga ikan aktual.
+Hasil perhitungan dari seed saat ini:
 
-Kategori yang terdapat dalam dataset meliputi antara lain:
+| Informasi          |             Nilai |
+| ------------------ | ----------------: |
+| Jenis ikan         |            **31** |
+| Kategori           |            **11** |
+| Total stok         |    **4.280 ekor** |
+| Nilai nominal stok | **Rp162.660.000** |
+
+Nilai nominal dihitung dari:
+
+```text
+jumlah × harga
+```
+
+Nilai tersebut merupakan **dataset contoh repository**, bukan hasil survei harga pasar atau audit bisnis aktual.
+
+Kategori yang terdapat dalam dataset:
 
 ```text
 Predator
@@ -710,6 +927,21 @@ Channa
 Crustacea
 Hias
 Hias Besar
+```
+
+---
+
+# 📦 Dependencies
+
+`requirements.txt` saat ini:
+
+```text
+Flask>=3.1,<4
+psycopg[binary]>=3.2,<4
+python-dotenv>=1.0,<2
+argon2-cffi>=23.1,<26
+Flask-Limiter>=3.5,<5
+gunicorn==26.2.0
 ```
 
 ---
@@ -729,12 +961,21 @@ CAPSTONE_PROJECT_KELOMPOK_B/
 ├── .gitignore
 │
 ├── assets/
+│   ├── ceo.mp4
 │   ├── images/
 │   │   ├── logo.png
-│   │   └── *.jpg
+│   │   ├── *.jpg
+│   │   └── profile images
+│   │
 │   └── readme/
 │       ├── login.png
-│       └── profile.png
+│       ├── dashboard.png
+│       ├── stokikan.png
+│       ├── tambahikan.png
+│       ├── catatanpenjualan.png
+│       ├── riwayatpenjualan.png
+│       ├── catatankematian.png
+│       └── riwayatkematian.png
 │
 ├── css/
 │   └── style.css
@@ -757,187 +998,43 @@ CAPSTONE_PROJECT_KELOMPOK_B/
 │
 └── modules/
     ├── catat-kematian/
-    │   └── catatankematian.html
-    │
     ├── catat-penjualan/
-    │   └── catatanpenjualan.html
-    │
     ├── riwayat-kematian/
-    │   └── riwayatkematian.html
-    │
     ├── riwayat-penjualan/
-    │   └── riwayatpenjualan.html
-    │
     ├── stok-ikan/
-    │   └── stokikan.html
-    │
     └── tambah-ikan/
-        └── tambahikan.html
-```
-
----
-
-# 🖥️ Halaman Aplikasi
-
-### Login
-
-```text
-/
- /login
- /login.html
-```
-
-Mengarahkan pengguna ke halaman autentikasi CEO apabila belum memiliki session aktif.
-
-### Dashboard
-
-```text
-/dashboard.html
-```
-
-Pusat ringkasan operasional.
-
-### Profile
-
-```text
-/CEO.html
-```
-
-Halaman profil project dan anggota kelompok.
-
-### Modul
-
-```text
-/modules/stok-ikan/stokikan.html
-/modules/tambah-ikan/tambahikan.html
-/modules/catat-penjualan/catatanpenjualan.html
-/modules/riwayat-penjualan/riwayatpenjualan.html
-/modules/catat-kematian/catatankematian.html
-/modules/riwayat-kematian/riwayatkematian.html
-```
-
----
-
-
-
-# 🐟 Sumber Aquarium
-
-## 🖼️ Interface Preview
-
-### 🎬 Project Preview
-
-[▶️ Play `ceo.mp4`](assets/ceo.mp4)
-
-Video preview yang menunjukkan tampilan dan alur penggunaan sistem Sumber Aquarium.
-
----
-
-### 🖥️ Interface
-
-#### 🔐 Login
-
-Halaman autentikasi untuk pengguna masuk ke dalam sistem.
-
-<p align="center">
-  <img src="assets/readme/login.png" width="80%" alt="Login">
-</p>
-
-#### 📈 Dashboard Monitoring
-
-Tampilan monitoring untuk melihat informasi operasional aquarium secara lebih terstruktur.
-
-<p align="center">
-  <img src="assets/readme/dashboard.png" width="80%" alt="Dashboard Monitoring">
-</p>
-
-#### 🐟 Stok Ikan
-
-Digunakan untuk melihat data dan jumlah stok ikan yang tersedia.
-
-<p align="center">
-  <img src="assets/readme/stokikan.png" width="80%" alt="Stok Ikan">
-</p>
-
-#### ➕ Tambah Ikan
-
-Form untuk menambahkan data ikan baru ke dalam sistem.
-
-<p align="center">
-  <img src="assets/readme/tambahikan.png" width="80%" alt="Tambah Ikan">
-</p>
-
-#### 🧾 Catat Penjualan
-
-Halaman untuk mencatat transaksi penjualan ikan.
-
-<p align="center">
-  <img src="assets/readme/catatanpenjualan.png" width="80%" alt="Catatan Penjualan">
-</p>
-
-#### 📋 Riwayat Penjualan
-
-Menampilkan daftar dan riwayat transaksi penjualan yang telah tercatat.
-
-<p align="center">
-  <img src="assets/readme/riwayatpenjualan.png" width="80%" alt="Riwayat Penjualan">
-</p>
-
-#### ☠️ Catat Kematian
-
-Halaman untuk mencatat data ikan yang mengalami kematian.
-
-<p align="center">
-  <img src="assets/readme/catatankematian.png" width="80%" alt="Catatan Kematian">
-</p>
-
-#### 📜 Riwayat Kematian
-
-Menampilkan riwayat data kematian ikan yang telah dicatat dalam sistem.
-
-<p align="center">
-  <img src="assets/readme/riwayatkematian.png" width="80%" alt="Riwayat Kematian">
-</p>
-
-
-
-------
-
-# 📦 Dependencies
-
-`requirements.txt` saat ini menggunakan:
-
-```text
-Flask>=3.1,<4
-psycopg[binary]>=3.2,<4
-python-dotenv>=1.0,<2
-argon2-cffi>=23.1,<26
-Flask-Limiter>=3.5,<5
-gunicorn==26.2.0
 ```
 
 ---
 
 # 🚀 Instalasi Lokal
 
-## 1. Clone repository
+## 1. Clone Repository
 
 ```bash
 git clone https://github.com/Zzzzzzzpeng/CAPSTONE_PROJECT_KELOMPOK_B.git
 cd CAPSTONE_PROJECT_KELOMPOK_B
 ```
 
----
-
-## 2. Buat virtual environment
+## 2. Buat Virtual Environment
 
 ```bash
 python -m venv .venv
+```
+
+Linux/macOS:
+
+```bash
 source .venv/bin/activate
 ```
 
----
+Windows:
 
-## 3. Install dependencies
+```powershell
+.venv\Scripts\activate
+```
+
+## 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -945,7 +1042,7 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Buat konfigurasi environment
+# ⚙️ Environment Configuration
 
 Buat file:
 
@@ -953,7 +1050,7 @@ Buat file:
 .env
 ```
 
-Contoh konfigurasi:
+Contoh:
 
 ```env
 DATABASE_URL=postgresql://USERNAME:PASSWORD@127.0.0.1:5432/DBNAME
@@ -971,15 +1068,25 @@ FLASK_DEBUG=0
 LOG_LEVEL=INFO
 ```
 
-Jangan memasukkan credential asli ke repository.
+Alternatif konfigurasi database juga tersedia:
+
+```env
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+```
+
+Jangan memasukkan credential database atau secret asli ke repository.
 
 ---
 
 # 🐘 Persiapan PostgreSQL
 
-Buat database sesuai kebutuhan environment lokal.
+Buat database PostgreSQL sesuai environment lokal.
 
-Kemudian jalankan schema:
+Kemudian jalankan:
 
 ```bash
 psql "$DATABASE_URL" -f database/schema.sql
@@ -991,7 +1098,7 @@ Buat tabel autentikasi:
 psql "$DATABASE_URL" -f ceo_auth.sql
 ```
 
-Masukkan dataset awal:
+Masukkan dataset:
 
 ```bash
 psql "$DATABASE_URL" -f database/seed.sql
@@ -999,7 +1106,7 @@ psql "$DATABASE_URL" -f database/seed.sql
 
 ---
 
-## Permissions
+# ⚠️ Permissions
 
 File:
 
@@ -1007,17 +1114,17 @@ File:
 database/permissions.sql
 ```
 
-saat ini menggunakan PostgreSQL role:
+menggunakan role PostgreSQL:
 
 ```text
 peng
 ```
 
-Karena itu file tersebut bersifat **environment-specific**.
+File tersebut bersifat **environment-specific**.
 
-Jangan menjalankannya secara buta pada database yang menggunakan role berbeda.
+Jangan menjalankannya tanpa menyesuaikan role database.
 
-Jika role yang digunakan memang `peng`:
+Jika role database memang bernama `peng`:
 
 ```bash
 psql "$DATABASE_URL" -f database/permissions.sql
@@ -1033,7 +1140,7 @@ Gunakan:
 python create_ceo.py
 ```
 
-Script akan meminta:
+Script meminta:
 
 ```text
 CEO username:
@@ -1041,7 +1148,7 @@ CEO password:
 Repeat password:
 ```
 
-Password kemudian di-hash menggunakan Argon2 sebelum disimpan ke:
+Password kemudian di-hash sebelum disimpan ke:
 
 ```text
 ceo_accounts.password_hash
@@ -1051,7 +1158,7 @@ ceo_accounts.password_hash
 
 # ▶️ Menjalankan Aplikasi
 
-### Development
+## Development
 
 ```bash
 python app.py
@@ -1063,9 +1170,15 @@ Default:
 127.0.0.1:5000
 ```
 
-### Gunicorn
+Kemudian buka:
 
-Project menyediakan:
+```text
+http://127.0.0.1:5000
+```
+
+## Gunicorn
+
+Repository menyediakan:
 
 ```text
 gunicorn.conf.py
@@ -1077,7 +1190,7 @@ Jalankan:
 gunicorn -c gunicorn.conf.py app:app
 ```
 
-Konfigurasi repository saat ini menggunakan:
+Konfigurasi saat ini:
 
 ```text
 bind = 127.0.0.1:5000
@@ -1091,149 +1204,265 @@ max_requests_jitter = 100
 worker_tmp_dir = /dev/shm
 ```
 
-Konfigurasi tersebut menjalankan Flask melalui Gunicorn pada interface localhost.
+Konfigurasi tersebut merupakan konfigurasi repository saat ini dan bukan klaim bahwa konfigurasi tersebut otomatis sesuai untuk seluruh deployment produksi.
 
 ---
 
-# 📝 Dokumentasi Akademik
+# 🖼️ Interface Preview
 
-Repository juga menyimpan artefak akademik project:
+## Login
+
+![Login](assets/readme/login.png)
+
+## Dashboard
+
+![Dashboard](assets/readme/dashboard.png)
+
+## Stok Ikan
+
+![Stok Ikan](assets/readme/stokikan.png)
+
+## Tambah Ikan
+
+![Tambah Ikan](assets/readme/tambahikan.png)
+
+## Catat Penjualan
+
+![Catat Penjualan](assets/readme/catatanpenjualan.png)
+
+## Riwayat Penjualan
+
+![Riwayat Penjualan](assets/readme/riwayatpenjualan.png)
+
+## Catat Kematian
+
+![Catat Kematian](assets/readme/catatankematian.png)
+
+## Riwayat Kematian
+
+![Riwayat Kematian](assets/readme/riwayatkematian.png)
+
+---
+
+# 🎬 Project Preview
+
+Video demonstrasi tersedia pada:
+
+```text
+assets/ceo.mp4
+```
+
+Video menunjukkan tampilan dan alur penggunaan sistem Sumber Aquarium PGK.
+
+---
+
+# 📚 Dokumentasi Akademik
+
+Repository menyimpan artefak akademik:
 
 ```text
 docs/Karil_Sumber_Aquarium_Kelompok_B.docx
 docs/Sumber_Aquarium_PGK_Presentation.pptx
 ```
 
-Dokumen tersebut menjadi bagian dari dokumentasi dan penyampaian hasil Capstone Project kelompok.
+Dokumen tersebut digunakan sebagai bagian dari dokumentasi dan penyampaian hasil Capstone Project.
 
 ---
 
 # 🧪 Status Project
 
 ```text
-Project Type : Academic Capstone Project
-Scope        : Information System
-Architecture : Client / Server
-Frontend     : HTML + CSS + Vanilla JavaScript
-Backend      : Python + Flask
-Database     : PostgreSQL
-Authentication: Session + Argon2
-Deployment   : Gunicorn
-Versioning   : Git + GitHub
+Project Type      : Academic Capstone Project
+Scope             : Information System
+Architecture      : Client / Server
+Frontend           : HTML5 + CSS3 + Vanilla JavaScript
+Backend            : Python + Flask
+Database           : PostgreSQL
+Database Adapter   : Psycopg 3
+Authentication     : Session + Argon2
+Rate Limiting      : Flask-Limiter
+WSGI Server        : Gunicorn
+Version Control    : Git
+Repository         : GitHub
 ```
 
-Project ini merupakan **project akademik dan prototype sistem**, sehingga konfigurasi dan beberapa aspek deployment masih perlu disesuaikan sebelum digunakan sebagai aplikasi produksi publik.
+Project ini merupakan **prototype/sistem akademik**.
+
+Implementasi saat ini ditujukan untuk demonstrasi kebutuhan dan proses sistem dalam konteks pembelajaran.
 
 ---
 
-# ⚠️ Production Hardening
+# ⚠️ Batasan Implementasi
 
-Sebelum deployment publik, beberapa konfigurasi perlu diperhatikan:
+Repository saat ini masih memiliki beberapa batasan yang perlu dipahami.
 
-### Secret
+## 1. Belum terdapat automated test suite
 
-Gunakan `FLASK_SECRET_KEY` yang eksplisit dan random.
+Repository tidak memiliki direktori pengujian otomatis khusus untuk:
 
-### HTTPS
-
-Aktifkan:
-
-```env
-SESSION_COOKIE_SECURE=true
+```text
+API
+Authentication
+Transaction
+Concurrency
+Permission
+Regression
 ```
 
-ketika aplikasi dijalankan di HTTPS.
+Pengujian tersebut dapat menjadi pengembangan selanjutnya.
 
-### Rate Limit Storage
+## 2. CSRF protection belum diimplementasikan
 
-Default:
+Autentikasi menggunakan session cookie, tetapi endpoint perubahan data belum menunjukkan mekanisme CSRF token khusus.
+
+Perlindungan CSRF perlu dipertimbangkan sebelum deployment publik.
+
+## 3. Rate limit menggunakan memory storage secara default
 
 ```text
 memory://
 ```
 
-cukup untuk development sederhana, tetapi deployment multi-worker sebaiknya menggunakan shared storage yang sesuai.
+Konfigurasi tersebut sesuai untuk penggunaan sederhana/development, tetapi shared storage lebih sesuai untuk deployment multi-worker.
 
-### CSRF
+## 4. Belum terdapat audit trail khusus
 
-Repository saat ini menggunakan session cookie untuk autentikasi, tetapi belum menunjukkan implementasi CSRF token pada endpoint perubahan data. Perlindungan CSRF perlu ditambahkan sebelum deployment publik.
+Histori penjualan dan kematian tersedia, tetapi belum terdapat audit trail generik yang mencatat seluruh aktivitas pengguna seperti:
 
-### Automated Testing
+```text
+login
+logout
+create
+update
+delete
+```
 
-Tidak terdapat direktori test automation pada struktur repository saat ini. Automated test untuk API, transaksi stok, authentication, dan permission dapat ditambahkan sebagai pengembangan lanjutan.
+beserta identitas pengguna dan perubahan datanya.
+
+## 5. Model pengguna masih sederhana
+
+Sistem saat ini berpusat pada akun CEO dan belum menerapkan role-based access control yang lebih granular.
+
+## 6. Belum terdapat integrasi sensor aquarium
+
+Sistem belum menerima data sensor secara real-time seperti:
+
+```text
+temperature
+pH
+dissolved oxygen
+ammonia
+turbidity
+```
+
+Data tersebut berada di luar ruang lingkup implementasi repository saat ini.
 
 ---
 
 # 🔭 Pengembangan Selanjutnya
 
-Beberapa area yang dapat dikembangkan:
+Pengembangan dapat diarahkan pada beberapa area.
+
+## Database
 
 ```text
-Database
- ├── audit trail
- ├── role-based access control
- └── reporting
+Audit trail
+Role-based access control
+Supplier
+Pembelian
+Pelacakan pemasukan stok
+Reporting
+```
 
-Backend
- ├── automated testing
- ├── API versioning
- ├── CSRF protection
- └── production observability
+## Backend
 
-Frontend
- ├── filtering lanjutan
- ├── pagination
- ├── visual analytics
- └── improved form validation
+```text
+Automated testing
+CSRF protection
+API versioning
+Structured logging
+Observability
+Shared rate-limit storage
+```
 
-Deployment
- ├── HTTPS
- ├── reverse proxy
- ├── shared rate-limit storage
- └── production database configuration
+## Frontend
+
+```text
+Pagination
+Filtering lanjutan
+Visual analytics
+Improved validation
+Accessibility improvements
+```
+
+## Operasional Aquarium
+
+```text
+Supplier management
+Purchase records
+Stock movement
+Mortality analysis
+Water-quality records
+Sensor integration
 ```
 
 ---
 
-# 📚 Referensi 
+# 🔎 Catatan tentang Data
 
-Flask. (n.d.). *Quickstart*. Pallets Projects.
-https://flask.palletsprojects.com/en/stable/quickstart/
+Data yang tersedia pada:
 
-Flask-Limiter. (n.d.). *Flask-Limiter documentation*.
-https://flask-limiter.readthedocs.io/en/stable/
+```text
+database/seed.sql
+```
 
-Gunicorn. (n.d.). *Gunicorn documentation*.
-https://docs.gunicorn.org/
+adalah **data contoh untuk kebutuhan project**.
 
-OWASP Foundation. (n.d.). *Password storage cheat sheet*.
-https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+Angka seperti:
 
-PostgreSQL Global Development Group. (n.d.). *About PostgreSQL*.
-https://www.postgresql.org/about/
+```text
+4.280 ekor
+Rp162.660.000
+```
 
-Psycopg. (n.d.). *Psycopg 3 documentation*.
-https://www.psycopg.org/psycopg3/docs/
+merupakan hasil dari dataset seed repository.
 
-Universitas Terbuka. (2025, February 18). *Mengenal Capstone Project mata kuliah STSI4401*. Program Studi S1 Sistem Informasi, Fakultas Sains dan Teknologi, Universitas Terbuka.
-https://si-fst.ut.ac.id/2025/02/18/mengenal-capstone-project-mata-kuliah-stsi4401/
+Angka tersebut tidak boleh diperlakukan sebagai:
+
+* data pasar;
+* hasil survei harga;
+* statistik industri;
+* laporan keuangan bisnis aktual;
+* hasil penelitian populasi ikan.
+
+---
+
+# 📖 Referensi Teknis
+
+* Flask Documentation. Configuration and security documentation.
+* PostgreSQL Documentation. Transactions and explicit locking.
+* RFC 9106. *Argon2 Memory-Hard Function for Password Hashing and Proof-of-Work Applications*.
+* Flask-Limiter Documentation.
+* Gunicorn Documentation.
+* Psycopg 3 Documentation.
+* Universitas Terbuka. (2025). *Mengenal Capstone Project Mata Kuliah STSI4401*, Program Studi S1 Sistem Informasi, Fakultas Sains dan Teknologi.
 
 ---
 
 # 📌 Ringkasan
 
-**Sumber Aquarium PGK** adalah implementasi sistem informasi berbasis web yang mengintegrasikan:
+Sumber Aquarium PGK mengintegrasikan:
 
 ```text
-HTML
+HTML5
    +
-CSS
+CSS3
    +
 Vanilla JavaScript
    +
 Python / Flask
    +
-Psycopg
+Psycopg 3
    +
 PostgreSQL
    +
@@ -1244,7 +1473,7 @@ Flask-Limiter
 Gunicorn
 ```
 
-Seluruh komponen tersebut membentuk satu alur sistem untuk:
+dalam satu sistem informasi untuk:
 
 ```text
 Authentication
@@ -1262,4 +1491,12 @@ Operational History
 PostgreSQL
 ```
 
-Project ini merupakan hasil kerja akademik **Kelompok B, Program Studi S1 Sistem Informasi, Universitas Terbuka**, dengan pembagian kontribusi pada fondasi sistem dan data, dokumentasi, komunikasi visual, serta full-stack dan integrasi sistem.
+Sistem ini dikembangkan sebagai **Capstone Project Kelompok B Program Studi S1 Sistem Informasi Universitas Terbuka** dan berfungsi sebagai implementasi akademik sistem informasi pengelolaan operasional toko ikan hias.
+
+---
+
+## Repository
+
+Source code dan seluruh artefak project tersedia pada repository:
+
+**Sumber Aquarium PGK — CAPSTONE_PROJECT_KELOMPOK_B**
